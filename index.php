@@ -2,6 +2,7 @@
 
     require_once "library/limonade.php";
     require_once "library/lightopenid/openid.php";
+	require_once "library/stripe/Stripe.php";
     
     require("config/config.php");
     require("library/utils.php");
@@ -10,11 +11,14 @@
     /* Establish database connection */
     $con = mysql_connect(Server, Username, Password);
     mysql_select_db(Database, $con);
+	
+	/* Connect to Stripe */
+	Stripe::setApiKey("xyNE8eAHEtrXJEbjIAt7hVzVRsaCyxfn");
     
     /* Modify configuration settings */
     function configure()
     {
-        option('base_uri', '/');
+        option('base_uri', '/labs/paige/');
         option('public_dir', 'public/');
         option('views_dir', 'views/');
         option('controllers_dir', 'controllers/');
