@@ -1,0 +1,6 @@
+[submodule "public/js/form"]
+	path = public/js/form
+	url = git://github.com/malsup/form.git
+[submodule "public/js/css_browser_selector"]
+	path = public/js/css_browser_selector
+	url = git://github.com/rafaelp/css_browser_selector.git

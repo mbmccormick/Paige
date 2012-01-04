@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    Options +Indexes
+    RewriteEngine on
+    RewriteBase /
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?uri=/$1 [NC,L,QSA]
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/gif "access plus 2 months"
+    ExpiresByType image/jpeg "access plus 2 months"
+    ExpiresByType image/png "access plus 2 months"
+    ExpiresByType text/css "access plus 2 months"
+    ExpiresByType image/ico "access plus 2 months"
+    ExpiresByType text/javascript "access plus 2 months"
+    ExpiresByType application/x-javascript "access plus 2 months"
+    ExpiresByType application/octet-stream "access plus 2 months"
+</IfModule>

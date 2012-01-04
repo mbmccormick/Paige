@@ -1,0 +1,14 @@
+<?php
+
+    // database configuration
+    define(Server, "yourserver.com");
+    define(Username, "youruser");
+    define(Password, "yourpass");
+    define(Database, "yourdatabase");
+    
+    // application settings
+    define(ApplicationName, "Limoncello");
+    define(EmailAddress, "system@yourserver.com");
+    define(Version, "2011.01.01");
+    
+?>
