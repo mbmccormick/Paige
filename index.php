@@ -54,6 +54,14 @@
     dispatch('/login/openid/remove', 'login_openid_remove');
     dispatch('/logout', 'logout');
     
+	/* Declare Accounts routes */
+    dispatch('/accounts', 'accounts_add');
+    dispatch('/accounts/add', 'accounts_add');
+    dispatch_post('/accounts/add', 'accounts_add_post');
+    dispatch('/accounts/:id', 'accounts_edit');
+    dispatch_post('/accounts/:id/edit', 'accounts_edit_post');
+    dispatch('/accounts/:id/delete', 'accounts_delete');
+	
     /* Declare Users routes */
     dispatch('/users', 'users_list');
     dispatch('/users/add', 'users_add');

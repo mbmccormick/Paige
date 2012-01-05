@@ -21,7 +21,7 @@
         $customer = Stripe_Customer::create(array(
 			"description" => mysql_real_escape_string($_POST[name]),
 			"email" => mysql_real_escape_string($_POST[email]),
-			"card" => mysql_real_escape_string($_POST[creditcard]),
+			"card" => mysql_real_escape_string($_POST[stripeToken]),
 			"plan" => mysql_real_escape_string($_POST[plan])
 		));
 		

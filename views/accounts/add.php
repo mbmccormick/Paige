@@ -35,7 +35,7 @@
                 <div class="clearfix">
                     <label for="card-expiry-month">Expiration</label>
                     <div class="input">
-                        <select class="xlarge" id="card-expiry-month" autocomplete="off" size="2">
+                        <select class="xlarge" id="card-expiry-month" autocomplete="off">
 							<option value="01">01</option>
 							<option value="02">02</option>
 							<option value="03">03</option>
@@ -49,7 +49,7 @@
 							<option value="11">11</option>
 							<option value="12">12</option>
 						</select>
-						<select class="xlarge" id="card-expiry-month" autocomplete="off" size="4">
+						<select class="xlarge" id="card-expiry-month" autocomplete="off">
 							<option value="2012">2012</option>
 							<option value="2013">2013</option>
 							<option value="2014">2014</option>
@@ -72,7 +72,7 @@
             </fieldset>
             <br />
             <div class="actions">
-                <button type="submit" class="btn primary">Create Account</button>&nbsp;<button type="reset" class="btn">Cancel</button>
+                <button type="submit" id="submit-button" class="btn primary">Create Account</button>&nbsp;<button type="reset" class="btn">Cancel</button>
             </div>
         </form>
     </div>
@@ -82,3 +82,33 @@
         <br />
     </div>
 </div>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$(".form-stacked").submit(function(event) {
+			$('#submit-button').attr("disabled", "disabled");
+
+			Stripe.createToken({
+				number: $('.card-number').val(),
+				cvc: $('.card-cvc').val(),
+				exp_month: $('.card-expiry-month').val(),
+				exp_year: $('.card-expiry-year').val()
+			}, stripeResponseHandler);
+
+			return false;
+		});
+	});
+	
+	function stripeResponseHandler(status, response) {
+		if (response.error) {
+			// TODO: handle this error
+		}
+		else {
+			var form$ = $(".form-stacked");
+			var token = response['id'];
+			form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+			form$.get(0).submit();
+		}
+	}
+	
+</script>
