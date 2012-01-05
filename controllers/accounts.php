@@ -43,8 +43,8 @@
                     ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($customer->plan->id) . "', '" . $now . "')";
 		mysql_query($sql);
         
-		// header("Location: " . option('base_uri') . "accounts&success=Your account was added successfully!");
-        // exit;
+		header("Location: " . option('base_uri') . "accounts&success=Your account was added successfully!");
+        exit;
     }
     
     function accounts_edit()
@@ -113,8 +113,26 @@
             header("Location: " . option('base_uri') . "accounts/" . params('id') . "&error=You are not authorized to delete this account!");
             exit;
         }
-    
-        $sql = "DELETE FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'";    
+		
+		$result = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'");
+        $account = mysql_fetch_array($result);
+		
+		// delete customer on Stripe
+        customer = Stripe_Customer::retrieve($account[stripeid]);
+		$customer->delete();
+		
+		// release number on Twilio
+		$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
+		foreach ($twilio->account->incoming_phone_numbers as $number)
+		{
+			if (str_replace("+1", "", $number->phone_number) == $account[phonenumber])
+			{
+				$twilio->account->incoming_phone_numbers->delete($number->sid);
+				break;
+			}
+		}
+		
+		$sql = "DELETE FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'";    
         mysql_query($sql);
 
         header("Location: " . option('base_uri') . "accounts&success=Your account was deleted successfully!");
