@@ -14,6 +14,12 @@
                         <input class="xlarge" id="email" name="email" size="30" type="text">
                     </div>
                 </div>
+				<div class="clearfix">
+                    <label for="areacode">Area Code</label>
+                    <div class="input">
+                        <input class="xlarge" id="areacode" name="areacode" size="30" type="text">
+                    </div>
+                </div>
 				<br />
                 <div class="clearfix">
                     <label for="plan">Plan</label>
