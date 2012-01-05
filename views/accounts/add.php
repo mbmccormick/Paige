@@ -41,7 +41,7 @@
                 <div class="clearfix">
                     <label for="cardexpmonth">Expiration</label>
                     <div class="input">
-                        <select class="xlarge" id="cardexpmonth" name="cardexpmonth" autocomplete="off">
+                        <select class="small" id="cardexpmonth" name="cardexpmonth" autocomplete="off">
 							<option value="01">01</option>
 							<option value="02">02</option>
 							<option value="03">03</option>
@@ -55,7 +55,7 @@
 							<option value="11">11</option>
 							<option value="12">12</option>
 						</select>
-						<select class="xlarge" id="cardexpyear" name="cardexpyear" autocomplete="off">
+						<select class="small" id="cardexpyear" name="cardexpyear" autocomplete="off">
 							<option value="2012">2012</option>
 							<option value="2013">2013</option>
 							<option value="2014">2014</option>
@@ -72,7 +72,7 @@
                 <div class="clearfix">
                     <label for="cardcvc">Security Code</label>
                     <div class="input">
-                        <input class="xlarge" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text">
+                        <input class="small" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text">
                     </div>
                 </div>
             </fieldset>

@@ -60,11 +60,18 @@
         
         $result = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'");
         $account = mysql_fetch_array($result);
+		
+		$customer = Stripe_Customer::retrieve($account[stripeid]);
+		$creditcard = "************" . $customer->active_card->last4;
+		
+		$nextcharge = date("F j, Y", strtotime($customer->next_recurring_charge->date));
         
         if ($account != null)
         {
             set("title", "Edit Account");
             set("account", $account);
+			set("creditcard", $creditcard);
+			set("nextcharge", $nextcharge);
             return html("accounts/edit.php");
         }
         else
