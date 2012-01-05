@@ -31,7 +31,7 @@
 							<option value="3">Large - $20/month</option>
 						</select>
                     </div>
-					<span class="help-block">Changes to your plan will take affect immediately and you will be prorated for this change at the next billing cycle.</span>
+					<span class="help-block">Changes to your plan will take effect immediately and you will be pro-rated for this change at the next billing cycle.</span>
                 </div>
 				<br />
                 <div class="clearfix">
