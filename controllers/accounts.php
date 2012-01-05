@@ -118,7 +118,7 @@
         $account = mysql_fetch_array($result);
 		
 		// delete customer on Stripe
-        customer = Stripe_Customer::retrieve($account[stripeid]);
+        $customer = Stripe_Customer::retrieve($account[stripeid]);
 		$customer->delete();
 		
 		// release number on Twilio
