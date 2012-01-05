@@ -98,8 +98,8 @@
         
         $now = date("Y-m-d H:i:s");
         
-        $sql = "UPDATE account SET accountname='" . mysql_real_escape_string($_POST[accountname]) . "', name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', isadministrator='" . mysql_real_escape_string($_POST[isadministrator]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
-		mysql_query($sql);
+        // $sql = "UPDATE account SET accountname='" . mysql_real_escape_string($_POST[accountname]) . "', name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', isadministrator='" . mysql_real_escape_string($_POST[isadministrator]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
+		// mysql_query($sql);
         
         if ($_SESSION['CurrentAccount_ID'] == params('id'))
         {
