@@ -2,9 +2,9 @@
     <form action="<?=option('base_uri')?>login" method="post" class="form-stacked">
         <fieldset>
             <div class="clearfix">
-                <label for="username">Username</label>
+                <label for="email">Email Address</label>
                 <div class="input">
-                    <input class="xlarge" id="username" name="username" size="30" type="text">
+                    <input class="xlarge" id="email" name="email" size="30" type="text">
                 </div>
             </div>
             <div class="clearfix">
@@ -25,13 +25,3 @@
         </div>
     </form>
 </div>
-
-<script type="text/javascript">
-
-    function authenticateOpenID()
-    {
-        document.getElementById("login").action = "<?=option('base_uri')?>login/openid/google";
-        document.getElementById("login").submit();
-    }
-
-</script>

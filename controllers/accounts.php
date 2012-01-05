@@ -51,8 +51,8 @@
     {
         Security_Authorize();
         
-        if ($_SESSION["CurrentUser_IsAdministrator"] == "0" &&
-            $_SESSION["CurrentUser_AccountID"] != params('id'))
+        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
+            $_SESSION['CurrentAccount_ID'] != params('id'))
         {
             header("Location: " . option('base_uri') . "accounts&error=You are not authorized to edit that account!");
             exit;
@@ -79,8 +79,8 @@
     {
         Security_Authorize();
         
-        if ($_SESSION["CurrentUser_IsAdministrator"] == "0" &&
-            $_SESSION["CurrentUser_AccountID"] != params('id'))
+        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
+            $_SESSION['CurrentAccount_ID'] != params('id'))
         {
             header("Location: " . option('base_uri') . "accounts&error=You are not authorized to edit that account!");
             exit;
@@ -94,7 +94,7 @@
         $sql = "UPDATE account SET accountname='" . mysql_real_escape_string($_POST[accountname]) . "', name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', isadministrator='" . mysql_real_escape_string($_POST[isadministrator]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
 		mysql_query($sql);
         
-        if ($_SESSION["CurrentUser_ID"] == params('id'))
+        if ($_SESSION['CurrentAccount_ID'] == params('id'))
         {
             Security_Refresh(params('id'));
         }
@@ -107,8 +107,8 @@
     {
         Security_Authorize();
         
-        if ($_SESSION["CurrentUser_IsAdministrator"] == "0" &&
-            $_SESSION["CurrentUser_AccountID"] != params('id'))
+        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
+            $_SESSION['CurrentAccount_ID'] != params('id'))
         {
             header("Location: " . option('base_uri') . "accounts/" . params('id') . "&error=You are not authorized to delete this account!");
             exit;

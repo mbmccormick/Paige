@@ -1,31 +1,14 @@
 <?php
 
-    function Security_Login($username, $password)
+    function Security_Login($email, $password)
     {
-        $sql = mysql_query("SELECT * FROM user WHERE username='" . mysql_real_escape_string($username) . "' AND password='" . mysql_real_escape_string(md5($password)) . "'");
+        $sql = mysql_query("SELECT * FROM account WHERE email='" . mysql_real_escape_string($email) . "' AND password='" . mysql_real_escape_string(md5($password)) . "'");
         
         if (mysql_num_rows($sql) > 0)
         {
             $row = mysql_fetch_array($sql);
             
             Security_Refresh($row[id]);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    function Security_Login_OpenID($identity)
-    {
-        $sql = mysql_query("SELECT * FROM user WHERE identity='" . mysql_real_escape_string($identity) . "'");
-        
-        if (mysql_num_rows($sql) > 0)
-        {
-            $row = mysql_fetch_array($sql);
-            
-            Security_Refresh($row[id]);        
             return true;
         }
         else
@@ -43,7 +26,7 @@
     
     function Security_Authorize()
     {
-        if ($_SESSION["CurrentUser_ID"] == null)
+        if ($_SESSION['CurrentAccount_ID'] == null)
         {
             header("Location: " . option('base_uri') . "login");
             exit;
@@ -52,23 +35,16 @@
     
     function Security_Refresh($id)
     {
-        $sql = mysql_query("SELECT * FROM user WHERE id='" . mysql_real_escape_string($id) . "'");
+        $sql = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string($id) . "'");
         
         if (mysql_num_rows($sql) > 0)
         {
             $row = mysql_fetch_array($sql);
             
-            $_SESSION["CurrentUser_ID"] = $row[id];
-			$_SESSION["CurrentUser_AccountID"] = $row[accountid];
-            $_SESSION["CurrentUser_Name"] = $row[name];
-            $_SESSION["CurrentUser_Username"] = $row[username];
-            $_SESSION["CurrentUser_IsAdministrator"] = $row[isadministrator];
-			
-			$sql = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string($row[accountid]) . "'");
-			$row = mysql_fetch_array($sql);
-			
-			$_SESSION["CurrentAccount_Name"] = $row[name];
-			$_SESSION["CurrentAccount_PhoneNumber"] = $row[phonenumber];
+            $_SESSION['CurrentAccount_ID'] = $row[id];
+            $_SESSION['CurrentAccount_Name'] = $row[name];
+			$_SESSION['CurrentAccount_PhoneNumber'] = $row[phonenumber];
+            $_SESSION['CurrentAccount_IsAdministrator'] = $row[isadministrator];
         }
     }
     
