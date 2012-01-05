@@ -16,10 +16,6 @@
     <script type="text/javascript" src="<?=option('base_uri')?>public/js/bootstrap-tabs.js"></script>
     <script type="text/javascript" src="<?=option('base_uri')?>public/js/bootstrap-buttons.js"></script>
     <script type="text/javascript" src="<?=option('base_uri')?>public/js/common.js"></script>
-	<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-	<script type="text/javascript">
-		Stripe.setPublishableKey('pk_QHHJn24of00NEH0UoLYhk8UiN2Guz');
-	</script>
 </head> 
 <body>
     <div class="container">

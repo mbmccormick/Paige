@@ -27,15 +27,15 @@
                 </div>
 				<br />
                 <div class="clearfix">
-                    <label for="card-number">Credit Card Number</label>
+                    <label for="cardnumber">Credit Card Number</label>
                     <div class="input">
-                        <input class="xlarge" id="card-number" autocomplete="off" size="20" type="text">
+                        <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text">
                     </div>
                 </div>
                 <div class="clearfix">
-                    <label for="card-expiry-month">Expiration</label>
+                    <label for="cardexpmonth">Expiration</label>
                     <div class="input">
-                        <select class="xlarge" id="card-expiry-month" autocomplete="off">
+                        <select class="xlarge" id="cardexpmonth" name="cardexpmonth" autocomplete="off">
 							<option value="01">01</option>
 							<option value="02">02</option>
 							<option value="03">03</option>
@@ -49,7 +49,7 @@
 							<option value="11">11</option>
 							<option value="12">12</option>
 						</select>
-						<select class="xlarge" id="card-expiry-month" autocomplete="off">
+						<select class="xlarge" id="cardexpyear" name="cardexpyear" autocomplete="off">
 							<option value="2012">2012</option>
 							<option value="2013">2013</option>
 							<option value="2014">2014</option>
@@ -64,15 +64,15 @@
                     </div>
                 </div>
                 <div class="clearfix">
-                    <label for="card-cvc">Security Code</label>
+                    <label for="cardcvc">Security Code</label>
                     <div class="input">
-                        <input class="xlarge" id="card-cvc" autocomplete="off" size="4" type="text">
+                        <input class="xlarge" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text">
                     </div>
                 </div>
             </fieldset>
             <br />
             <div class="actions">
-                <button type="submit" id="submit-button" class="btn primary">Create Account</button>&nbsp;<button type="reset" class="btn">Cancel</button>
+                <button type="submit" class="btn primary">Create Account</button>&nbsp;<button type="reset" class="btn">Cancel</button>
             </div>
         </form>
     </div>
@@ -82,33 +82,3 @@
         <br />
     </div>
 </div>
-<script type="text/javascript">
-
-	$(document).ready(function() {
-		$(".form-stacked").submit(function(event) {
-			$('#submit-button').attr("disabled", "disabled");
-
-			Stripe.createToken({
-				number: $('.card-number').val(),
-				cvc: $('.card-cvc').val(),
-				exp_month: $('.card-expiry-month').val(),
-				exp_year: $('.card-expiry-year').val()
-			}, stripeResponseHandler);
-
-			return false;
-		});
-	});
-	
-	function stripeResponseHandler(status, response) {
-		if (response.error) {
-			// TODO: handle this error
-		}
-		else {
-			var form$ = $(".form-stacked");
-			var token = response['id'];
-			form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-			form$.get(0).submit();
-		}
-	}
-	
-</script>
