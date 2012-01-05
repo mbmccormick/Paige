@@ -66,6 +66,9 @@
     dispatch('/users/:id', 'users_edit');
     dispatch_post('/users/:id/edit', 'users_edit_post');
     dispatch('/users/:id/delete', 'users_delete');
+	
+	/* Declare Stripe routes */
+    dispatch('/stripe/hook', 'stripe_hook');
     
     run();
     
