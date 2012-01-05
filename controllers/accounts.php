@@ -31,13 +31,16 @@
 		));
 		
 		// purchase number on Twilio
-		$purchasedNumber = $client->account->incoming_phone_numbers->create(array('AreaCode' => $_POST[areacode]));
+		$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
+		$purchasedNumber = $twilio->account->incoming_phone_numbers->create(array('AreaCode' => $_POST[areacode]));
+		
+		$number = str_replace("+1", "", $purchasedNumber->phone_number);
 		
 		// insert account to database
         $now = date("Y-m-d H:i:s");
         
         $sql = "INSERT INTO account (name, email, phonenumber, stripeid, stripeplan, createddate) VALUES
-                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($purchasedNumber->phone_number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($customer->plan) . "', '" . $now . "')";
+                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($customer->plan->id) . "', '" . $now . "')";
 		mysql_query($sql);
         
 		// header("Location: " . option('base_uri') . "accounts&success=Your account was added successfully!");
