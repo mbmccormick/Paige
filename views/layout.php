@@ -29,17 +29,27 @@
                     <?php } else { ?>
                     <li><a href="<?=option('base_uri')?>">Dashboard</a></li>
                     <?php } ?>
-                    <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "users") === 0) { ?>
-                    <li class="active"><a href="<?=option('base_uri')?>users">Users</a></li>
+					<?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "schedule") === 0) { ?>
+                    <li class="active"><a href="<?=option('base_uri')?>schedule">Schedule</a></li>
                     <?php } else { ?>
-                    <li><a href="<?=option('base_uri')?>users">Users</a></li>
+                    <li><a href="<?=option('base_uri')?>schedule">Schedule</a></li>
+                    <?php } ?>
+                    <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "users") === 0) { ?>
+                    <li class="active"><a href="<?=option('base_uri')?>users">Team</a></li>
+                    <?php } else { ?>
+                    <li><a href="<?=option('base_uri')?>users">Team</a></li>
+                    <?php } ?>
+					<?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "history") === 0) { ?>
+                    <li class="active"><a href="<?=option('base_uri')?>history">History</a></li>
+                    <?php } else { ?>
+                    <li><a href="<?=option('base_uri')?>history">History</a></li>
                     <?php } ?>
                 </ul>
                 <ul class="nav secondary-nav">
                     <li class="dropdown" data-dropdown="dropdown">
-                        <a href="#" class="dropdown-toggle"><?=$_SESSION['CurrentUser_Name']?></a>
+                        <a href="#" class="dropdown-toggle"><?=$_SESSION['CurrentAccount_Name']?></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?=option('base_uri')?>users/<?=$_SESSION['CurrentUser_ID']?>">Edit Profile</a></li>
+                            <li><a href="<?=option('base_uri')?>users/<?=$_SESSION['CurrentUser_ID']?>">Account Settings</a></li>
                             <li><a href="<?=option('base_uri')?>logout">Logout</a></li>
                         </ul>
                     </li>

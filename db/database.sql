@@ -11,6 +11,28 @@ CREATE TABLE IF NOT EXISTS `account` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `member` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `accountid` int(10) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phonenumber` varchar(10) NOT NULL,
+  `isactive` tinyint(4) NOT NULL,
+  `createddate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `schedule` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `accountid` int(10) NOT NULL,
+  `memberid` int(10) NOT NULL,
+  `startdate` datetime NOT NULL,
+  `enddate` datetime NOT NULL,
+  `type` int(10) NOT NULL,
+  `createddate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accountid` int(11) NOT NULL,

@@ -8,11 +8,7 @@
         {
             $row = mysql_fetch_array($sql);
             
-            $_SESSION["CurrentUser_ID"] = $row[id];
-            $_SESSION["CurrentUser_Name"] = $row[name];
-            $_SESSION["CurrentUser_Username"] = $row[username];
-            $_SESSION["CurrentUser_IsAdministrator"] = $row[isadministrator];
-        
+            Security_Refresh($row[id]);
             return true;
         }
         else
@@ -29,11 +25,7 @@
         {
             $row = mysql_fetch_array($sql);
             
-            $_SESSION["CurrentUser_ID"] = $row[id];
-            $_SESSION["CurrentUser_Name"] = $row[name];
-            $_SESSION["CurrentUser_Username"] = $row[username];
-            $_SESSION["CurrentUser_IsAdministrator"] = $row[isadministrator];
-        
+            Security_Refresh($row[id]);        
             return true;
         }
         else
@@ -67,9 +59,16 @@
             $row = mysql_fetch_array($sql);
             
             $_SESSION["CurrentUser_ID"] = $row[id];
+			$_SESSION["CurrentUser_AccountID"] = $row[accountid];
             $_SESSION["CurrentUser_Name"] = $row[name];
             $_SESSION["CurrentUser_Username"] = $row[username];
             $_SESSION["CurrentUser_IsAdministrator"] = $row[isadministrator];
+			
+			$sql = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string($row[accountid]) . "'");
+			$row = mysql_fetch_array($sql);
+			
+			$_SESSION["CurrentAccount_Name"] = $row[name];
+			$_SESSION["CurrentAccount_PhoneNumber"] = $row[phonenumber];
         }
     }
     

@@ -40,7 +40,7 @@
         $now = date("Y-m-d H:i:s");
         
         $sql = "INSERT INTO account (name, email, phonenumber, stripeid, stripeplan, createddate) VALUES
-                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($customer->plan->id) . "', '" . $now . "')";
+                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . $now . "')";
 		mysql_query($sql);
         
 		header("Location: " . option('base_uri') . "accounts&success=Your account was added successfully!");
