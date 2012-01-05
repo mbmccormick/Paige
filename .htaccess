@@ -2,7 +2,7 @@
     Options +FollowSymlinks
     Options +Indexes
     RewriteEngine on
-    RewriteBase /labs/paige/
+    RewriteBase /
     RewriteCond %{SCRIPT_FILENAME} !-f
     RewriteCond %{SCRIPT_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?uri=/$1 [NC,L,QSA]

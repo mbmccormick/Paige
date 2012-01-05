@@ -18,7 +18,7 @@
     /* Modify configuration settings */
     function configure()
     {
-        option('base_uri', '/labs/paige/');
+        option('base_uri', '/');
         option('public_dir', 'public/');
         option('views_dir', 'views/');
         option('controllers_dir', 'controllers/');
