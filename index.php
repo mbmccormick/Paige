@@ -56,13 +56,29 @@
     dispatch_post('/accounts/:id/edit', 'accounts_edit_post');
     dispatch('/accounts/:id/delete', 'accounts_delete');
 	
-    /* Declare Users routes */
-    dispatch('/users', 'users_list');
-    dispatch('/users/add', 'users_add');
-    dispatch_post('/users/add', 'users_add_post');
-    dispatch('/users/:id', 'users_edit');
-    dispatch_post('/users/:id/edit', 'users_edit_post');
-    dispatch('/users/:id/delete', 'users_delete');
+	/* Declare Members routes */
+    dispatch('/accounts', 'accounts_add');
+    dispatch('/accounts/add', 'accounts_add');
+    dispatch_post('/accounts/add', 'accounts_add_post');
+    dispatch('/accounts/:id', 'accounts_edit');
+    dispatch_post('/accounts/:id/edit', 'accounts_edit_post');
+    dispatch('/accounts/:id/delete', 'accounts_delete');
+	
+	/* Declare Schedule routes */
+    dispatch('/schedules', 'schedules_add');
+    dispatch('/schedules/add', 'schedules_add');
+    dispatch_post('/schedules/add', 'schedules_add_post');
+    dispatch('/schedules/:id', 'schedules_edit');
+    dispatch_post('/schedules/:id/edit', 'schedules_edit_post');
+    dispatch('/schedules/:id/delete', 'schedules_delete');
+	
+	/* Declare History routes */
+    dispatch('/history', 'history_add');
+    dispatch('/history/add', 'history_add');
+    dispatch_post('/history/add', 'history_add_post');
+    dispatch('/history/:id', 'history_edit');
+    dispatch_post('/history/:id/edit', 'history_edit_post');
+    dispatch('/history/:id/delete', 'history_delete');
 	
 	/* Declare Stripe routes */
     dispatch('/stripe/hook', 'stripe_hook');
