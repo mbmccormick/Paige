@@ -23,7 +23,7 @@
                 <br />
                 <div class="clearfix">
                     <div class="input">
-                        <input type="checkbox" name="isadministrator" value="1">
+                        <input type="checkbox" name="isoptedin" value="1">
                         <span>Receive text message notifications</span>
                     </div>
                 </div>

@@ -23,7 +23,7 @@
                 <br />
                 <div class="clearfix">
                     <div class="input">
-                        <input type="checkbox" name="isadministrator" value="1" <?php if ($member['isadministrator'] == 1) { ?>checked="true"<?php } ?>>
+                        <input type="checkbox" name="isoptedin" value="1" <?php if ($member['isoptedin'] == 1) { ?>checked="true"<?php } ?>>
                         <span>Receive text message notifications</span>
                     </div>
                 </div>
