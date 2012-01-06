@@ -19,11 +19,13 @@
         $calendar = "";        
         for ($i = 0; $i < 6; $i++) // weeks
         {
+			if ($i > 4 && date("m", $working_date) != $month) break;
+			
             $calendar .= "<tr valign='top'>\n";
             
             for ($j = 0; $j < 7; $j++) // day of week
             {
-                $calendar .= "<td class='calendar-day'>\n";
+				$calendar .= "<td class='calendar-day'>\n";
                 date("m", $working_date) == $month ? $calendar .= "<div class='calendar-day-title'>\n" : $calendar .= "<div class='calendar-day-title calendar-day-title-off'>\n";
                 
 				if (date("d", $working_date) == date("d") &&
