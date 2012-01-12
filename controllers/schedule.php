@@ -32,7 +32,7 @@
 				    date("m", $working_date) == date("m") &&
 					date("Y", $working_date) == date("Y"))
 				{
-					$calendar .= "<span style='color: red; font-weight: bold;'>" . date("j", $working_date) . "</span>\n";
+					$calendar .= "<span style='font-weight: bold;'>" . date("j", $working_date) . "</span>\n";
                 }
 				else
 				{

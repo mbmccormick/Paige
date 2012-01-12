@@ -23,5 +23,8 @@
                 </tbody>
             </table>
         </div>
+        <div class="well">
+            <a href="<?=option('base_uri')?>schedule/add" class="btn primary">New Shift</a>
+        </div>
     </div>
 </div>
