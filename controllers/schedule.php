@@ -93,12 +93,6 @@
         
         $now = date("Y-m-d H:i:s");
         
-        if (date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime])) < $now)
-        {
-            header("Location: /schedule/add&error=Start Date must be in the future!");
-            exit;
-        }
-        
         $sql = "INSERT INTO schedule (accountid, memberid, startdate, type, createddate) VALUES ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[memberid]) . "', '" . mysql_real_escape_string(date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime]))) . "', '0', '" . $now . "')";
         mysql_query($sql);
         
