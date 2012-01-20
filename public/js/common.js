@@ -10,8 +10,6 @@ $(document).ready(function() {
     $(".alert-message a.close").click(function() {
         $(".alert-message").fadeOut();
     });
-    
-    $(".alert-message").delay(5000).fadeOut();
 });
 
 function getRawUrl()
