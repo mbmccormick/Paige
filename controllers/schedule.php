@@ -1,10 +1,10 @@
 <?php
 
-	function schedule_view()
-	{
-		Security_Authorize();
-		
-		$month = isset($_GET[month]) ? $_GET[month] : date("m");
+    function schedule_view()
+    {
+        Security_Authorize();
+        
+        $month = isset($_GET[month]) ? $_GET[month] : date("m");
         $year = isset($_GET[year]) ? $_GET[year] : date("Y");
         
         $first_of_month = strtotime($year . "-" . $month . "-" . 1 . " 00:00:00");
@@ -19,26 +19,26 @@
         $calendar = "";        
         for ($i = 0; $i < 6; $i++) // weeks
         {
-			if ($i > 4 && date("m", $working_date) != $month) break;
-			
+            if ($i > 4 && date("m", $working_date) != $month) break;
+            
             $calendar .= "<tr valign='top'>\n";
             
             for ($j = 0; $j < 7; $j++) // day of week
             {
-				if (date("d", $working_date) == date("d") &&
-				    date("m", $working_date) == date("m") &&
-					date("Y", $working_date) == date("Y"))
-				{
-					$calendar .= "<td class='calendar-day today'>\n";
+                if (date("d", $working_date) == date("d") &&
+                    date("m", $working_date) == date("m") &&
+                    date("Y", $working_date) == date("Y"))
+                {
+                    $calendar .= "<td class='calendar-day today'>\n";
                 }
-				else
-				{
-					$calendar .= "<td class='calendar-day'>\n";
-				}
-				
+                else
+                {
+                    $calendar .= "<td class='calendar-day'>\n";
+                }
+                
                 date("m", $working_date) == $month ? $calendar .= "<div class='calendar-day-title'>\n" : $calendar .= "<div class='calendar-day-title calendar-day-title-off'>\n";
                 $calendar .= date("j", $working_date) . "\n";
-				$calendar .= "</div>\n";
+                $calendar .= "</div>\n";
 
                 $result = mysql_query("SELECT * FROM schedule WHERE startdate >= '" . date("Y-m-d", $working_date) . " 00:00:00' AND startdate < '" . date("Y-m-d", $working_date) . " 23:59:59' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate ASC, type ASC");                
                 while($row = mysql_fetch_array($result))
@@ -66,17 +66,17 @@
         set("calendar_title", date("F", $first_of_month) . " " . date("Y", $first_of_month));
         set("prev", "<a href='/schedule&month=" . (($month - 1) == 0 ? 12 : ($month - 1)) . "&year=" . (($month - 1) == 0 ? ($year - 1) : $year) . "'>&lt;&lt;&lt;</a>");
         set("next", "<a href='/schedule&month=" . (($month + 1) == 13 ? 1 : ($month + 1)) . "&year=" . (($month + 1) == 13 ? ($year + 1) : $year) . "'>&gt;&gt;&gt;</a>");
-		
-		return html("schedule/view.php");
-	}
-	
-	function schedule_add()
+        
+        return html("schedule/view.php");
+    }
+    
+    function schedule_add()
     {
         Security_Authorize();
     
         $members = "<option selected='true' value=''></option>\n";
     
-        $result = mysql_query("SELECT * FROM member ORDER BY name ASC");
+        $result = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY name ASC");
         while($row = mysql_fetch_array($result))
         {
             $members .= "<option value='" . $row[id] . "'>" . $row[name] . "</option>\n";
