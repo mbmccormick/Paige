@@ -11,7 +11,7 @@
             </fieldset>
             <br />
             <div>                
-                <button type="submit" class="btn large success">Page Team</button>
+                <button type="submit" class="btn success">Page Team</button>
             </div>
         </form>
     </div>
