@@ -6,7 +6,7 @@
         
         $index = 1;
         
-        $result = mysql_query("SELECT * FROM member ORDER BY name ASC");
+        $result = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY name ASC");
         while($row = mysql_fetch_array($result))
         {
             $body .= "<tr>\n";
