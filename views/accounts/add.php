@@ -25,10 +25,10 @@
                     <label for="plan">Plan</label>
                     <div class="input">
                         <select class="xlarge" id="plan" name="plan">
-							<option value="1">Level 1</option>
-							<option value="2">Level 2</option>
-							<option value="3">Level 3</option>
-						</select>
+                            <option value="1">Small - $10/month</option>
+                            <option value="2">Medium - $15/month</option>
+                            <option value="3">Large - $20/month</option>
+                        </select>
                     </div>
                 </div>
 				<br />
