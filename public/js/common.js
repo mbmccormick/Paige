@@ -6,6 +6,10 @@ $(document).ready(function() {
         
         history.replaceState(null, document.title, getRawUrl());
     }
+    
+    $(".alert-message a.close").click(function() {
+        $(".alert-message").hide();
+    });
 });
 
 function getRawUrl()
