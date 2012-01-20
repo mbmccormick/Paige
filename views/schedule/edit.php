@@ -1,6 +1,6 @@
 <div class="row">
     <div class="span10">
-        <form action="<?=option('base_uri')?>schedule/add" method="post" class="form-stacked">
+        <form action="<?=option('base_uri')?>schedule/edit" method="post" class="form-stacked">
             <fieldset>
                 <div class="clearfix">
                     <label for="memberid">Team Member</label>
@@ -19,7 +19,7 @@
             </fieldset>
             <br />
             <div class="actions">
-                <button type="submit" class="btn primary">Add Shift</button>&nbsp;<button type="reset" class="btn">Cancel</button>
+                <button type="submit" class="btn primary">Edit Shift</button>&nbsp;<button type="reset" class="btn">Cancel</button>
             </div>
         </form>
     </div>
