@@ -154,7 +154,7 @@ body {
 }
 
 .calendricalDatePopup table td.selected a {
-    background: #ccccff;
+    background: #cccccc;
 }
 
 .calendricalDatePopup table td.today_selected a {
@@ -195,7 +195,7 @@ body {
 }
 
 .calendricalTimePopup ul li a:hover, .calendricalTimePopup ul li.selected a {
-    background: #ccccff;
+    background: #cccccc;
 }
 
 .calendricalEndTimePopup {
