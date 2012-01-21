@@ -1,11 +1,5 @@
 <?php
 
-    function accounts_add()
-    {
-        set("title", "New Account");
-        return html("accounts/add.php");
-    }
-    
     function accounts_add_post()
     {
         $sql = mysql_query("SELECT COUNT(*) AS rowcount FROM account WHERE email='" . mysql_real_escape_string($_POST[email]) . "'");
@@ -13,7 +7,7 @@
         
         if ($return[rowcount] > 0)
         {
-            header("Location: " . option('base_uri') . "accounts/add&error=An account with that email address already exists!");
+            header("Location: " . option('base_uri') . "register&error=An account with that email address already exists!");
             exit;
         }
         
@@ -51,7 +45,7 @@
                     ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
         mysql_query($sql);
         
-        header("Location: " . option('base_uri') . "accounts&success=Your account was added successfully!");
+        header("Location: " . option('base_uri') . "login&success=Your account was added successfully!");
         exit;
     }
     

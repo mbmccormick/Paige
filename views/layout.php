@@ -24,13 +24,39 @@
         <div class="fill">
             <div class="container">
                 <a class="brand" href="<?=option('base_uri')?>"><?=ApplicationName?></a>
+                <?php if ($_SESSION['CurrentAccount_ID'] == null) { ?>
+                <ul class="nav">
+                    <?php if ($_SERVER['REQUEST_URI'] == option('base_uri')) { ?>
+                    <li class="active"><a href="<?=option('base_uri')?>">Home</a></li>
+                    <?php } else { ?>
+                    <li><a href="<?=option('base_uri')?>">Home</a></li>
+                    <?php } ?>
+                    <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "about") === 0) { ?>
+                    <li class="active"><a href="<?=option('base_uri')?>about">About</a></li>
+                    <?php } else { ?>
+                    <li><a href="<?=option('base_uri')?>about">About</a></li>
+                    <?php } ?>
+                    <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "register") === 0) { ?>
+                    <li class="active"><a href="<?=option('base_uri')?>register">Register</a></li>
+                    <?php } else { ?>
+                    <li><a href="<?=option('base_uri')?>register">Register</a></li>
+                    <?php } ?>
+                </ul>
+                <ul class="nav secondary-nav">
+                    <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "login") === 0) { ?>
+                    <li class="active"><a href="<?=option('base_uri')?>login">Login</a></li>
+                    <?php } else { ?>
+                    <li><a href="<?=option('base_uri')?>login">Login</a></li>
+                    <?php } ?>
+                </ul>
+                <?php } else { ?>
                 <ul class="nav">
                     <?php if ($_SERVER['REQUEST_URI'] == option('base_uri')) { ?>
                     <li class="active"><a href="<?=option('base_uri')?>">Dashboard</a></li>
                     <?php } else { ?>
                     <li><a href="<?=option('base_uri')?>">Dashboard</a></li>
                     <?php } ?>
-					<?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "schedule") === 0) { ?>
+                    <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "schedule") === 0) { ?>
                     <li class="active"><a href="<?=option('base_uri')?>schedule">Schedule</a></li>
                     <?php } else { ?>
                     <li><a href="<?=option('base_uri')?>schedule">Schedule</a></li>
@@ -40,7 +66,7 @@
                     <?php } else { ?>
                     <li><a href="<?=option('base_uri')?>members">Team</a></li>
                     <?php } ?>
-					<?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "history") === 0) { ?>
+                    <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "history") === 0) { ?>
                     <li class="active"><a href="<?=option('base_uri')?>history">History</a></li>
                     <?php } else { ?>
                     <li><a href="<?=option('base_uri')?>history">History</a></li>
@@ -59,7 +85,7 @@
                         </ul>
                     </li>
                 </ul>
-                <a href="<?=option('base_uri')?>accounts/<?=$_SESSION['CurrentUser_ID']?>"></a>
+                <?php } ?>
             </div>
         </div>
     </div>
