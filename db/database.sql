@@ -8,7 +8,17 @@ CREATE TABLE IF NOT EXISTS `account` (
   `phonenumber` varchar(10) NOT NULL,
   `stripeid` varchar(50) NOT NULL,
   `stripeplan` varchar(50) NOT NULL,
-  `isadministrator` tinyint(11) NOT NULL,
+  `hash` varchar(15) NOT NULL,
+  `createddate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `accountid` int(10) NOT NULL,
+  `memberid` int(10) NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `interface` int(10) NOT NULL,
   `createddate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -29,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `accountid` int(10) NOT NULL,
   `memberid` int(10) NOT NULL,
   `startdate` datetime NOT NULL,
-  `enddate` datetime NOT NULL,
   `type` int(10) NOT NULL,
   `createddate` datetime NOT NULL,
   PRIMARY KEY (`id`)
