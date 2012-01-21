@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `phonenumber` varchar(10) NOT NULL,
-  `isactive` tinyint(4) NOT NULL,
+  `isoptedin` tinyint(4) NOT NULL,
   `createddate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
