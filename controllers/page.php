@@ -31,7 +31,7 @@
 
         echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
         echo "<Response>\n";
-        echo "<Gather timeout='5' action='http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3' method='POST' numDigits='1'>\n";
+        echo "<Gather timeout='20' action='http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3' method='POST' numDigits='1'>\n";
         echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
         echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
         echo "<Say voice='woman'>Press one now to confirm that you have received this message.</Say>\n";
@@ -39,6 +39,26 @@
         echo "</Response>\n";
     }
 
+	function page_step3()
+	{
+		Security_Refresh(params('accountid'));
+		
+		if ($_POST[Digits] == '1') 
+		{
+			echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
+			echo "<Response>\n";
+			echo "<Say voice='woman'>Your page has been confirmed. Thank you.</Say>\n";
+			echo "</Response>\n";
+		}
+		else 
+		{
+			echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
+			echo "<Response>\n";
+			echo "<Say voice='woman'>Your page was not confirmed. We will attempt to page you again in 15 minutes.</Say>\n";
+			echo "</Response>\n";
+		}
+	}
+	
     function page_hook()
     {
         $result = mysql_query("SELECT * FROM account WHERE hash='" . mysql_real_escape_string(params('hash')) . "'");

@@ -80,6 +80,7 @@
     dispatch('/page/:hash', 'page_hook');
     dispatch('/page/:accountid/step1', 'page_step1');
     dispatch_post('/page/:accountid/step2', 'page_step2');
+	dispatch_post('/page/:accountid/step3', 'page_step3');
 	
 	/* Declare Stripe routes */
     dispatch('/stripe/hook', 'stripe_hook');
