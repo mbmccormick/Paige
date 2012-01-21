@@ -47,7 +47,11 @@
                     <?php } ?>
                 </ul>
                 <ul class="nav secondary-nav">
+                    <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "accounts") === 0) { ?>
+                    <li class="dropdown active" data-dropdown="dropdown">
+                    <?php } else { ?>
                     <li class="dropdown" data-dropdown="dropdown">
+                    <?php } ?>
                         <a href="#" class="dropdown-toggle"><?=$_SESSION['CurrentAccount_Name']?></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?=option('base_uri')?>accounts/<?=$_SESSION['CurrentAccount_ID']?>">Account Settings</a></li>

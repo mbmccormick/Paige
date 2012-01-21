@@ -32,10 +32,10 @@
                 <div class="clearfix">
                     <label for="plan">Plan</label>
                     <div class="input">
-                        <select class="xlarge" id="plan" name="plan">
-							<option value="1">Small - $10/month</option>
-							<option value="2">Medium - $15/month</option>
-							<option value="3">Large - $20/month</option>
+                        <select class="xlarge" id="stripeplan" name="stripeplan">
+							<option value="1" <?php if ($account[stripeplan] == 1) echo "selected='true'"; ?>>Small - $10/month</option>
+							<option value="2" <?php if ($account[stripeplan] == 2) echo "selected='true'"; ?>>Medium - $15/month</option>
+							<option value="3" <?php if ($account[stripeplan] == 3) echo "selected='true'"; ?>>Large - $20/month</option>
 						</select>
                     </div>
 					<span class="help-block">Changes to your plan will take effect immediately and you will be pro-rated for this change at the next billing cycle.</span>

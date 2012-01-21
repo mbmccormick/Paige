@@ -101,14 +101,30 @@
             exit;
         }
         
+        $now = date("Y-m-d H:i:s");
+        
+        $sql = "UPDATE account SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
+        mysql_query($sql);
+        
         $result = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'");
         $account = mysql_fetch_array($result);
         
-        $now = date("Y-m-d H:i:s");
-        
-        // $sql = "UPDATE account SET accountname='" . mysql_real_escape_string($_POST[accountname]) . "', name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', isadministrator='" . mysql_real_escape_string($_POST[isadministrator]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
-        // mysql_query($sql);
-        
+        if ($account[stripeplan] != $_POST[stripeplan])
+        {
+            $customer = Stripe_Customer::retrieve("cus_ZeIL4hOQAT6inx");
+            $customer->updateSubscription(array("prorate" => true, "plan" => $_POST[stripeplan]));
+
+            $sql = "UPDATE account SET stripeplan='" . mysql_real_escape_string($_POST[stripeplan]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
+            mysql_query($sql);
+        }
+
+        if ($_POST[newpassword] != "" &&
+            $_POST[newpassword] == $_POST[newpasswordconfirm])
+        {
+            $sql = "UPDATE account SET password='" . md5(mysql_real_escape_string($_POST[newpassword])) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
+            mysql_query($sql);
+        }
+
         if ($_SESSION['CurrentAccount_ID'] == params('id'))
         {
             Security_Refresh(params('id'));
