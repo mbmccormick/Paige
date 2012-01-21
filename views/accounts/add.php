@@ -14,12 +14,6 @@
                         <input class="xlarge" id="email" name="email" size="30" type="text">
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="areacode">Area Code</label>
-                    <div class="input">
-                        <input class="xlarge" id="areacode" name="areacode" size="30" type="text">
-                    </div>
-                </div>
                 <br />
                 <div class="clearfix">
                     <label for="plan">Plan</label>
@@ -77,13 +71,13 @@
                 </div>
                 <br />
                 <div class="clearfix">
-                    <label for="newpassword">Password</label>
+                    <label for="password">Password</label>
                     <div class="input">
                         <input class="xlarge" id="password" name="password" size="30" type="password">
                     </div>
                 </div>
                 <div class="clearfix">
-                    <label for="newpasswordconfirm">Confirm Password</label>
+                    <label for="passwordconfirm">Confirm Password</label>
                     <div class="input">
                         <input class="xlarge" id="passwordconfirm" name="passwordconfirm" size="30" type="password">
                     </div>

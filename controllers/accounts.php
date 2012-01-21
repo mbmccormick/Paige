@@ -11,8 +11,8 @@
             exit;
         }
 
-        if ($_POST[password] != "" &&
-            $_POST[password] == $_POST[passwordconfirm])
+        if ($_POST[password] == "" ||
+            $_POST[password] != $_POST[passwordconfirm])
         {
             header("Location: " . option('base_uri') . "register&error=Your passwords do not match!");
             exit;
@@ -33,7 +33,10 @@
         
         // purchase number on Twilio
         $twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
-        $purchasedNumber = $twilio->account->incoming_phone_numbers->create(array('AreaCode' => $_POST[areacode]));
+        
+        $numbers = $twilio->account->available_phone_numbers->getList('US', 'Local');
+        $firstNumber = $numbers->available_phone_numbers[0]->phone_number;
+        $purchasedNumber = $twilio->account->incoming_phone_numbers->create(array('PhoneNumber' => $firstNumber));
         
         $number = str_replace("+1", "", $purchasedNumber->phone_number);
         
@@ -117,8 +120,8 @@
             mysql_query($sql);
         }
 
-        if ($_POST[newpassword] != "" &&
-            $_POST[newpassword] == $_POST[newpasswordconfirm])
+        if ($_POST[newpassword] == "" ||
+            $_POST[newpassword] != $_POST[newpasswordconfirm])
         {
             $sql = "UPDATE account SET password='" . md5(mysql_real_escape_string($_POST[newpassword])) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
             mysql_query($sql);
