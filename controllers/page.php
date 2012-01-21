@@ -4,6 +4,12 @@
     {
         Security_Refresh(params('accountid'));
         
+        if (strlen($_GET[message]) > 120)
+        {
+            die("Message must be 120 characters or less.")
+            exit;
+        }
+
         $now = date("Y-m-d H:i:s");
 
         // lookup the on-call member

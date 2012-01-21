@@ -34,6 +34,14 @@ CREATE TABLE IF NOT EXISTS `member` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `queue` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `duedatetime` datetime NOT NULL,
+  `url` varchar(500) NOT NULL,
+  `createddate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `schedule` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `accountid` int(10) NOT NULL,

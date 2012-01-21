@@ -19,7 +19,7 @@
                     <div class="input">
                         <textarea class="xlarge" id="message" name="message" rows="2"></textarea>
                         <span class="help-block">
-                            Your message must be 140 characters or less.
+                            Your message must be 120 characters or less.
                         </span>
                     </div>
                 </div>
