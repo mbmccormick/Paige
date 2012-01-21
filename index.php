@@ -41,6 +41,8 @@
     /* Declare Common routes */
     dispatch('/', 'common_dashboard');
     dispatch_post('/', 'common_dashboard_post');
+    dispatch('/about', 'common_about');
+    dispatch('/register', 'common_register');
     
     /* Declare Security routes */
     dispatch('/login', 'login');
@@ -50,8 +52,6 @@
     dispatch('/logout', 'logout');
     
 	/* Declare Accounts routes */
-    dispatch('/accounts', 'accounts_add');
-    dispatch('/accounts/add', 'accounts_add');
     dispatch_post('/accounts/add', 'accounts_add_post');
     dispatch('/accounts/:id', 'accounts_edit');
     dispatch_post('/accounts/:id/edit', 'accounts_edit_post');

@@ -1,11 +1,5 @@
 <?php
 
-    function accounts_add()
-    {
-        set("title", "New Account");
-        return html("accounts/add.php");
-    }
-    
     function accounts_add_post()
     {
         $sql = mysql_query("SELECT COUNT(*) AS rowcount FROM account WHERE email='" . mysql_real_escape_string($_POST[email]) . "'");
@@ -13,7 +7,14 @@
         
         if ($return[rowcount] > 0)
         {
-            header("Location: " . option('base_uri') . "accounts/add&error=An account with that email address already exists!");
+            header("Location: " . option('base_uri') . "register&error=An account with that email address already exists!");
+            exit;
+        }
+
+        if ($_POST[password] != "" &&
+            $_POST[password] == $_POST[passwordconfirm])
+        {
+            header("Location: " . option('base_uri') . "register&error=Your passwords do not match!");
             exit;
         }
         
@@ -47,11 +48,11 @@
         // insert account to database
         $now = date("Y-m-d H:i:s");
         
-        $sql = "INSERT INTO account (name, email, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
-                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
+        $sql = "INSERT INTO account (name, email, password, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
+                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($_POST[password]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
         mysql_query($sql);
         
-        header("Location: " . option('base_uri') . "accounts&success=Your account was added successfully!");
+        header("Location: " . option('base_uri') . "login&success=Your account was added successfully!");
         exit;
     }
     
@@ -59,15 +60,14 @@
     {
         Security_Authorize();
         
-        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
-            $_SESSION['CurrentAccount_ID'] != params('id'))
-        {
-            header("Location: " . option('base_uri') . "accounts&error=You are not authorized to edit that account!");
-            exit;
-        }
-        
         $result = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'");
         $account = mysql_fetch_array($result);
+
+        if ($_SESSION['CurrentAccount_ID'] != $account[id])
+        {
+            header("Location: " . option('base_uri') . "&error=You are not authorized to edit that account!");
+            exit;
+        }
         
         $customer = Stripe_Customer::retrieve($account[stripeid]);
         $creditcard = "************" . $customer->active_card->last4;
@@ -94,21 +94,36 @@
     {
         Security_Authorize();
         
-        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
-            $_SESSION['CurrentAccount_ID'] != params('id'))
+        $result = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'");
+        $account = mysql_fetch_array($result);
+
+        if ($_SESSION['CurrentAccount_ID'] != $account[id])
         {
-            header("Location: " . option('base_uri') . "accounts&error=You are not authorized to edit that account!");
+            header("Location: " . option('base_uri') . "&error=You are not authorized to edit that account!");
             exit;
         }
         
-        $result = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'");
-        $account = mysql_fetch_array($result);
-        
         $now = date("Y-m-d H:i:s");
         
-        // $sql = "UPDATE account SET accountname='" . mysql_real_escape_string($_POST[accountname]) . "', name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', isadministrator='" . mysql_real_escape_string($_POST[isadministrator]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
-        // mysql_query($sql);
+        $sql = "UPDATE account SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
+        mysql_query($sql);
         
+        if ($account[stripeplan] != $_POST[stripeplan])
+        {
+            $customer = Stripe_Customer::retrieve("cus_ZeIL4hOQAT6inx");
+            $customer->updateSubscription(array("prorate" => true, "plan" => $_POST[stripeplan]));
+
+            $sql = "UPDATE account SET stripeplan='" . mysql_real_escape_string($_POST[stripeplan]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
+            mysql_query($sql);
+        }
+
+        if ($_POST[newpassword] != "" &&
+            $_POST[newpassword] == $_POST[newpasswordconfirm])
+        {
+            $sql = "UPDATE account SET password='" . md5(mysql_real_escape_string($_POST[newpassword])) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
+            mysql_query($sql);
+        }
+
         if ($_SESSION['CurrentAccount_ID'] == params('id'))
         {
             Security_Refresh(params('id'));
@@ -122,15 +137,14 @@
     {
         Security_Authorize();
         
-        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
-            $_SESSION['CurrentAccount_ID'] != params('id'))
-        {
-            header("Location: " . option('base_uri') . "accounts/" . params('id') . "&error=You are not authorized to delete this account!");
-            exit;
-        }
-        
         $result = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'");
         $account = mysql_fetch_array($result);
+
+        if ($_SESSION['CurrentAccount_ID'] != $account[id])
+        {
+            header("Location: " . option('base_uri') . "&error=You are not authorized to edit that account!");
+            exit;
+        }
         
         // delete customer on Stripe
         $customer = Stripe_Customer::retrieve($account[stripeid]);
@@ -150,7 +164,7 @@
         $sql = "DELETE FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'";    
         mysql_query($sql);
 
-        header("Location: " . option('base_uri') . "accounts&success=Your account was deleted successfully!");
+        header("Location: " . option('base_uri') . "logout&success=Your account was deleted successfully!");
         exit;
     }
 
