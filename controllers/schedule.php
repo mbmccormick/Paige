@@ -49,7 +49,7 @@
                     $startdate = strtotime($row[startdate]);
                         
                     $calendar .= "<div class='calendar-day-event'>\n";
-                    $calendar .= "<a href='/schedule/" . $row[id] . "/edit'><b>" . substr((date("i", $startdate) == "00" ? date("ga", $startdate) : date("g:ia", $startdate)), 0, -1) . "</b> " . $member[name] . "</a>";
+                    $calendar .= "<a href='/schedule/" . $row[id] . "'><b>" . substr((date("i", $startdate) == "00" ? date("ga", $startdate) : date("g:ia", $startdate)), 0, -1) . "</b> " . $member[name] . "</a>";
                     $calendar .= "</div>\n";
                 }
                 
