@@ -21,6 +21,13 @@
                     </div>
 					<span class="help-block">If you need to change the phone number assigned to your account, please contact support.</span>
                 </div>
+                <div class="clearfix">
+                    <label for="hash">Page Hook URL</label>
+                    <div class="input">
+                        <input class="xlarge" id="hash" name="hash" size="30" type="text" value="http://paigeapp.com/page/<?=$account['hash']?>" readonly="true">
+                    </div>
+                    <span class="help-block">If you need to change the page hook URL assigned to your account, please contact support.</span>
+                </div>
 				<br />
                 <div class="clearfix">
                     <label for="plan">Plan</label>

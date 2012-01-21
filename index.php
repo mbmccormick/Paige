@@ -75,11 +75,6 @@
 	
 	/* Declare History routes */
     dispatch('/history', 'history_list');
-    dispatch('/history/add', 'history_add');
-    dispatch_post('/history/add', 'history_add_post');
-    dispatch('/history/:id', 'history_edit');
-    dispatch_post('/history/:id/edit', 'history_edit_post');
-    dispatch('/history/:id/delete', 'history_delete');
 
     /* Declare Page routes */
     dispatch('/page/:hash', 'page_hook');
