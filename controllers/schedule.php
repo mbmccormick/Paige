@@ -102,47 +102,24 @@
     
     function schedule_edit()
     {
-        Security_Authorize(5);
-        
-        $now = date("Y-m-d H:i:s");
-        
-        $result = mysql_query("SELECT * FROM schedule WHERE id='" . params('id') . "'");
+        Security_Authorize();
+    
+		$result = mysql_query("SELECT * FROM schedule WHERE id='" . mysql_real_escape_string(params('id')) . "'");
         $schedule = mysql_fetch_array($result);
-        
-        $doctors_list = "<option selected='true' value=''></option>\n";
-        
-        $result = mysql_query("SELECT * FROM environment_user, user WHERE environmentid='" . $_SESSION[CurrentEnvironment_ID] . "' AND userid=user.id AND user.roletype=2 ORDER BY user.name ASC");
+    
+        $result = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY name ASC");
         while($row = mysql_fetch_array($result))
         {
-            if ($row[id] == $schedule[userid])
-                $doctors_list .= "<option value='" . $row[id] . "' selected='true'>" . $row[name] . "</option>\n";
-            else
-                $doctors_list .= "<option value='" . $row[id] . "'>" . $row[name] . "</option>\n";
+			if ($row[id] == $schedule[memberid])
+				$members .= "<option value='" . $row[id] . "' selected='true'>" . $row[name] . "</option>\n";
+			else 
+				$members .= "<option value='" . $row[id] . "'>" . $row[name] . "</option>\n";
         }
-        
-        if ($schedule[shifttype] == 0)
-            $types_list = "<option value='0' selected='true'>Primary Doctor</option>\n";
-        else
-            $types_list = "<option value='0'>Primary Doctor</option>\n";
-        if ($schedule[shifttype] == 1)
-            $types_list .= "<option value='1' selected='true'>Backup Doctor</option>\n";
-        else
-            $types_list .= "<option value='1'>Backup Doctor</option>\n";
-        
-        if ($schedule != null)
-        {
-            set("title", "Edit Schedule");
-            set("schedule", $schedule);
-            set("doctors", $doctors_list);
-            set("types", $types_list);
-            return html("schedule/edit.php");
-        }
-        else
-        {
-            set("title", "Schedule Not Found");
-            set("type", "schedule");
-            return html("common/notfound.php");
-        }
+    
+        set("title", "Edit Shift");
+		set("schedule", $schedule);
+        set("members", $members);
+        return html("schedule/edit.php");
     }
     
     function schedule_edit_post()
@@ -151,13 +128,7 @@
         
         $now = date("Y-m-d H:i:s");
         
-        if (date("Y-m-d", strtotime($_POST[shiftstartdate])) . " " . date("H:i:s", strtotime($_POST[shiftstarttime])) < $now)
-        {
-            header("Location: " . option('base_uri') . "schedule/" . params('id') . "/edit&error=Shift start date must be in the future!");
-            exit;
-        }
-        
-        $sql = "UPDATE schedule SET userid='" . mysql_real_escape_string($_POST[userid]) . "', shiftstart='" . date("Y-m-d", strtotime($_POST[shiftstartdate])) . " " . date("H:i:s", strtotime($_POST[shiftstarttime])) . "', shifttype='" . $_POST[shifttype] . "' WHERE id='" . params('id') . "'";
+        $sql = "UPDATE schedule SET memberid='" . mysql_real_escape_string($_POST[memberid]) . "', startdate='" . date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime])) . "' WHERE id='" . params('id') . "'";
         mysql_query($sql);
         
         header("Location: " . option('base_uri') . "schedule&success=Your shift was updated successfully!");
@@ -171,7 +142,7 @@
         $sql = "DELETE FROM schedule WHERE id='" . params('id') . "'";    
         mysql_query($sql);
 
-        header("Location: " . option('base_uri') . "schedule");
+        header("Location: " . option('base_uri') . "schedule&success=Your shift was deleted successfully!");
         exit;
     }
 

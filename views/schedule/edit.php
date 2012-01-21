@@ -1,6 +1,6 @@
 <div class="row">
     <div class="span10">
-        <form action="<?=option('base_uri')?>schedule/edit" method="post" class="form-stacked">
+        <form action="<?=option('base_uri')?>schedule/<?=$schedule[id]?>/edit" method="post" class="form-stacked">
             <fieldset>
                 <div class="clearfix">
                     <label for="memberid">Team Member</label>
@@ -13,13 +13,13 @@
                 <div class="clearfix">
                     <label for="startdate">Start Date/Time</label>
                     <div class="input">
-                        <input class="medium" id="startdate" name="startdate" size="30" type="text"> <input class="medium" id="starttime" name="starttime" size="30" type="text">
+                        <input class="medium" id="startdate" name="startdate" size="30" type="text" value=<?=date("n/d/Y", strtotime($schedule[startdate]))?>> <input class="medium" id="starttime" name="starttime" size="30" type="text" value=<?=date("g:ia", strtotime($schedule[startdate]))?>>
                     </div>
                 </div>
             </fieldset>
             <br />
             <div class="actions">
-                <button type="submit" class="btn primary">Edit Shift</button>&nbsp;<button type="reset" class="btn">Cancel</button>
+                <button type="submit" class="btn primary">Edit Shift</button>&nbsp;<a onclick="return confirm('Are you sure you want to delete this shift?');" href="<?=option('base_uri')?>schedule/<?=$schedule['id']?>/delete" class="btn">Delete</a>
             </div>
         </form>
     </div>
