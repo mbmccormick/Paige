@@ -75,6 +75,19 @@
                         <input class="small" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text">
                     </div>
                 </div>
+                <br />
+                <div class="clearfix">
+                    <label for="newpassword">Password</label>
+                    <div class="input">
+                        <input class="xlarge" id="password" name="password" size="30" type="password">
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <label for="newpasswordconfirm">Confirm Password</label>
+                    <div class="input">
+                        <input class="xlarge" id="passwordconfirm" name="passwordconfirm" size="30" type="password">
+                    </div>
+                </div>
             </fieldset>
             <br />
             <div class="actions">

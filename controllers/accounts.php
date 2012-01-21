@@ -10,6 +10,13 @@
             header("Location: " . option('base_uri') . "register&error=An account with that email address already exists!");
             exit;
         }
+
+        if ($_POST[password] != "" &&
+            $_POST[password] == $_POST[passwordconfirm])
+        {
+            header("Location: " . option('base_uri') . "register&error=Your passwords do not match!");
+            exit;
+        }
         
         // create customer on Stripe
         $customer = Stripe_Customer::create(array(
@@ -41,8 +48,8 @@
         // insert account to database
         $now = date("Y-m-d H:i:s");
         
-        $sql = "INSERT INTO account (name, email, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
-                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
+        $sql = "INSERT INTO account (name, email, password, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
+                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($_POST[password]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
         mysql_query($sql);
         
         header("Location: " . option('base_uri') . "login&success=Your account was added successfully!");
