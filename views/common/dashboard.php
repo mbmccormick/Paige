@@ -1,6 +1,6 @@
 <div class="row">
     <div class="span14">
-        <form action="<?=option('base_uri')?>members/add" method="post" class="form-stacked">
+        <form action="<?=option('base_uri')?>" method="post" class="form-stacked" style="padding-left: 0px;">
             <fieldset>
                 <div class="clearfix">
                     <label for="name">Message</label>

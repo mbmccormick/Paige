@@ -40,6 +40,7 @@
     
     /* Declare Common routes */
     dispatch('/', 'common_dashboard');
+    dispatch_post('/', 'common_dashboard_post');
     
     /* Declare Security routes */
     dispatch('/login', 'login');
@@ -81,9 +82,9 @@
     dispatch('/history/:id/delete', 'history_delete');
 
     /* Declare Page routes */
-    dispatch('/page/:accountid', 'page_step1');
+    dispatch('/page/:hash', 'page_hook');
     dispatch('/page/:accountid/step1', 'page_step1');
-    dispatch('/page/:accountid/step2', 'page_step2');
+    dispatch_post('/page/:accountid/step2', 'page_step2');
 	
 	/* Declare Stripe routes */
     dispatch('/stripe/hook', 'stripe_hook');
