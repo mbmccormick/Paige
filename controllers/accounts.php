@@ -36,11 +36,19 @@
         
         $number = str_replace("+1", "", $purchasedNumber->phone_number);
         
+        // generate hash
+        $hash = "";
+        for ($i = 0; $i < 15; $i++)
+        { 
+            $d .= rand(1, 30) % 2; 
+            $hash .= $d ? chr(rand(97, 122)) : chr(rand(48, 57)); 
+        }
+
         // insert account to database
         $now = date("Y-m-d H:i:s");
         
-        $sql = "INSERT INTO account (name, email, phonenumber, stripeid, stripeplan, createddate) VALUES
-                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . $now . "')";
+        $sql = "INSERT INTO account (name, email, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
+                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
         mysql_query($sql);
         
         header("Location: " . option('base_uri') . "accounts&success=Your account was added successfully!");

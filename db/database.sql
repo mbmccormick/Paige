@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `history` (
   `accountid` int(10) NOT NULL,
   `memberid` int(10) NOT NULL,
   `message` varchar(500) NOT NULL,
-  `interface` int(10) NOT NULL,
+  `medium` int(10) NOT NULL,
   `createddate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
