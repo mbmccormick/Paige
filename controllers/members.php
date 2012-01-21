@@ -52,8 +52,8 @@
         
         $now = date("Y-m-d H:i:s");
         
-        $sql = "INSERT INTO member (name, email, phonenumber, isoptedin, createddate) VALUES
-                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($_POST[phonenumber]) . "', '" . mysql_real_escape_string($_POST[isoptedin]) . "', '" . $now . "')";
+        $sql = "INSERT INTO member (accountid, name, email, phonenumber, isoptedin, createddate) VALUES
+                    ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($_POST[phonenumber]) . "', '" . mysql_real_escape_string($_POST[isoptedin]) . "', '" . $now . "')";
         mysql_query($sql);
         
 		header("Location: " . option('base_uri') . "members&success=Your member was added successfully!");
@@ -64,15 +64,14 @@
     {
         Security_Authorize();
         
-        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
-            $_SESSION['CurrentAccount_ID'] != params('id'))
+        $result = mysql_query("SELECT * FROM member WHERE id='" . mysql_real_escape_string(params('id')) . "'");
+        $member = mysql_fetch_array($result);
+        
+        if ($_SESSION['CurrentAccount_ID'] != $member[accountid])
         {
             header("Location: " . option('base_uri') . "members&error=You are not authorized to edit that member!");
             exit;
         }
-        
-        $result = mysql_query("SELECT * FROM member WHERE id='" . mysql_real_escape_string(params('id')) . "'");
-        $member = mysql_fetch_array($result);
         
         if ($member != null)
         {
@@ -92,41 +91,19 @@
     {
         Security_Authorize();
         
-        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
-            $_SESSION['CurrentAccount_ID'] != params('id'))
+        $result = mysql_query("SELECT * FROM member WHERE id='" . mysql_real_escape_string(params('id')) . "'");
+        $member = mysql_fetch_array($result);
+        
+        if ($_SESSION['CurrentAccount_ID'] != $member[accountid])
         {
             header("Location: " . option('base_uri') . "members&error=You are not authorized to edit that member!");
             exit;
         }
         
-        $result = mysql_query("SELECT * FROM member WHERE id='" . mysql_real_escape_string(params('id')) . "'");
-        $member = mysql_fetch_array($result);
-        
         $now = date("Y-m-d H:i:s");
         
-        if (md5($_POST[currentpassword]) == $member[password])
-        {
-            if ($member[newpassword] == $member[newpasswordconfirm])
-            {
-                $sql = "UPDATE member SET membername='" . mysql_real_escape_string($_POST[membername]) . "', name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', password='" . md5(mysql_real_escape_string($_POST[newpassword])) . "', isadministrator='" . mysql_real_escape_string($_POST[isadministrator]) . "' WHERE id='" . mysql_real_escape_string($member[id]) . "'";
-                mysql_query($sql);
-            }
-            else
-            {
-                header("Location: " . option('base_uri') . "members/$member[id]&error=Your new password does not match!");
-                exit;
-            }
-        }
-        else
-        {
-            $sql = "UPDATE member SET membername='" . mysql_real_escape_string($_POST[membername]) . "', name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', isadministrator='" . mysql_real_escape_string($_POST[isadministrator]) . "' WHERE id='" . mysql_real_escape_string($member[id]) . "'";
-            mysql_query($sql);
-        }
-        
-        if ($_SESSION['CurrentAccount_ID'] == params('id'))
-        {
-            Security_Refresh(params('id'));
-        }
+        $sql = "UPDATE member SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', phonenumber='" . mysql_real_escape_string($_POST[phonenumber]) . "' , isoptedin='" . mysql_real_escape_string($_POST[isoptedin]) . "' WHERE id='" . mysql_real_escape_string($member[id]) . "'";
+        mysql_query($sql);
         
         header("Location: " . option('base_uri') . "members/$member[id]&success=Your member was updated successfully!");
         exit;
@@ -136,14 +113,16 @@
     {
         Security_Authorize();
         
-        if ($_SESSION['CurrentAccount_IsAdministrator'] == 0 &&
-            $_SESSION['CurrentAccount_ID'] != params('id'))
+        $result = mysql_query("SELECT * FROM member WHERE id='" . mysql_real_escape_string(params('id')) . "'");
+        $member = mysql_fetch_array($result);
+        
+        if ($_SESSION['CurrentAccount_ID'] != $member[accountid])
         {
             header("Location: " . option('base_uri') . "members/" . params('id') . "&error=You are not authorized to delete this member!");
             exit;
         }
     
-        $sql = "DELETE FROM member WHERE id='" . mysql_real_escape_string(params('id')) . "'";    
+        $sql = "DELETE FROM member WHERE id='" . mysql_real_escape_string($member[id]) . "'";    
         mysql_query($sql);
 
         header("Location: " . option('base_uri') . "members&success=Your member was deleted successfully!");

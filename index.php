@@ -79,6 +79,11 @@
     dispatch('/history/:id', 'history_edit');
     dispatch_post('/history/:id/edit', 'history_edit_post');
     dispatch('/history/:id/delete', 'history_delete');
+
+    /* Declare Page routes */
+    dispatch('/page/:accountid', 'page_step1');
+    dispatch('/page/:accountid/step1', 'page_step1');
+    dispatch('/page/:accountid/step2', 'page_step2');
 	
 	/* Declare Stripe routes */
     dispatch('/stripe/hook', 'stripe_hook');
