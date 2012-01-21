@@ -13,7 +13,7 @@
         $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
         $member = mysql_fetch_array($result);
 
-        echo "Calling " . $member[name] . " at " . $member[phonenumber] . "...";
+        LogHistory($member[id], $_GET[message], 0);
         
         // initialize twilio client
         $twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');

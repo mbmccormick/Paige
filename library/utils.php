@@ -1,5 +1,14 @@
 <?php
 
+    function LogHistory($memberid, $message, $interface)
+    {
+        $now = date("Y-m-d H:i:s");
+        
+        $sql = "INSERT INTO history (accountid, memberid, message, interface, createddate) VALUES
+                    ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($memberid) . "', '" . mysql_real_escape_string($message) . "', '" . mysql_real_escape_string($interface) . "', '" . $now . "')";
+        mysql_query($sql);
+    }
+
     function FriendlyDate($levels = 2, $date1)
     { 
         $blocks = array( 
