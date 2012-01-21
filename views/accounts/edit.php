@@ -64,7 +64,7 @@
             </fieldset>
             <br />
             <div class="actions">
-                <button type="submit" class="btn primary">Create Account</button>&nbsp;<button type="reset" class="btn">Cancel</button>
+                <button type="submit" class="btn primary">Save Account</button>&nbsp;<a onclick="return confirm('Are you sure you want to delete your account?');" href="<?=option('base_uri')?>accounts/<?=$account['id']?>/delete" class="btn">Delete</a>
             </div>
         </form>
     </div>
