@@ -129,7 +129,17 @@
 		}
 		else
 		{
-			// text the team
+			$result = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "'");
+        	while($row = mysql_fetch_array($result))
+        	{
+        		$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
+
+        		$message = $twilio->account->sms_messages->create(
+					$_SESSION['CurrentAccount_PhoneNumber'],
+					$row[phonenumber],
+					$_GET[message] . " Reply \"confirm\" to confirm this page."
+				);
+        	}
 		}
     }
 
