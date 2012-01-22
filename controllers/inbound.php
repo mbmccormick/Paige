@@ -82,7 +82,7 @@
 	{
 		Security_Refresh(params('accountid'));
 
-		if ($_POST[Body] == "confirm")
+		if (strtolower($_POST[Body]) == "confirm")
 		{
 			$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
 					
