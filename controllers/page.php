@@ -32,7 +32,8 @@
         $call = $twilio->account->calls->create(
             $_SESSION['CurrentAccount_PhoneNumber'],
             $member[phonenumber],
-            "http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step2&attempt=" . $attempt . "&message=" . urlencode($_GET[message])
+            "http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step2&attempt=" . $attempt . "&message=" . urlencode($_GET[message]),
+			array('IfMachine' => 'Continue')
         );
     }
 
@@ -40,14 +41,26 @@
     {
         Security_Refresh(params('accountid'));
 
-        echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
-        echo "<Response>\n";
-        echo "<Gather timeout='20' action='http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . urlencode($_GET[attempt]) . "&amp;message=" . urlencode($_GET[message]) . "' method='POST' numDigits='1'>\n";
-        echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
-        echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
-        echo "<Say voice='woman'>Press one now to confirm that you have received this message.</Say>\n";
-        echo "</Gather>\n";
-        echo "</Response>\n";
+		if ($_POST[AnsweredBy] == 'machine') 
+		{
+			echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
+			echo "<Response>\n";
+			echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
+			echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
+			echo "<Say voice='woman'>Since your page was not confirmed, we will try again in fifteen minutes.</Say>\n";
+			echo "</Response>\n";
+		}
+		else 
+		{
+			echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
+			echo "<Response>\n";
+			echo "<Gather timeout='20' action='http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . urlencode($_GET[attempt]) . "&amp;message=" . urlencode($_GET[message]) . "' method='POST' numDigits='1'>\n";
+			echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
+			echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
+			echo "<Say voice='woman'>Press one now to confirm that you have received this message.</Say>\n";
+			echo "</Gather>\n";
+			echo "</Response>\n";
+		}
     }
 
 	function page_step3()
@@ -67,7 +80,7 @@
 			{
 				echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
 				echo "<Response>\n";
-				echo "<Say voice='woman'>Your message was not confirmed. We will try again in fifteen minutes.</Say>\n";
+				echo "<Say voice='woman'>Since your page was not confirmed, we will try again in fifteen minutes.</Say>\n";
 				echo "</Response>\n";
 				
 				// add message to queue
