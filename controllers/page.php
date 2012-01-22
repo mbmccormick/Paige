@@ -56,6 +56,11 @@
 
 		        if ($member[isoptedin] == "1")
 				{
+					echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
+					echo "<Response>\n";
+					echo "<Hangup />\n";
+					echo "</Response>\n";
+
 					// send text
 					$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
 					
@@ -82,7 +87,7 @@
 					echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
 					echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
 					echo "<Say voice='woman'>Since your page was not confirmed, we will try again in fifteen minutes.</Say>\n";
-					echo "</Response>\n";	
+					echo "</Response>\n";
 					
 					// add message to queue
 					$now = date("Y-m-d H:i:s");
