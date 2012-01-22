@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $(".phone").mask("999-999-9999");
     
-	$(".alert-message").delay(5000).fadeOut();
+    $(".alert-message").delay(5000).fadeOut();
 	
     $(".alert-message a.close").click(function() {
         $(".alert-message").fadeOut();
