@@ -12,14 +12,29 @@
 
         $now = date("Y-m-d H:i:s");
 
+        if (isset($_GET[team]) == true)
+        {
+        	$result = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "'");
+        	while($row = mysql_fetch_array($result))
+        	{
+        		$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
+
+        		$message = $twilio->account->sms_messages->create(
+					$_SESSION['CurrentAccount_PhoneNumber'],
+					$row[phonenumber],
+					$_GET[message]
+				);
+        	}
+
+        	exit;
+        }
+
         // lookup the on-call member
         $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
         $shift = mysql_fetch_array($result);
 
         $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
         $member = mysql_fetch_array($result);
-
-        LogHistory($member[id], $_GET[message], 0);
         
         // initialize twilio client
         $twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
@@ -191,6 +206,17 @@
         $account = mysql_fetch_array($result);
 
         Security_Refresh($account[id]);
+
+        $now = date("Y-m-d H:i:s");
+		
+		// lookup the on-call member
+        $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+        $shift = mysql_fetch_array($result);
+
+        $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
+        $member = mysql_fetch_array($result);
+
+        LogHistory($member[id], $_GET[message], 3);
 
         RequestUrl("http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_GET[message]));
     }

@@ -52,6 +52,17 @@
 			echo "<Say voice='woman'>Thank you, your page has been sent.</Say>\n";
 			echo "</Response>\n";
 
+			$now = date("Y-m-d H:i:s");
+        
+	        // lookup the on-call member
+	        $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+	        $shift = mysql_fetch_array($result);
+
+	        $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
+	        $member = mysql_fetch_array($result);
+
+	        LogHistory($member[id], $_GET[message], 2);
+
 			RequestUrl("http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1");
 		}
 		elseif ($_POST[Digits] == "2")
