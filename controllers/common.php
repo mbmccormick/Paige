@@ -29,7 +29,7 @@
                 $history .= $row[message] . "<br />\n";
                 $history .= "</div><br />\n";
             }
-            
+
             set("title", "Dashboard");
             set("oncall", $member[name]);
             set("history", $history);
