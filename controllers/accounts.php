@@ -19,17 +19,25 @@
         }
         
         // create customer on Stripe
-        $customer = Stripe_Customer::create(array(
-            "description" => mysql_real_escape_string($_POST[name]),
-            "email" => mysql_real_escape_string($_POST[email]),
-            "card" => array(
-                "number" => mysql_real_escape_string($_POST[cardnumber]),
-                "exp_month" => mysql_real_escape_string($_POST[cardexpmonth]),
-                "exp_year" => mysql_real_escape_string($_POST[cardexpyear]),
-                "cvc" => mysql_real_escape_string($_POST[cardcvc])
-            ),
-            "plan" => mysql_real_escape_string($_POST[plan])
-        ));
+        try
+        {
+            $customer = Stripe_Customer::create(array(
+                "description" => mysql_real_escape_string($_POST[name]),
+                "email" => mysql_real_escape_string($_POST[email]),
+                "card" => array(
+                    "number" => mysql_real_escape_string($_POST[cardnumber]),
+                    "exp_month" => mysql_real_escape_string($_POST[cardexpmonth]),
+                    "exp_year" => mysql_real_escape_string($_POST[cardexpyear]),
+                    "cvc" => mysql_real_escape_string($_POST[cardcvc])
+                ),
+                "plan" => mysql_real_escape_string($_POST[plan])
+            ));
+        }
+        catch (Exception $e)
+        {
+            header("Location: " . option('base_uri') . "register&error=Your billing information could not be verified!");
+            exit;
+        }
         
         // purchase number on Twilio
         $twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
