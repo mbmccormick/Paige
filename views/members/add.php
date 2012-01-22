@@ -24,7 +24,7 @@
                 <div class="clearfix">
                     <div class="input">
                         <input type="checkbox" name="isoptedin" value="1">
-                        <span>This phone number can receive text message</span>
+                        <span>This phone number can receive text messages</span>
                     </div>
                 </div>
             </fieldset>
