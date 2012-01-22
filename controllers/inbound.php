@@ -27,7 +27,8 @@
 			echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
 			echo "<Response>\n";
 			echo "<Gather timeout='20' action='http://paigeapp.com/inbound/" . $_SESSION['CurrentAccount_ID'] . "/voice/confirm' method='POST' numDigits='1'>\n";
-			echo "<Say voice='woman'>To confirm your page, please press one.</Say>\n";
+			echo "<Say voice='woman'>To page your on-call team member now, please press one.</Say>\n";
+			echo "<Say voice='woman'>To confirm the most recent page, please press two.</Say>\n";
 			echo "</Gather>\n";
 			echo "</Response>\n";
 		}
@@ -48,7 +49,16 @@
 		{
 			echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
 			echo "<Response>\n";
-			echo "<Say voice='woman'>Thank you, your page has been confirmed.</Say>\n";
+			echo "<Say voice='woman'>Thank you, your page has been sent.</Say>\n";
+			echo "</Response>\n";
+
+			RequestUrl("http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1");
+		}
+		elseif ($_POST[Digits] == "2")
+		{
+			echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
+			echo "<Response>\n";
+			echo "<Say voice='woman'>Thank you, the most recent page has been confirmed.</Say>\n";
 			echo "</Response>\n";
 
 			mysql_query("DELETE FROM queue WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
