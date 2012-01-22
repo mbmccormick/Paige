@@ -9,7 +9,7 @@
         }
         else
         {
-            $result = mysql_query("SELECT * FROM history WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 3");
+            $result = mysql_query("SELECT * FROM history WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 4");
             while($row = mysql_fetch_array($result))
             {
                 $result2 = mysql_query("SELECT * FROM member WHERE id='" . $row[memberid] . "'");

@@ -11,7 +11,7 @@
 
 		if ($_POST[Body] == "confirm")
 		{
-			mysql_query("DELETE FROM queue WHERE accountid='" . $account[id] . "' LIMIT 1 ORDER BY createddate DESC");
+			mysql_query("DELETE FROM queue WHERE accountid='" . $account[id] . "' ORDER BY createddate DESC LIMIT 1");
 
 			$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
 					
