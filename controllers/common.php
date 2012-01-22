@@ -9,6 +9,15 @@
         }
         else
         {
+            $now = date("Y-m-d H:i:s");
+
+            // lookup the on-call member
+            $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+            $shift = mysql_fetch_array($result);
+
+            $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
+            $member = mysql_fetch_array($result);
+
             $result = mysql_query("SELECT * FROM history WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 3");
             while($row = mysql_fetch_array($result))
             {
@@ -22,6 +31,7 @@
             }
             
             set("title", "Dashboard");
+            set("oncall", $member[name]);
             set("history", $history);
             return html("common/dashboard.php");
         }
