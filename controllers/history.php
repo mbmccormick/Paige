@@ -5,7 +5,7 @@
         Security_Authorize();
 
 		// gets all tuples from history table
-        $result = mysql_query("SELECT * FROM history WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC");
+        $result = mysql_query("SELECT * FROM history WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 25");
 
 		// iterates through result
 		while($row = mysql_fetch_array($result)) 

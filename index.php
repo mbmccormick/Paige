@@ -85,6 +85,8 @@
 
     /* Declare Inbound routes */
     dispatch_post('/inbound/:accountid/voice', 'inbound_voice');
+    dispatch_post('/inbound/:accountid/voice/menu', 'inbound_voice_menu');
+    dispatch_post('/inbound/:accountid/voice/confirm', 'inbound_voice_confirm');
     dispatch_post('/inbound/:accountid/sms', 'inbound_sms');
 	
 	/* Declare Stripe routes */
