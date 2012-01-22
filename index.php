@@ -82,6 +82,10 @@
     dispatch('/page/:accountid/step1', 'page_step1');
     dispatch_post('/page/:accountid/step2', 'page_step2');
 	dispatch_post('/page/:accountid/step3', 'page_step3');
+
+    /* Declare Inbound routes */
+    dispatch_post('/inbound/:accountid/voice', 'inbound_voice');
+    dispatch_post('/inbound/:accountid/sms', 'inbound_sms');
 	
 	/* Declare Stripe routes */
     dispatch('/stripe/hook', 'stripe_hook');
