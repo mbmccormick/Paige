@@ -52,8 +52,10 @@
         $now = date("Y-m-d H:i:s");
         
         $sql = "INSERT INTO account (name, email, password, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
-                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($_POST[password]) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
+                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . md5(mysql_real_escape_string($_POST[password])) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
         mysql_query($sql);
+
+        $purchasedNumber->update(array('VoiceUrl' => 'http://paigeapp.com/inbound/' . mysql_insert_id() . '/voice', 'SmsUrl' => 'http://paigeapp.com/inbound/' . mysql_insert_id() . '/sms'));
         
         header("Location: " . option('base_uri') . "login&success=Your account was added successfully!");
         exit;
@@ -165,6 +167,18 @@
         }
         
         $sql = "DELETE FROM account WHERE id='" . mysql_real_escape_string(params('id')) . "'";    
+        mysql_query($sql);
+
+        $sql = "DELETE FROM history WHERE accountid='" . mysql_real_escape_string(params('id')) . "'";    
+        mysql_query($sql);
+
+        $sql = "DELETE FROM member WHERE accountid='" . mysql_real_escape_string(params('id')) . "'";    
+        mysql_query($sql);
+
+        $sql = "DELETE FROM queue WHERE accountid='" . mysql_real_escape_string(params('id')) . "'";    
+        mysql_query($sql);
+
+        $sql = "DELETE FROM schedule WHERE accountid='" . mysql_real_escape_string(params('id')) . "'";    
         mysql_query($sql);
 
         header("Location: " . option('base_uri') . "logout&success=Your account was deleted successfully!");
