@@ -52,4 +52,16 @@
         return html("common/about.php");
     }
 
+    function common_execute()
+    {
+        $now = date("Y-m-d H:i:s");
+        
+        $result = mysql_query("SELECT * FROM queue WHERE duedatetime <= '" . $now . "'");
+        while($row = mysql_fetch_array($result))
+        {
+            RequestUrl($row[url]);
+            mysql_query("DELETE FROM queue WHERE id='" . $row[id] . "'");
+        }
+    }
+
 ?>

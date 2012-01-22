@@ -21,19 +21,8 @@
 			$body .= $row[message];
             $body .= "</td>\n";
 			$body .= "<td>\n";
-			$body .= date('F d, Y \a\t g:ia', strtotime($row[createddate]));
-            $body .= "</td>\n";
-            $body .= "<td>\n";
-					
-			if ($row[medium] == 0) 
-				$body .= "Web";
-			else if ($row[medium] == 1)
-				$body .= "Telephone";
-			else if ($row[medium] == 2)
-				$body .= "Hook";
-
-            $body .= "</td>\n";
-			
+			$body .= date('F d \a\t g:ia', strtotime($row[createddate]));
+            $body .= "</td>\n";			
             $body .= "</tr>\n";
 		}
 		

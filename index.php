@@ -43,6 +43,7 @@
     dispatch_post('/', 'common_dashboard_post');
     dispatch('/about', 'common_about');
     dispatch('/register', 'common_register');
+    dispatch('/execute', 'common_execute');
     
     /* Declare Security routes */
     dispatch('/login', 'login');

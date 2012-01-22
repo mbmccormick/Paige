@@ -3,10 +3,9 @@
         <table class="bordered-table">
             <thead>
                 <tr>
-                    <th>Member</th>
+                    <th style="min-width: 100px;">Member</th>
 					<th>Message</th>
-					<th>Date</th>
-					<th>Medium</th>
+					<th style="min-width: 130px;">Date</th>
                 </tr>
             </thead>
             <tbody>
