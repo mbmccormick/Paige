@@ -41,16 +41,25 @@
     {
         Security_Refresh(params('accountid'));
 
-		if ($_POST[AnsweredBy] == 'machine') 
+		// lookup the on-call member
+		$onCall = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+		$shift = mysql_fetch_array($onCall);
+		
+		$result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
+		$member = mysql_fetch_array($result);
+		
+		if ($_POST[AnsweredBy] == 'machine' && ($member[isoptedin] == 1)) 
 		{
 			if ($_GET[attempt] != 3) {
-				echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
-				echo "<Response>\n";
-				echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
-				echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
-				echo "<Say voice='woman'>Since your page was not confirmed, we will try again in fifteen minutes.</Say>\n";
-				echo "</Response>\n";
+				// send text
+				$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
 				
+				$message = $twilio->account->sms_messages->create(
+				  $_SESSION['CurrentAccount_PhoneNumber'],
+				  $member[phonenumber], // Text this number
+				  $_GET[message] . " Reply \"confirm\" to confirm this page."
+				);
+
 				// add message to queue
 				$now = date("Y-m-d H:i:s");
 				
@@ -58,29 +67,8 @@
 				$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
 				$createdtime = $now;
 				
-				$sql = "INSERT INTO queue (duedatetime, url, createddate) VALUES ('" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
+				$sql = "INSERT INTO queue (accountid, duedatetime, url, createddate) VALUES ('" . $_SESSION['CurrentAccount_ID'] . "', '" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
 				mysql_query($sql);
-				
-				// if opted in, send a text
-				
-				// lookup the on-call member
-				$onCall = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
-				$shift = mysql_fetch_array($onCall);
-				
-				$result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
-				$member = mysql_fetch_array($result);
-				
-				if ($member[isoptedin] == 1) 
-				{
-					// send text
-					$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
-					
-					$message = $twilio->account->sms_messages->create(
-					  $_SESSION['CurrentAccount_PhoneNumber'],
-					  $member[phonenumber], // Text this number
-					  $_GET[message] . " Reply \"confirm\" to confirm this page."
-					);
-				}
 			}
 			else 
 			{
@@ -89,9 +77,38 @@
 				// lookup the on-call member
 				/*$result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
 				$shift = mysql_fetch_array($result);
-
-				$result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
-				$member = mysql_fetch_array($result);*/
+				*/
+			}
+		}
+		else if ($_POST[AnsweredBy] == 'machine' && ($member[isoptedin] == 0)) 
+		{
+			if ($_GET[attempt] != 3) 
+			{
+				echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
+				echo "<Response>\n";
+				echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
+				echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
+				echo "<Say voice='woman'>Since your page was not confirmed, we will try again in fifteen minutes.</Say>\n";
+				echo "</Response>\n";	
+				
+				// add message to queue
+				$now = date("Y-m-d H:i:s");
+				
+				$url = "http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
+				$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
+				$createdtime = $now;
+				
+				$sql = "INSERT INTO queue (accountid, duedatetime, url, createddate) VALUES ('" . $_SESSION['CurrentAccount_ID'] . "', '" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
+				mysql_query($sql);
+			}
+			else 
+			{
+				// send a text to the whole team
+				
+				// lookup the on-call member
+				/*$result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+				$shift = mysql_fetch_array($result);
+				*/
 			}
 		}
 		else 
