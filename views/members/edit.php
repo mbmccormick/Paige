@@ -24,7 +24,7 @@
                 <div class="clearfix">
                     <div class="input">
                         <input type="checkbox" name="isoptedin" value="1" <?php if ($member['isoptedin'] == 1) { ?>checked="true"<?php } ?>>
-                        <span>Receive text message notifications</span>
+                        <span>This phone number can receive text message</span>
                     </div>
                 </div>
             </fieldset>
