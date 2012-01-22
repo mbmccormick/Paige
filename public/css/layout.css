@@ -201,3 +201,15 @@ body {
 .calendricalEndTimePopup {
     width: 160px;
 }
+
+.history-item-image {
+    display: inline;
+    float: left;
+    height: 40px;
+    padding-top: 3px;
+    padding-right: 6px;
+}
+
+.history-item-body {
+    display: inline;
+}

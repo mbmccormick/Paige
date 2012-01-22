@@ -27,6 +27,8 @@
                 $member = mysql_fetch_array($result2);
 
                 $history .= "<div class='history-item'>\n";
+                $history .= "<div class='history-item-image'><img src='/public/img/" . $row[status] . ".png' /></div>";
+                $history .= "<div class='history-item-body'>\n";
                 if ($row[medium] == 0)
                     $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via unknown</b><br />\n";
                 elseif ($row[medium] == 1)
@@ -36,7 +38,7 @@
                 elseif ($row[medium] == 3)
                     $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via hook</b><br />\n";
                 $history .= $row[message] . "<br />\n";
-                $history .= "</div><br />\n";
+                $history .= "</div></div><br />\n";
             }
 
             set("title", "Dashboard");

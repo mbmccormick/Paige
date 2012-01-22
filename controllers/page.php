@@ -94,6 +94,8 @@
 					
 					$sql = "INSERT INTO queue (accountid, duedatetime, url, createddate) VALUES ('" . $_SESSION['CurrentAccount_ID'] . "', '" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
 					mysql_query($sql);
+
+					mysql_query("UPDATE history SET status='2' WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
 				}
 				else
 				{
@@ -113,6 +115,8 @@
 					
 					$sql = "INSERT INTO queue (accountid, duedatetime, url, createddate) VALUES ('" . $_SESSION['CurrentAccount_ID'] . "', '" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
 					mysql_query($sql);
+
+					mysql_query("UPDATE history SET status='2' WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
 				}
 			}
 			else 
@@ -153,6 +157,8 @@
 			echo "<Response>\n";
 			echo "<Say voice='woman'>Your page has been confirmed. Thank you.</Say>\n";
 			echo "</Response>\n";
+
+			mysql_query("UPDATE history SET status='1' WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
 		}
 		else 
 		{
@@ -172,8 +178,8 @@
 				
 				$sql = "INSERT INTO queue (duedatetime, url, createddate) VALUES ('" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
 				mysql_query($sql);
-				
-				// if opted in, send a text
+
+				mysql_query("UPDATE history SET status='2' WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
 				
 				// lookup the on-call member
 				$onCall = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");

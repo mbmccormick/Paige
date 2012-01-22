@@ -3,6 +3,7 @@
         <table class="bordered-table">
             <thead>
                 <tr>
+                    <th>Status</th>
                     <th style="min-width: 100px;">Member</th>
 					<th>Message</th>
 					<th style="min-width: 130px;">Date</th>

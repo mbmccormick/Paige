@@ -73,6 +73,8 @@
 			echo "</Response>\n";
 
 			mysql_query("DELETE FROM queue WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
+
+			mysql_query("UPDATE history SET status='1' WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
 		}
 	}
 
@@ -82,8 +84,6 @@
 
 		if ($_POST[Body] == "confirm")
 		{
-			mysql_query("DELETE FROM queue WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
-
 			$twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
 					
 			$message = $twilio->account->sms_messages->create(
@@ -91,6 +91,10 @@
 				$_POST[From],
 				"Thank you, your page has been confirmed."
 			);
+
+			mysql_query("DELETE FROM queue WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
+
+			mysql_query("UPDATE history SET status='1' WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
 		}
 	}
 

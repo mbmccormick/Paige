@@ -12,6 +12,9 @@
 		{
 			$body .= "<tr>\n";
        
+            $body .= "<td>\n";
+            $body .= "<img src='/public/img/" . $row[status] . ".png' />";
+            $body .= "</td>\n";
             $body .= "<td>\n";		
 			$name = mysql_query("SELECT name FROM member WHERE id=" . $row[memberid]);
 			$name = mysql_fetch_array($name);
