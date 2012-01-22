@@ -53,7 +53,7 @@
         $now = date("Y-m-d H:i:s");
         
         $sql = "INSERT INTO member (accountid, name, email, phonenumber, isoptedin, createddate) VALUES
-                    ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($_POST[phonenumber]) . "', '" . mysql_real_escape_string($_POST[isoptedin]) . "', '" . $now . "')";
+                    ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string(str_replace("-", "", $_POST[phonenumber])) . "', '" . mysql_real_escape_string($_POST[isoptedin]) . "', '" . $now . "')";
         mysql_query($sql);
         
 		header("Location: " . option('base_uri') . "members&success=Your member was added successfully!");
@@ -102,7 +102,7 @@
         
         $now = date("Y-m-d H:i:s");
         
-        $sql = "UPDATE member SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', phonenumber='" . mysql_real_escape_string($_POST[phonenumber]) . "' , isoptedin='" . mysql_real_escape_string($_POST[isoptedin]) . "' WHERE id='" . mysql_real_escape_string($member[id]) . "'";
+        $sql = "UPDATE member SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', phonenumber='" . mysql_real_escape_string(str_replace("-", "", $_POST[phonenumber])) . "' , isoptedin='" . mysql_real_escape_string($_POST[isoptedin]) . "' WHERE id='" . mysql_real_escape_string($member[id]) . "'";
         mysql_query($sql);
         
         header("Location: " . option('base_uri') . "members/$member[id]&success=Your member was updated successfully!");
@@ -122,7 +122,7 @@
             exit;
         }
     
-        $sql = "DELETE FROM member WHERE id='" . mysql_real_escape_string($member[id]) . "'";    
+        $sql = "DELETE FROM member WHERE id='" . mysql_real_escape_string($member[id]) . "'";
         mysql_query($sql);
 
         header("Location: " . option('base_uri') . "members&success=Your member was deleted successfully!");

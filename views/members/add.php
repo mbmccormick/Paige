@@ -17,7 +17,7 @@
                 <div class="clearfix">
                     <label for="phonenumber">Phone Number</label>
                     <div class="input">
-                        <input class="xlarge" id="phonenumber" name="phonenumber" size="30" type="text">
+                        <input class="xlarge phone" id="phonenumber" name="phonenumber" size="30" type="text">
                     </div>
                 </div>
                 <br />

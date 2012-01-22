@@ -6,6 +6,8 @@ $(document).ready(function() {
         
         history.replaceState(null, document.title, getRawUrl());
     }
+
+    $(".phone").mask("999-999-9999");
     
 	$(".alert-message").delay(5000).fadeOut();
 	
