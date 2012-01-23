@@ -3,6 +3,8 @@
     Options +Indexes
     RewriteEngine on
     RewriteBase /
+    RewriteCond %{SERVER_PORT} !^443$
+    RewriteRule ^(.*)$ https://paigeapp.com/$1 [R=permanent]
     RewriteCond %{SCRIPT_FILENAME} !-f
     RewriteCond %{SCRIPT_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?uri=/$1 [NC,L,QSA]
