@@ -48,7 +48,7 @@
         }
         else
         {
-            return "about " . implode(' ',$result) . " ago"; 
+            return implode(' ',$result) . " ago"; 
         }
     }
     

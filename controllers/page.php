@@ -10,8 +10,6 @@
             exit;
         }
 
-        $now = date("Y-m-d H:i:s");
-
         if (isset($_GET[team]) == true)
         {
         	$result = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "'");
@@ -29,6 +27,8 @@
         	exit;
         }
 
+        $now = date("Y-m-d H:i:s");
+
         // lookup the on-call member
         $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
         $shift = mysql_fetch_array($result);
@@ -36,6 +36,11 @@
         $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
         $member = mysql_fetch_array($result);
         
+        if (isset($_GET[queue]) == true)
+        {
+        	LogHistory($member[id], $_GET[message], 4);
+        }
+
         // initialize twilio client
         $twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
         
@@ -89,7 +94,7 @@
 					$now = date("Y-m-d H:i:s");
 					
 					$url = "http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
-					$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
+					$duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes'));
 					$createdtime = $now;
 					
 					$sql = "INSERT INTO queue (accountid, duedatetime, url, createddate) VALUES ('" . $_SESSION['CurrentAccount_ID'] . "', '" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
@@ -103,7 +108,7 @@
 					echo "<Response>\n";
 					echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
 					echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
-					echo "<Say voice='woman'>Since your page was not confirmed, we will try again in fifteen minutes.</Say>\n";
+					echo "<Say voice='woman'>Please confirm this page as soon as possible. We will attempt to page you again in 10 minutes.</Say>\n";
 					echo "</Response>\n";
 					
 					// add message to queue
@@ -126,7 +131,7 @@
 				echo "<Gather timeout='20' action='http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . urlencode($_GET[attempt]) . "&amp;message=" . urlencode($_GET[message]) . "' method='POST' numDigits='1'>\n";
 				echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
 				echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
-				echo "<Say voice='woman'>Press one now to confirm that you have received this message.</Say>\n";
+				echo "<Say voice='woman'>Press one now to confirm that you have received this page.</Say>\n";
 				echo "</Gather>\n";
 				echo "</Response>\n";
 			}
