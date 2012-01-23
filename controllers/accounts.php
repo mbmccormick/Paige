@@ -40,13 +40,23 @@
         }
         
         // purchase number on Twilio
-        $twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
-        
-        $numbers = $twilio->account->available_phone_numbers->getList('US', 'Local');
-        $firstNumber = $numbers->available_phone_numbers[0]->phone_number;
-        $purchasedNumber = $twilio->account->incoming_phone_numbers->create(array('PhoneNumber' => $firstNumber));
-        
-        $number = str_replace("+1", "", $purchasedNumber->phone_number);
+        try
+        {
+            $twilio = new Services_Twilio('AC5057e5ab36685604eecc9b1fdd8528e2', '309e6930d27b624bbfaa45dac382c6ae');
+            
+            $numbers = $twilio->account->available_phone_numbers->getList('US', 'Local');
+            $firstNumber = $numbers->available_phone_numbers[0]->phone_number;
+            $purchasedNumber = $twilio->account->incoming_phone_numbers->create(array('PhoneNumber' => $firstNumber));
+            
+            $number = str_replace("+1", "", $purchasedNumber->phone_number);
+        }
+        catch (Exception $e)
+        {
+            $customer->delete();
+
+            header("Location: " . option('base_uri') . "register&error=There was a problem provisioning your account!");
+            exit;
+        }
         
         // generate hash
         $hash = "";
