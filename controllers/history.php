@@ -21,7 +21,12 @@
             $body .= $index;
             $body .= "</th>\n";
             $body .= "<td style='text-align: center;'>\n";
-            $body .= "<img src='/public/img/" . $row[status] . ".png' />";
+            if ($row[status] == 0)
+                $body .= "<img src='/public/img/0.png' title='This page is in progress.' />";
+            elseif ($row[status] == 1)
+                $body .= "<img src='/public/img/1.png' title='This page was confirmed.' />";
+            elseif ($row[status] == 2)
+                $body .= "<img src='/public/img/2.png' title='This page was not confirmed.' />";
             $body .= "</td>\n";
             $body .= "<td>\n";		
 			$name = mysql_query("SELECT name FROM member WHERE id=" . $row[memberid]);
