@@ -27,7 +27,7 @@
                 <a class="brand" href="<?=option('base_uri')?>"><?=ApplicationName?></a>
                 <?php if ($_SESSION['CurrentAccount_ID'] == null) { ?>
                 <ul class="nav">
-                    <?php if ($_SERVER['REQUEST_URI'] == option('base_uri')) { ?>
+                    <?php if ($_SERVER['REQUEST_URI'] == option('base_uri') || $_SERVER['REQUEST_URI'] == "") { ?>
                     <li class="active"><a href="<?=option('base_uri')?>">Home</a></li>
                     <?php } else { ?>
                     <li><a href="<?=option('base_uri')?>">Home</a></li>
