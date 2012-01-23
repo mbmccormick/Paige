@@ -37,6 +37,8 @@
                     $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via telephone</b><br />\n";
                 elseif ($row[medium] == 3)
                     $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via hook</b><br />\n";
+                elseif ($row[medium] == 4)
+                    $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via scheduler</b><br />\n";
                 $history .= $row[message] . "<br />\n";
                 $history .= "</div></div><br />\n";
             }
@@ -54,7 +56,7 @@
 
         if ($_POST[recipient] == 1)
         {
-    	   $now = date("Y-m-d H:i:s");
+    	    $now = date("Y-m-d H:i:s");
         
             // lookup the on-call member
             $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
@@ -95,7 +97,7 @@
         $result = mysql_query("SELECT * FROM queue WHERE duedatetime <= '" . $now . "'");
         while($row = mysql_fetch_array($result))
         {
-            RequestUrl($row[url]);
+            RequestUrl($row[url] . "&queue=true");
             mysql_query("DELETE FROM queue WHERE id='" . $row[id] . "'");
         }
     }
