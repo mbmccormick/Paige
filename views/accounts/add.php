@@ -29,7 +29,7 @@
                 <div class="clearfix">
                     <label for="cardnumber">Credit Card Number</label>
                     <div class="input">
-                        <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text">
+                        <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text" value="4242424242424242">
                     </div>
                 </div>
                 <div class="clearfix">
@@ -51,7 +51,7 @@
                         </select>
                         <select class="small" id="cardexpyear" name="cardexpyear" autocomplete="off">
                             <option value="2012">2012</option>
-                            <option value="2013">2013</option>
+                            <option value="2013" selected="true">2013</option>
                             <option value="2014">2014</option>
                             <option value="2015">2015</option>
                             <option value="2016">2016</option>
@@ -66,7 +66,7 @@
                 <div class="clearfix">
                     <label for="cardcvc">Security Code</label>
                     <div class="input">
-                        <input class="small" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text">
+                        <input class="small" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text" value="123">
                     </div>
                 </div>
                 <br />
