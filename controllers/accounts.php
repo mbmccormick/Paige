@@ -69,8 +69,8 @@
         // insert account to database
         $now = AccountTime();
         
-        $sql = "INSERT INTO account (name, email, password, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
-                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . md5(mysql_real_escape_string($_POST[password])) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
+        $sql = "INSERT INTO account (name, email, timezone, password, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
+                    ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($_POST[timezone]) . "', '" . md5(mysql_real_escape_string($_POST[password])) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
         mysql_query($sql);
 
         $purchasedNumber->update(array('VoiceUrl' => 'https://paigeapp.com/inbound/' . mysql_insert_id() . '/voice', 'SmsUrl' => 'https://paigeapp.com/inbound/' . mysql_insert_id() . '/sms'));
@@ -128,7 +128,7 @@
         
         $now = AccountTime();
         
-        $sql = "UPDATE account SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
+        $sql = "UPDATE account SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', timezone='" . mysql_real_escape_string($_POST[timezone]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
         mysql_query($sql);
         
         if ($account[stripeplan] != $_POST[stripeplan])
@@ -140,8 +140,8 @@
             mysql_query($sql);
         }
 
-        if ($_POST[newpassword] == "" ||
-            $_POST[newpassword] != $_POST[newpasswordconfirm])
+        if ($_POST[newpassword] != "" &&
+            $_POST[newpassword] == $_POST[newpasswordconfirm])
         {
             $sql = "UPDATE account SET password='" . md5(mysql_real_escape_string($_POST[newpassword])) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
             mysql_query($sql);
