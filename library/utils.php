@@ -5,7 +5,7 @@
         $now = date("Y-m-d H:i:s");
         
         $sql = "INSERT INTO history (accountid, memberid, message, medium, status, createddate) VALUES
-                    ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($memberid) . "', '" . mysql_real_escape_string($message) . "', '" . mysql_real_escape_string($medium) . "', '0', " . $now . "')";
+                    ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($memberid) . "', '" . mysql_real_escape_string($message) . "', '" . mysql_real_escape_string($medium) . "', '0', '" . $now . "')";
         mysql_query($sql);
     }
 

@@ -19,7 +19,7 @@
             </fieldset>
             <br />
             <div class="actions">
-                <button type="submit" class="btn primary">Edit Shift</button>&nbsp;<a onclick="return confirm('Are you sure you want to delete this shift?');" href="<?=option('base_uri')?>schedule/<?=$schedule['id']?>/delete" class="btn">Delete</a>
+                <button type="submit" class="btn primary">Save Shift</button>&nbsp;<a onclick="return confirm('Are you sure you want to delete this shift?');" href="<?=option('base_uri')?>schedule/<?=$schedule['id']?>/delete" class="btn">Delete</a>
             </div>
         </form>
     </div>

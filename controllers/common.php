@@ -27,7 +27,12 @@
                 $member = mysql_fetch_array($result2);
 
                 $history .= "<div class='history-item'>\n";
-                $history .= "<div class='history-item-image'><img src='/public/img/" . $row[status] . ".png' /></div>";
+                if ($row[status] == 0)
+                    $history .= "<div class='history-item-image'><img src='/public/img/0.png' title='This page is in progress.' /></div>";
+                elseif ($row[status] == 1)
+                    $history .= "<div class='history-item-image'><img src='/public/img/1.png' title='This page was confirmed.' /></div>";
+                elseif ($row[status] == 2)
+                    $history .= "<div class='history-item-image'><img src='/public/img/2.png' title='This page was not confirmed.' /></div>";
                 $history .= "<div class='history-item-body'>\n";
                 if ($row[medium] == 0)
                     $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via unknown</b><br />\n";
@@ -67,11 +72,11 @@
 
             LogHistory($member[id], $_POST[message], 1);
 
-            RequestUrl("http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]));
+            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]));
         }
         else
         {
-            RequestUrl("http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&team=true&message=" . urlencode($_POST[message]));
+            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&team=true&message=" . urlencode($_POST[message]));
         }
         
         header("Location: /&success=Your page was sent successfully!");
