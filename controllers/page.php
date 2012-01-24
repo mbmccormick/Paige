@@ -84,7 +84,7 @@
 				{
 					echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
 					echo "<Response>\n";
-					echo "<Hangup />\n";
+					//echo "<Hangup />\n";
 					echo "</Response>\n";
 
 					// send text
