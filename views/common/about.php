@@ -18,8 +18,8 @@
 		<p>Page has three different billing plans to choose from. You can change or cancel your plan at any time from within the application.
 		<ul>
 			<li>Small ($10/month) - 10 team members</li>
-			<li>Medium ($15/month) - 20 team members</li>
-			<li>Large ($20/month) - 50 team members</li>
+			<li>Medium ($15/month) - 15 team members</li>
+			<li>Large ($20/month) - 20 team members</li>
 		</ul>
 		Larger plans are available upon request, just <a href="mailto:contact@mccormicktechnologies.com">contact us</a> for more information.</p>
     </div>
