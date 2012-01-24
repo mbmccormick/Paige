@@ -92,6 +92,15 @@
         Security_Authorize();
         
         $now = AccountTime();
+
+        $result = mysql_query("SELECT * FROM schedule WHERE accountid='" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "' AND startdate='" . mysql_real_escape_string(date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime]))) . "'");
+        $count = mysql_num_rows($result);
+
+        if ($count > 0)
+        {
+            header("Location: /schedule/add&error=Another shift is already scheduled for that date and time!");
+            exit;
+        }
         
         $sql = "INSERT INTO schedule (accountid, memberid, startdate, type, createddate) VALUES ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[memberid]) . "', '" . mysql_real_escape_string(date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime]))) . "', '0', '" . $now . "')";
         mysql_query($sql);
@@ -127,6 +136,15 @@
         Security_Authorize(5);
         
         $now = AccountTime();
+
+        $result = mysql_query("SELECT * FROM schedule WHERE accountid='" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "' AND startdate='" . mysql_real_escape_string(date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime]))) . "'");
+        $count = mysql_num_rows($result);
+
+        if ($count > 0)
+        {
+            header("Location: /schedule/add&error=Another shift is already scheduled for that date and time!");
+            exit;
+        }
         
         $sql = "UPDATE schedule SET memberid='" . mysql_real_escape_string($_POST[memberid]) . "', startdate='" . date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime])) . "' WHERE id='" . params('id') . "'";
         mysql_query($sql);
