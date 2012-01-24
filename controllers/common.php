@@ -129,13 +129,19 @@
 
     function common_execute()
     {
-        $now = AccountTime();
-        
-        $result = mysql_query("SELECT * FROM queue WHERE duedatetime <= '" . $now . "'");
-        while($row = mysql_fetch_array($result))
+    	$result1 = mysql_query("SELECT * FROM account ORDER BY id");
+        while($row1 = mysql_fetch_array($result1))
         {
-            RequestUrl($row[url] . "&queue=true");
-            mysql_query("DELETE FROM queue WHERE id='" . $row[id] . "'");
+        	Security_Refresh($row1[id]);
+        	
+	        $now = AccountTime();
+	        
+	        $result2 = mysql_query("SELECT * FROM queue WHERE duedatetime <= '" . $now . "' AND accountid='" . $row1[id] . "'");
+	        while($row2 = mysql_fetch_array($result2))
+	        {
+	            RequestUrl($row2[url] . "&queue=true");
+	            mysql_query("DELETE FROM queue WHERE id='" . $row2[id] . "'");
+	        }
         }
     }
 
