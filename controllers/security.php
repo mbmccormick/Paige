@@ -53,7 +53,7 @@
             $sql = "UPDATE account SET password='" . mysql_real_escape_string(md5($password)) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
             mysql_query($sql);
             
-            header("Location: " . option('base_uri') . "login&success=Your password has been reset and a new one was just emailed to you!");
+            header("Location: " . option('base_uri') . "login&success=Your password has been reset, please check your email!");
             exit;
         }
         else
