@@ -4,6 +4,16 @@
     {
         if ($_SESSION['CurrentAccount_ID'] == null)
         {
+            if (isset($_COOKIE[email]) == true &&
+                isset($_COOKIE[password]) == true)
+            {
+                if (Security_CookieLogin($_COOKIE[email], $_COOKIE[password]) == true)
+                {
+                    header("Location: " . option('base_uri'));
+                    exit;
+                }
+            }
+
             set("title", "Home");
             return html("common/home.php");
         }
