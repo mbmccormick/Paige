@@ -149,10 +149,13 @@
             header("Location: " . option('base_uri') . "members/" . params('id') . "&error=You are not authorized to delete this member!");
             exit;
         }
-    
-        $sql = "DELETE FROM member WHERE id='" . mysql_real_escape_string($member[id]) . "'";
-        mysql_query($sql);
 
+		$sqlDelete = "DELETE FROM schedule WHERE memberid='" . mysql_real_escape_string($member[id]) . "'";
+		mysql_query($sqlDelete);
+		
+		$sql = "DELETE FROM member WHERE id='" . mysql_real_escape_string($member[id]) . "'";
+        mysql_query($sql);
+		
         header("Location: " . option('base_uri') . "members&success=Your member was deleted successfully!");
         exit;
     }
