@@ -14,6 +14,17 @@
                         <input class="xlarge" id="email" name="email" size="30" type="text">
                     </div>
                 </div>
+                <div class="clearfix">
+                    <label for="timezone">Timezone</label>
+                    <div class="input">
+                        <select class="xlarge" id="timezone" name="timezone">
+                            <option value="5">Eastern</option>
+                            <option value="6">Central</option>
+                            <option value="7">Mountain</option>
+                            <option value="8">Pacific</option>
+                        </select>
+                    </div>
+                </div>
                 <br />
                 <div class="clearfix">
                     <label for="plan">Plan</label>

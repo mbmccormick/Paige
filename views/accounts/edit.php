@@ -14,6 +14,18 @@
                         <input class="xlarge" id="email" name="email" size="30" type="text" value="<?=$account['email']?>">
                     </div>
                 </div>
+                <div class="clearfix">
+                    <label for="timezone">Timezone</label>
+                    <div class="input">
+                        <select class="xlarge" id="timezone" name="timezone">
+                            <option value="5" <?php if ($account[timezone] == 5) echo "selected='true'"; ?>>Eastern</option>
+                            <option value="6" <?php if ($account[timezone] == 6) echo "selected='true'"; ?>>Central</option>
+                            <option value="7" <?php if ($account[timezone] == 7) echo "selected='true'"; ?>>Mountain</option>
+                            <option value="8" <?php if ($account[timezone] == 8) echo "selected='true'"; ?>>Pacific</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
 				<div class="clearfix">
                     <label for="phonenumber">Phone Number</label>
                     <div class="input">

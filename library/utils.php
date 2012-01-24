@@ -9,6 +9,11 @@
         mysql_query($sql);
     }
 
+    function AccountTime()
+    {
+        return date("Y-m-d H:i:s", time() + ((8 - (int)$_SESSION['CurrentAccount_Timezone']) * 3600));
+    }
+
     function FriendlyDate($levels = 2, $date1)
     { 
         $blocks = array( 
