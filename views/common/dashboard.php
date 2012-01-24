@@ -13,6 +13,8 @@
 							<?=$options?>
                             <option value="<?=$i?>">All team members</option>
                         </select>
+						<input type="hidden" name="i" value="<?=$i?>">
+						<?=$input?>
                     </div>
                 </div>
                 <div class="clearfix">

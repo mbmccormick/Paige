@@ -1,9 +1,20 @@
 <?php
-
+	$i = 1;
+	
     function common_dashboard()
     {
         if ($_SESSION['CurrentAccount_ID'] == null)
         {
+            if (isset($_COOKIE[email]) == true &&
+                isset($_COOKIE[password]) == true)
+            {
+                if (Security_CookieLogin($_COOKIE[email], $_COOKIE[password]) == true)
+                {
+                    header("Location: " . option('base_uri'));
+                    exit;
+                }
+            }
+
             set("title", "Home");
             return html("common/home.php");
         }
@@ -20,14 +31,18 @@
 
             $oncall = $member[name];
 			
-			// get the other team members
 			$i = 2;
-			$options = "";
+			$input .= "<input type=\"hidden\" name=\"team1\" value=\"" . $member[id] . "\">";
+			
+			// get the other team members
 			$teamQuery = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' and id!='" . $member[id] . "'");
 			while($team = mysql_fetch_array($teamQuery))
 			{
 				$options .= "<option value=\"" . $i . "\">" . $team[name] . "</option>";
-				$i .= 1;
+				$inc = "team" . $i;
+				$input .= "<input type=\"hidden\" name=\"" . $inc . "\" value=\"" . $team[id] . "\">";  
+				//$options .= "<option value=\"" . $i . "\">" . $ids[$i] . "</option>";
+				$i++;
 			}
 
             $result = mysql_query("SELECT * FROM history WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 3");
@@ -63,6 +78,7 @@
             set("history", $history);
 			set("i", $i);
 			set("options", $options);
+			set("input", $input);
             return html("common/dashboard.php");
         }
     }
@@ -70,21 +86,25 @@
     function common_dashboard_post()
     {
     	Security_Authorize();
-
-        if ($_POST[recipient] == 1)
+		
+        if ($_POST[recipient] != $_POST[i])
         {
     	    $now = AccountTime();
         
             // lookup the on-call member
-            $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+            /*$result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
             $shift = mysql_fetch_array($result);
 
             $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
-            $member = mysql_fetch_array($result);
+            $member = mysql_fetch_array($result);*/
+			
+			//$result = mysql_query("SELECT * FROM member WHERE id='" . $ids[$i] . "'");
+			//$member = mysql_fetch_array($result);
 
-            LogHistory($member[id], $_POST[message], 1);
-
-            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]));
+			$idVal = "team" . $_POST[recipient]; 
+            LogHistory($_POST[$idVal], $_POST[message], 1);
+			
+            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&memberid=" . urlencode($_POST[$idVal]));
         }
         else
         {

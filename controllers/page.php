@@ -30,11 +30,14 @@
         $now = AccountTime();
 
         // lookup the on-call member
-        $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+        /*$result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
         $shift = mysql_fetch_array($result);
 
         $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
-        $member = mysql_fetch_array($result);
+        $member = mysql_fetch_array($result);*/
+		
+		$result = mysql_query("SELECT * FROM member WHERE id='" . $_GET[memberid] . "'");
+		$member = mysql_fetch_array($result);
         
         if (isset($_GET[queue]) == true)
         {
@@ -52,7 +55,7 @@
         $call = $twilio->account->calls->create(
             $_SESSION['CurrentAccount_PhoneNumber'],
             $member[phonenumber],
-            "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step2&attempt=" . $attempt . "&message=" . urlencode($_GET[message]),
+            "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step2&attempt=" . $attempt . "&message=" . urlencode($_GET[message]) . "&memberid=" . urlencode($member[id]),
 			array('IfMachine' => 'Continue')
         );
     }
@@ -68,11 +71,14 @@
 			if ($_POST[AnsweredBy] == "machine")
 			{
 				// lookup the on-call member
-		        $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+		        /*$result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
 		        $shift = mysql_fetch_array($result);
 
 		        $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
-		        $member = mysql_fetch_array($result);
+		        $member = mysql_fetch_array($result);*/
+				
+				$result = mysql_query("SELECT * FROM member WHERE id='" . $ids[$_GET[memberid]] . "'");
+				$member = mysql_fetch_array($result);
 
 		        if ($member[isoptedin] == "1")
 				{
@@ -93,7 +99,7 @@
 					// add message to queue
 					$now = AccountTime();
 					
-					$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
+					$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . urlencode($member[id]);
 					$duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes'));
 					$createdtime = $now;
 					
@@ -114,7 +120,7 @@
 					// add message to queue
 					$now = AccountTime();
 					
-					$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
+					$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . urlencode($_GET[memberid]);
 					$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
 					$createdtime = $now;
 					
@@ -128,7 +134,7 @@
 			{
 				echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
 				echo "<Response>\n";
-				echo "<Gather timeout='20' action='https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . urlencode($_GET[attempt]) . "&amp;message=" . urlencode($_GET[message]) . "' method='POST' numDigits='1'>\n";
+				echo "<Gather timeout='20' action='https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . urlencode($_GET[attempt]) . "&amp;message=" . urlencode($_GET[message]) . "&amp;memberid=" . urlencode($_GET[memberid]) . "' method='POST' numDigits='1'>\n";
 				echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
 				echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
 				echo "<Say voice='woman'>Press one now to confirm that you have received this page.</Say>\n";
@@ -177,7 +183,7 @@
 				// add message to queue
 				$now = AccountTime();
 				
-				$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
+				$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . urlencode($member[id]);
 				$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
 				$createdtime = $now;
 				
@@ -187,10 +193,13 @@
 				mysql_query("UPDATE history SET status='2' WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
 				
 				// lookup the on-call member
-				$onCall = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
+				/*$onCall = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
 				$shift = mysql_fetch_array($onCall);
 				
 				$result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
+				$member = mysql_fetch_array($result);*/
+				
+				$result = mysql_query("SELECT * FROM member WHERE id='" . $_GET[memberid] . "'");
 				$member = mysql_fetch_array($result);
 				
 				if ($member[isoptedin] == 1) 
@@ -221,6 +230,9 @@
 		}
 	}
 	
+	/**
+	 * Haven't updated this yet!
+	 **/
     function page_hook()
     {
         $result = mysql_query("SELECT * FROM account WHERE hash='" . mysql_real_escape_string(params('hash')) . "'");
