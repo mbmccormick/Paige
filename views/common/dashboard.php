@@ -18,7 +18,7 @@
                     <label for="name">Message</label>
                     <div class="input">
 						<!-- return (this.value.length <= 120); -->
-                        <textarea class="xlarge" style="resize: none" id="message" name="message" rows="2" onkeydown="changeLimit(); return (this.value.length < 120);" onkeyup="changeLimit(); return (this.value.length < 120);"></textarea>
+                        <textarea class="xlarge" style="resize: none" id="message" name="message" rows="2" onkeydown="changeLimit();" onkeyup="changeLimit();"></textarea>
                         <span class="help-block" id="limit">
                             You have 120 characters left.
                         </span>
@@ -54,6 +54,7 @@
 <script type="text/javascript">
 	function changeLimit() 
 	{
-		document.getElementById("limit").innerHTML = "You have " + (120 - document.getElementById("message").value.length) + " characters left.";
+		document.getElementById("message").value = document.getElementById("message").value.substring(0,120);
+		document.getElementById("limit").innerHTML = "You have " + (120 - document.getElementById("message").value.length) + " characters left.";	
 	}
 </script>
