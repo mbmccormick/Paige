@@ -74,6 +74,8 @@
         mysql_query($sql);
 
         $purchasedNumber->update(array('VoiceUrl' => 'https://paigeapp.com/inbound/' . mysql_insert_id() . '/voice', 'SmsUrl' => 'https://paigeapp.com/inbound/' . mysql_insert_id() . '/sms'));
+
+        mail($account[email], "Welcome to " . ApplicationName . "", "Thank you for signing up with " . ApplicationName . "! Your account is now activate and your two week free trial begins today. If you have any questions about our service, please don't hesitate to contact us. Login to your account now to get started!\n\n--\n" . ApplicationName . "", "From: " . ApplicationName . " <" . EmailAddress . ">");
         
         header("Location: " . option('base_uri') . "login&success=Your account was added successfully!");
         exit;
