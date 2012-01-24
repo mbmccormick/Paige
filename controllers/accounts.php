@@ -67,7 +67,7 @@
         }
 
         // insert account to database
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
         
         $sql = "INSERT INTO account (name, email, password, phonenumber, stripeid, stripeplan, hash, createddate) VALUES
                     ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . md5(mysql_real_escape_string($_POST[password])) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
@@ -126,7 +126,7 @@
             exit;
         }
         
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
         
         $sql = "UPDATE account SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
         mysql_query($sql);

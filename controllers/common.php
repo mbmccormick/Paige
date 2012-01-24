@@ -9,7 +9,7 @@
         }
         else
         {
-            $now = date("Y-m-d H:i:s");
+            $now = AccountTime();
 
             // lookup the on-call member
             $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
@@ -61,7 +61,7 @@
 
         if ($_POST[recipient] == 1)
         {
-    	    $now = date("Y-m-d H:i:s");
+    	    $now = AccountTime();
         
             // lookup the on-call member
             $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
@@ -97,7 +97,7 @@
 
     function common_execute()
     {
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
         
         $result = mysql_query("SELECT * FROM queue WHERE duedatetime <= '" . $now . "'");
         while($row = mysql_fetch_array($result))

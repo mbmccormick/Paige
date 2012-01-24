@@ -78,7 +78,7 @@
             exit;
         }
         
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
         
         $sql = "INSERT INTO member (accountid, name, email, phonenumber, isoptedin, createddate) VALUES
                     ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string(str_replace("-", "", $_POST[phonenumber])) . "', '" . mysql_real_escape_string($_POST[isoptedin]) . "', '" . $now . "')";
@@ -128,7 +128,7 @@
             exit;
         }
         
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
         
         $sql = "UPDATE member SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', phonenumber='" . mysql_real_escape_string(str_replace("-", "", $_POST[phonenumber])) . "' , isoptedin='" . mysql_real_escape_string($_POST[isoptedin]) . "' WHERE id='" . mysql_real_escape_string($member[id]) . "'";
         mysql_query($sql);

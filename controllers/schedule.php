@@ -91,7 +91,7 @@
     {
         Security_Authorize();
         
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
         
         $sql = "INSERT INTO schedule (accountid, memberid, startdate, type, createddate) VALUES ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[memberid]) . "', '" . mysql_real_escape_string(date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime]))) . "', '0', '" . $now . "')";
         mysql_query($sql);
@@ -126,7 +126,7 @@
     {
         Security_Authorize(5);
         
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
         
         $sql = "UPDATE schedule SET memberid='" . mysql_real_escape_string($_POST[memberid]) . "', startdate='" . date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime])) . "' WHERE id='" . params('id') . "'";
         mysql_query($sql);

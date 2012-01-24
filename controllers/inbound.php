@@ -52,7 +52,7 @@
 			echo "<Say voice='woman'>Thank you, your page has been sent.</Say>\n";
 			echo "</Response>\n";
 
-			$now = date("Y-m-d H:i:s");
+			$now = AccountTime();
         
 	        // lookup the on-call member
 	        $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");

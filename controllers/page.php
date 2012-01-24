@@ -27,7 +27,7 @@
         	exit;
         }
 
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
 
         // lookup the on-call member
         $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
@@ -61,7 +61,7 @@
     {
         Security_Refresh(params('accountid'));
 
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
 
 		if ($_GET[attempt] != 3)
 		{
@@ -91,7 +91,7 @@
 					);
 
 					// add message to queue
-					$now = date("Y-m-d H:i:s");
+					$now = AccountTime();
 					
 					$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
 					$duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes'));
@@ -112,7 +112,7 @@
 					echo "</Response>\n";
 					
 					// add message to queue
-					$now = date("Y-m-d H:i:s");
+					$now = AccountTime();
 					
 					$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
 					$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
@@ -175,7 +175,7 @@
 				echo "</Response>\n";
 				
 				// add message to queue
-				$now = date("Y-m-d H:i:s");
+				$now = AccountTime();
 				
 				$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
 				$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
@@ -228,7 +228,7 @@
 
         Security_Refresh($account[id]);
 
-        $now = date("Y-m-d H:i:s");
+        $now = AccountTime();
 		
 		// lookup the on-call member
         $result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");

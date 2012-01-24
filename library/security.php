@@ -44,7 +44,7 @@
             $_SESSION['CurrentAccount_ID'] = $row[id];
             $_SESSION['CurrentAccount_Name'] = $row[name];
 			$_SESSION['CurrentAccount_PhoneNumber'] = $row[phonenumber];
-            $_SESSION['CurrentAccount_IsAdministrator'] = $row[isadministrator];
+            $_SESSION['CurrentAccount_Timezone'] = $row[timezone];
         }
     }
     

@@ -123,6 +123,7 @@
         </div>
         <footer>
             <p><a href="<?=option('base_uri')?>"><?=ApplicationName?></a> is powered by <a href="http://github.com/mccormicktechnologies/limoncello" target="_blank">Limoncello</a>. Version <?=Version?>.</p>
+            <p><?=date('F d, Y \a\t g:ia', strtotime(AccountTime()));?>
         </footer>
     </div>
     </body>
