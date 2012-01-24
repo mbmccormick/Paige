@@ -2,13 +2,23 @@
 
     function login()
     {
+        if (isset($_COOKIE[email]) == true &&
+            isset($_COOKIE[password]) == true)
+        {
+            if (Security_CookieLogin($_COOKIE[email], $_COOKIE[password]) == true)
+            {
+                header("Location: " . option('base_uri'));
+                exit;
+            }
+        }
+
         set("title", "Login");
         return html("security/login.php", "basic.php");
     }
     
     function login_post()
     {
-        if (Security_Login($_POST[email], $_POST[password]) == true)
+        if (Security_Login($_POST[email], $_POST[password], $_POST[rememberme]) == true)
         {
             header("Location: " . option('base_uri'));
             exit;

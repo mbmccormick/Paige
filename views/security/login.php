@@ -15,7 +15,7 @@
             </div>
             <div class="clearfix">
                 <div class="input">
-                    <input type="checkbox" name="rememberme" value="true">
+                    <input type="checkbox" id="rememberme" name="rememberme" value="true">
                     <span>Remember me</span>
                 </div>
             </div>
