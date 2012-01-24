@@ -41,6 +41,20 @@
     function members_add()
     {
         Security_Authorize();
+
+        $result = mysql_query("SELECT * FROM account WHERE id='" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "'");
+        $account = mysql_fetch_array($result);
+
+        $result = mysql_query("SELECT * FROM member WHERE accountid='" . mysql_real_escape_string($account[id]) . "'");
+        $count = mysql_num_rows($result);
+
+        if (($count >= 10 && $account[stripeplan] == 1) ||
+            ($count >= 20 && $account[stripeplan] == 2) ||
+            ($count >= 50 && $account[stripeplan] == 3))
+        {
+            header("Location: " . option('base_uri') . "members&error=You have reached the maxium number of team members for your account plan!");
+            exit;
+        }
         
         set("title", "New Member");
         return html("members/add.php");
