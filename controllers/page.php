@@ -77,7 +77,7 @@
 		        $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
 		        $member = mysql_fetch_array($result);*/
 				
-				$result = mysql_query("SELECT * FROM member WHERE id='" . $ids[$_GET[memberid]] . "'");
+				$result = mysql_query("SELECT * FROM member WHERE id='" . $_GET[memberid] . "'");
 				$member = mysql_fetch_array($result);
 
 		        if ($member[isoptedin] == "1")
