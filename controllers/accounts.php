@@ -73,7 +73,7 @@
                     ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . md5(mysql_real_escape_string($_POST[password])) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
         mysql_query($sql);
 
-        $purchasedNumber->update(array('VoiceUrl' => 'http://paigeapp.com/inbound/' . mysql_insert_id() . '/voice', 'SmsUrl' => 'http://paigeapp.com/inbound/' . mysql_insert_id() . '/sms'));
+        $purchasedNumber->update(array('VoiceUrl' => 'https://paigeapp.com/inbound/' . mysql_insert_id() . '/voice', 'SmsUrl' => 'https://paigeapp.com/inbound/' . mysql_insert_id() . '/sms'));
         
         header("Location: " . option('base_uri') . "login&success=Your account was added successfully!");
         exit;

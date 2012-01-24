@@ -72,11 +72,11 @@
 
             LogHistory($member[id], $_POST[message], 1);
 
-            RequestUrl("http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]));
+            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]));
         }
         else
         {
-            RequestUrl("http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&team=true&message=" . urlencode($_POST[message]));
+            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&team=true&message=" . urlencode($_POST[message]));
         }
         
         header("Location: /&success=Your page was sent successfully!");

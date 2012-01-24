@@ -52,7 +52,7 @@
         $call = $twilio->account->calls->create(
             $_SESSION['CurrentAccount_PhoneNumber'],
             $member[phonenumber],
-            "http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step2&attempt=" . $attempt . "&message=" . urlencode($_GET[message]),
+            "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step2&attempt=" . $attempt . "&message=" . urlencode($_GET[message]),
 			array('IfMachine' => 'Continue')
         );
     }
@@ -93,7 +93,7 @@
 					// add message to queue
 					$now = date("Y-m-d H:i:s");
 					
-					$url = "http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
+					$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
 					$duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes'));
 					$createdtime = $now;
 					
@@ -114,7 +114,7 @@
 					// add message to queue
 					$now = date("Y-m-d H:i:s");
 					
-					$url = "http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
+					$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
 					$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
 					$createdtime = $now;
 					
@@ -128,7 +128,7 @@
 			{
 				echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
 				echo "<Response>\n";
-				echo "<Gather timeout='20' action='http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . urlencode($_GET[attempt]) . "&amp;message=" . urlencode($_GET[message]) . "' method='POST' numDigits='1'>\n";
+				echo "<Gather timeout='20' action='https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . urlencode($_GET[attempt]) . "&amp;message=" . urlencode($_GET[message]) . "' method='POST' numDigits='1'>\n";
 				echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
 				echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
 				echo "<Say voice='woman'>Press one now to confirm that you have received this page.</Say>\n";
@@ -177,7 +177,7 @@
 				// add message to queue
 				$now = date("Y-m-d H:i:s");
 				
-				$url = "http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
+				$url = "https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]);
 				$duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
 				$createdtime = $now;
 				
@@ -239,7 +239,7 @@
 
         LogHistory($member[id], $_GET[message], 3);
 
-        RequestUrl("http://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_GET[message]));
+        RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_GET[message]));
     }
 
 ?>
