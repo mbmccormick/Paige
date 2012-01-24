@@ -19,6 +19,16 @@
             $member = mysql_fetch_array($result);
 
             $oncall = $member[name];
+			
+			// get the other team members
+			$i = 2;
+			$options = "";
+			$teamQuery = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' and id!='" . $member[id] . "'");
+			while($team = mysql_fetch_array($teamQuery))
+			{
+				$options .= "<option value=\"" . $i . "\">" . $team[name] . "</option>";
+				$i .= 1;
+			}
 
             $result = mysql_query("SELECT * FROM history WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 3");
             while($row = mysql_fetch_array($result))
@@ -51,6 +61,8 @@
             set("title", "Dashboard");
             set("oncall", $oncall);
             set("history", $history);
+			set("i", $i);
+			set("options", $options);
             return html("common/dashboard.php");
         }
     }

@@ -10,7 +10,8 @@
                     <div class="input">
                         <select class="xlarge" id="recipient" name="recipient">
                             <option value="1"><?=$oncall?> (on-call team member)</option>
-                            <option value="2">All team members</option>
+							<?=$options?>
+                            <option value="<?=$i?>">All team members</option>
                         </select>
                     </div>
                 </div>
