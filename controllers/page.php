@@ -87,7 +87,8 @@
                     $now = AccountTime();
                     
                     $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id];
-                    $duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes'));
+
+                    $duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes', strtotime($now)));
                     $createdtime = $now;
                     
                     $sql = "INSERT INTO queue (accountid, duedatetime, url, createddate) VALUES ('" . $_SESSION['CurrentAccount_ID'] . "', '" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
@@ -108,7 +109,8 @@
                     $now = AccountTime();
                     
                     $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $_GET[memberid];
-                    $duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes'));
+
+                    $duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes', strtotime($now)));
                     $createdtime = $now;
                     
                     $sql = "INSERT INTO queue (accountid, duedatetime, url, createddate) VALUES ('" . $_SESSION['CurrentAccount_ID'] . "', '" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
@@ -174,11 +176,11 @@
             
             $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id];
 
-            $duedatetime = date("Y-m-d H:i:s", strtotime('+15 minutes', strtotime($now)));
+            $duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes', strtotime($now)));
             $createdtime = $now;
             
-            $sql = "INSERT INTO queue (duedatetime, url, createddate) VALUES ('" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
-            mysql_query($sql);
+            $sql = "INSERT INTO queue (accountid, duedatetime, url, createddate) VALUES ('" . $_SESSION['CurrentAccount_ID'] . "', '" . $duedatetime . "', '" . $url . "', '" . $createdtime . "')";
+                    mysql_query($sql);
 
             mysql_query("UPDATE history SET status='2' WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 1");
             
