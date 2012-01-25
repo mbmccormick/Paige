@@ -143,6 +143,9 @@
                 mysql_query("DELETE FROM queue WHERE id='" . $row2[id] . "'");
             }
         }
+
+        header("Location: /logout");
+        exit;
     }
 
 ?>
