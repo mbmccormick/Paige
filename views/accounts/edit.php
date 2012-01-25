@@ -36,7 +36,7 @@
                 <div class="clearfix">
                     <label for="hash">Page Hook URL</label>
                     <div class="input">
-                        <input class="xlarge" id="hash" name="hash" size="30" type="text" value="https://paigeapp.com/page/<?=$account['hash']?>" readonly="true">
+                        <input class="xlarge" id="hash" name="hash" size="30" type="text" value="https://<?=$_SEVER['HTTP_HOST']?>/page/<?=$account['hash']?>" readonly="true">
                     </div>
                     <span class="help-block">If you need to change the page hook URL assigned to your account, please contact support.</span>
                 </div>
