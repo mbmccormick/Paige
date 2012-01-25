@@ -90,7 +90,7 @@
         }
         else
         {
-            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&team=true&message=" . urlencode($_POST[message]));
+            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&team=true");
         }
         
         header("Location: /&success=Your page was sent successfully!");
