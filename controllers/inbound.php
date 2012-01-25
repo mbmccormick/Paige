@@ -6,7 +6,7 @@
 
         echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
         echo "<Response>\n";
-        echo "<Gather timeout='20' action='https://" . $_SEVER['HTTP_HOST'] . "/inbound/" . $_SESSION['CurrentAccount_ID'] . "/voice/menu' method='POST' numDigits='4'>\n";
+        echo "<Gather timeout='20' action='https://" . $_SERVER['HTTP_HOST'] . "/inbound/" . $_SESSION['CurrentAccount_ID'] . "/voice/menu' method='POST' numDigits='4'>\n";
         echo "<Say voice='woman'>You have reached the " . $_SESSION['CurrentAccount_Name'] . " paging service.</Say>\n";
         echo "<Say voice='woman'>Please enter your account PIN to continue.</Say>\n";
         echo "</Gather>\n";
@@ -26,7 +26,7 @@
         {
             echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
             echo "<Response>\n";
-            echo "<Gather timeout='20' action='https://" . $_SEVER['HTTP_HOST'] . "/inbound/" . $_SESSION['CurrentAccount_ID'] . "/voice/confirm' method='POST' numDigits='1'>\n";
+            echo "<Gather timeout='20' action='https://" . $_SERVER['HTTP_HOST'] . "/inbound/" . $_SESSION['CurrentAccount_ID'] . "/voice/confirm' method='POST' numDigits='1'>\n";
             echo "<Say voice='woman'>To page your on-call team member now, please press one.</Say>\n";
             echo "<Say voice='woman'>To confirm the most recent page, please press two.</Say>\n";
             echo "</Gather>\n";
@@ -63,7 +63,7 @@
 
             LogHistory($member[id], $_GET[message], 2);
 
-            RequestUrl("https://" . $_SEVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&memberid=" . $member[id]);
+            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&memberid=" . $member[id]);
         }
         elseif ($_POST[Digits] == "2")
         {

@@ -79,18 +79,18 @@
     function common_dashboard_post()
     {
         Security_Authorize();
-        
+
         if ($_POST[recipient] > 0)
         {
             $now = AccountTime();
         
             LogHistory($_POST[recipient], $_POST[message], 1);
             
-            RequestUrl("https://" . $_SEVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&memberid=" . $_POST[recipient]);
+            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&memberid=" . $_POST[recipient]);
         }
         else
         {
-            RequestUrl("https://" . $_SEVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&team=true");
+            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&team=true");
         }
         
         header("Location: /&success=Your page was sent successfully!");
