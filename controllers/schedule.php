@@ -64,8 +64,8 @@
         set("title", "Schedule");
         set("calendar", $calendar);
         set("calendar_title", date("F", $first_of_month) . " " . date("Y", $first_of_month));
-        set("prev", "<a href='/schedule&month=" . (($month - 1) == 0 ? 12 : ($month - 1)) . "&year=" . (($month - 1) == 0 ? ($year - 1) : $year) . "'>&lt;&lt;&lt;</a>");
-        set("next", "<a href='/schedule&month=" . (($month + 1) == 13 ? 1 : ($month + 1)) . "&year=" . (($month + 1) == 13 ? ($year + 1) : $year) . "'>&gt;&gt;&gt;</a>");
+        set("prev", "<a href='/schedule&month=" . (($month - 1) == 0 ? 12 : ($month - 1)) . "&year=" . (($month - 1) == 0 ? ($year - 1) : $year) . "'>&larr; Previous</a>");
+        set("next", "<a href='/schedule&month=" . (($month + 1) == 13 ? 1 : ($month + 1)) . "&year=" . (($month + 1) == 13 ? ($year + 1) : $year) . "'>Next &rarr;</a>");
         
         return html("schedule/view.php");
     }
