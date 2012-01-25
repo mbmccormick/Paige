@@ -73,7 +73,7 @@
                     ('" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string($_POST[timezone]) . "', '" . md5(mysql_real_escape_string($_POST[password])) . "', '" . mysql_real_escape_string($number) . "', '" . mysql_real_escape_string($customer->id) . "', '" . mysql_real_escape_string($_POST[plan]) . "', '" . mysql_real_escape_string($hash) . "', '" . $now . "')";
         mysql_query($sql);
 
-        $purchasedNumber->update(array('VoiceUrl' => 'https://paigeapp.com/inbound/' . mysql_insert_id() . '/voice', 'SmsUrl' => 'https://paigeapp.com/inbound/' . mysql_insert_id() . '/sms'));
+        $purchasedNumber->update(array('VoiceUrl' => 'https://' . $_SEVER['HTTP_HOST'] . '/inbound/' . mysql_insert_id() . '/voice', 'SmsUrl' => 'https://' . $_SEVER['HTTP_HOST'] . '/inbound/' . mysql_insert_id() . '/sms'));
 
         mail($account[email], "Welcome to " . ApplicationName . "", "Thank you for signing up with " . ApplicationName . "! Your account is now activate and your two week free trial begins today. If you have any questions about our service, please don't hesitate to contact us. Login to your account now to get started!\n\n--\n" . ApplicationName . "", "From: " . ApplicationName . " <" . EmailAddress . ">");
         

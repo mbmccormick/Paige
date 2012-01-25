@@ -86,11 +86,11 @@
         
             LogHistory($_POST[recipient], $_POST[message], 1);
             
-            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&memberid=" . $_POST[recipient]);
+            RequestUrl("https://" . $_SEVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&memberid=" . $_POST[recipient]);
         }
         else
         {
-            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&team=true");
+            RequestUrl("https://" . $_SEVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&team=true");
         }
         
         header("Location: /&success=Your page was sent successfully!");
