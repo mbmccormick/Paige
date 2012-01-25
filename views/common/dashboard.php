@@ -9,19 +9,14 @@
                     <label for="name">Recipient</label>
                     <div class="input">
                         <select class="xlarge" id="recipient" name="recipient">
-                            <option value="1"><?=$oncall?> (on-call team member)</option>
-							<?=$options?>
-                            <option value="<?=$i?>">All team members</option>
+                            <?=$members?>
                         </select>
-						<input type="hidden" name="i" value="<?=$i?>">
-						<?=$input?>
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="name">Message</label>
                     <div class="input">
-						<!-- return (this.value.length <= 120); -->
-                        <textarea class="xlarge" style="resize: none" id="message" name="message" rows="2" onkeydown="changeLimit();" onkeyup="changeLimit();"></textarea>
+                        <textarea class="xlarge" style="resize: none;" id="message" name="message" rows="2"></textarea>
                         <span class="help-block" id="limit">
                             You have 120 characters left.
                         </span>
@@ -53,11 +48,11 @@
         }
     });
 
-</script>
-<script type="text/javascript">
-	function changeLimit() 
-	{
-		document.getElementById("message").value = document.getElementById("message").value.substring(0,120);
-		document.getElementById("limit").innerHTML = "You have " + (120 - document.getElementById("message").value.length) + " characters left.";	
-	}
+    $(document).ready(function() {
+        $("#message").keyup(function() {
+            $(this).val($(this).val().substring(0, 120));
+            $("#limit").html("You have " + (120 - $(this).val().length) + " characters remaining."); 
+        });
+    });
+
 </script>

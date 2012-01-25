@@ -1,6 +1,5 @@
 <?php
-    $i = 1;
-    
+        
     function common_dashboard()
     {
         if ($_SESSION['CurrentAccount_ID'] == null)
@@ -29,21 +28,18 @@
             $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
             $member = mysql_fetch_array($result);
 
-            $oncall = $member[name];
+            $members .= "<option value='" . $member[id] . "'>" . $member[name] . " (on-call team member)</option>\n";
             
-            $i = 2;
-            $input .= "<input type=\"hidden\" name=\"team1\" value=\"" . $member[id] . "\">";
-            
-            // get the other team members
-            $teamQuery = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' and id!='" . $member[id] . "'");
-            while($team = mysql_fetch_array($teamQuery))
+            $result = mysql_query("SELECT * FROM member WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "'");
+            while($row = mysql_fetch_array($result))
             {
-                $options .= "<option value=\"" . $i . "\">" . $team[name] . "</option>";
-                $inc = "team" . $i;
-                $input .= "<input type=\"hidden\" name=\"" . $inc . "\" value=\"" . $team[id] . "\">";  
-                //$options .= "<option value=\"" . $i . "\">" . $ids[$i] . "</option>";
-                $i++;
+                if ($row[id] != $member[id])
+                {
+                    $members .= "<option value='" . $row[id] . "'>" . $row[name] . "</option>\n";
+                }
             }
+
+            $members .= "<option value='-1'>All team members</option>\n";
 
             $result = mysql_query("SELECT * FROM history WHERE accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY createddate DESC LIMIT 3");
             while($row = mysql_fetch_array($result))
@@ -74,11 +70,8 @@
             }
 
             set("title", "Dashboard");
-            set("oncall", $oncall);
+            set("members", $members);
             set("history", $history);
-            set("i", $i);
-            set("options", $options);
-            set("input", $input);
             return html("common/dashboard.php");
         }
     }
@@ -87,24 +80,13 @@
     {
         Security_Authorize();
         
-        if ($_POST[recipient] != $_POST[i])
+        if ($_POST[recipient] > 0)
         {
             $now = AccountTime();
         
-            // lookup the on-call member
-            /*$result = mysql_query("SELECT * FROM schedule WHERE startdate <= '" . $now . "' AND accountid='" . $_SESSION['CurrentAccount_ID'] . "' ORDER BY startdate DESC");
-            $shift = mysql_fetch_array($result);
-
-            $result = mysql_query("SELECT * FROM member WHERE id='" . $shift[memberid] . "'");
-            $member = mysql_fetch_array($result);*/
+            LogHistory($_POST[recipient], $_POST[message], 1);
             
-            //$result = mysql_query("SELECT * FROM member WHERE id='" . $ids[$i] . "'");
-            //$member = mysql_fetch_array($result);
-
-            $idVal = "team" . $_POST[recipient]; 
-            LogHistory($_POST[$idVal], $_POST[message], 1);
-            
-            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&memberid=" . urlencode($_POST[$idVal]));
+            RequestUrl("https://paigeapp.com/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&memberid=" . $_POST[recipient]);
         }
         else
         {
