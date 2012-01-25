@@ -26,42 +26,42 @@
                     </div>
                 </div>
                 <br />
-				<div class="clearfix">
+                <div class="clearfix">
                     <label for="phonenumber">Phone Number</label>
                     <div class="input">
                         <input class="xlarge" id="phonenumber" name="phonenumber" size="30" type="text" value="<?=substr($account['phonenumber'], 0, 3) . '-' . substr($account['phonenumber'], 3, 3) . '-' . substr($account['phonenumber'], 6, 4)?>" readonly="true">
                     </div>
-					<span class="help-block">If you need to change the phone number assigned to your account, please contact support.</span>
+                    <span class="help-block">If you need to change the phone number assigned to your account, please contact support.</span>
                 </div>
                 <div class="clearfix">
                     <label for="hash">Page Hook URL</label>
                     <div class="input">
-                        <input class="xlarge" id="hash" name="hash" size="30" type="text" value="http://paigeapp.com/page/<?=$account['hash']?>" readonly="true">
+                        <input class="xlarge" id="hash" name="hash" size="30" type="text" value="https://paigeapp.com/page/<?=$account['hash']?>" readonly="true">
                     </div>
                     <span class="help-block">If you need to change the page hook URL assigned to your account, please contact support.</span>
                 </div>
-				<br />
+                <br />
                 <div class="clearfix">
                     <label for="plan">Plan</label>
                     <div class="input">
                         <select class="xlarge" id="stripeplan" name="stripeplan">
-							<option value="1" <?php if ($account[stripeplan] == 1) echo "selected='true'"; ?>>Small - $10/month</option>
-							<option value="2" <?php if ($account[stripeplan] == 2) echo "selected='true'"; ?>>Medium - $15/month</option>
-							<option value="3" <?php if ($account[stripeplan] == 3) echo "selected='true'"; ?>>Large - $20/month</option>
-						</select>
+                            <option value="1" <?php if ($account[stripeplan] == 1) echo "selected='true'"; ?>>Small - $10/month</option>
+                            <option value="2" <?php if ($account[stripeplan] == 2) echo "selected='true'"; ?>>Medium - $15/month</option>
+                            <option value="3" <?php if ($account[stripeplan] == 3) echo "selected='true'"; ?>>Large - $20/month</option>
+                        </select>
                     </div>
-					<span class="help-block">Changes to your plan will take effect immediately and you will be pro-rated for this change at the next billing cycle.</span>
+                    <span class="help-block">Changes to your plan will take effect immediately and you will be pro-rated for this change at the next billing cycle.</span>
                 </div>
-				<br />
+                <br />
                 <div class="clearfix">
                     <label for="cardnumber">Credit Card Number</label>
                     <div class="input">
                         <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text" value="<?=$creditcard?>" readonly="true">
                     </div>
-					<span class="help-block">If you need to change the credit card used for billing your account, please contact support. Your next charge will occur on <?=$nextcharge?>.</span>
+                    <span class="help-block">If you need to change the credit card used for billing your account, please contact support. Your next charge will occur on <?=$nextcharge?>.</span>
                 </div>
                 <br />
-				<div class="clearfix">
+                <div class="clearfix">
                     <label for="newpassword">New Password</label>
                     <div class="input">
                         <input class="xlarge" id="newpassword" name="newpassword" size="30" type="password">
