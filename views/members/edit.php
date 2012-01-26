@@ -11,7 +11,7 @@
                 <div class="clearfix">
                     <label for="email">Email Address</label>
                     <div class="input">
-                        <input class="xlarge" id="email" name="email" size="30" type="text" value="<?=$member['email']?>">
+                        <input class="xlarge email" id="email" name="email" size="30" type="text" value="<?=$member['email']?>">
                     </div>
                 </div>
                 <div class="clearfix">
@@ -40,16 +40,3 @@
         <br />
     </div>
 </div>
-<script type="text/javascript">
-
-    $("form.form-stacked").submit(function validate() {
-        var formData = $("form.form-stacked").serializeArray();
-        for (var i=0; i < formData.length; i++) { 
-            if (!formData[i].value) { 
-                alert("Please complete all fields, check your input, and try again.")                
-                return false;
-            }
-        }
-    });
-
-</script>

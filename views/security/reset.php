@@ -5,7 +5,7 @@
             <div class="clearfix">
                 <label for="email">Email Address</label>
                 <div class="input">
-                    <input class="xlarge" id="email" name="email" size="30" type="text">
+                    <input class="xlarge email" id="email" name="email" size="30" type="text">
                 </div>
             </div>
         </fieldset>

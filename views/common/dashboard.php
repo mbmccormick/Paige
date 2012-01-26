@@ -38,16 +38,6 @@
 </div>
 <script type="text/javascript">
 
-    $("form.form-stacked").submit(function validate() {
-        var formData = $("form.form-stacked").serializeArray();
-        for (var i=0; i < formData.length; i++) { 
-            if (!formData[i].value) { 
-                alert("Please complete all fields, check your input, and try again.")                
-                return false;
-            }
-        }
-    });
-
     $(document).ready(function() {
         $("#message").keyup(function() {
             $(this).val($(this).val().substring(0, 120));
