@@ -18,7 +18,7 @@
             $body .= $row[name];
             $body .= "</td>\n";
             $body .= "<td>\n";
-            $body .= "<a href='" . option('base_uri') . "members/$row[id]'>Edit</a>\n";
+            $body .= "<a href='" . option('base_uri') . "members/" . $row[id] . "'>Edit</a>\n";
             $body .= "</td>\n";
             
             $body .= "</tr>\n";
@@ -52,7 +52,7 @@
             ($count >= 20 && $account[stripeplan] == 2) ||
             ($count >= 50 && $account[stripeplan] == 3))
         {
-            header("Location: " . option('base_uri') . "members&error=You have reached the maxium number of team members for your account plan!");
+            header("Location: " . option('base_uri') . "members?error=You have reached the maxium number of team members for your account plan!");
             exit;
         }
         
@@ -74,7 +74,7 @@
             ($count >= 15 && $account[stripeplan] == 2) ||
             ($count >= 20 && $account[stripeplan] == 3))
         {
-            header("Location: " . option('base_uri') . "members&error=You have reached the maxium number of team members for your account plan!");
+            header("Location: " . option('base_uri') . "members?error=You have reached the maxium number of team members for your account plan!");
             exit;
         }
         
@@ -84,7 +84,7 @@
                     ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[name]) . "', '" . mysql_real_escape_string($_POST[email]) . "', '" . mysql_real_escape_string(str_replace("-", "", $_POST[phonenumber])) . "', '" . mysql_real_escape_string($_POST[isoptedin]) . "', '" . $now . "')";
         mysql_query($sql);
         
-		header("Location: " . option('base_uri') . "members&success=Your member was added successfully!");
+		header("Location: " . option('base_uri') . "members?success=Your member was added successfully!");
         exit;
     }
     
@@ -97,7 +97,7 @@
         
         if ($_SESSION['CurrentAccount_ID'] != $member[accountid])
         {
-            header("Location: " . option('base_uri') . "members&error=You are not authorized to edit that member!");
+            header("Location: " . option('base_uri') . "members?error=You are not authorized to edit that member!");
             exit;
         }
         
@@ -124,7 +124,7 @@
         
         if ($_SESSION['CurrentAccount_ID'] != $member[accountid])
         {
-            header("Location: " . option('base_uri') . "members&error=You are not authorized to edit that member!");
+            header("Location: " . option('base_uri') . "members?error=You are not authorized to edit that member!");
             exit;
         }
         
@@ -133,7 +133,7 @@
         $sql = "UPDATE member SET name='" . mysql_real_escape_string($_POST[name]) . "', email='" . mysql_real_escape_string($_POST[email]) . "', phonenumber='" . mysql_real_escape_string(str_replace("-", "", $_POST[phonenumber])) . "' , isoptedin='" . mysql_real_escape_string($_POST[isoptedin]) . "' WHERE id='" . mysql_real_escape_string($member[id]) . "'";
         mysql_query($sql);
         
-        header("Location: " . option('base_uri') . "members/$member[id]&success=Your member was updated successfully!");
+        header("Location: " . option('base_uri') . "members/" . $member[id] . "?success=Your member was updated successfully!");
         exit;
     }
     
@@ -146,7 +146,7 @@
         
         if ($_SESSION['CurrentAccount_ID'] != $member[accountid])
         {
-            header("Location: " . option('base_uri') . "members/" . params('id') . "&error=You are not authorized to delete this member!");
+            header("Location: " . option('base_uri') . "members/" . params('id') . "?error=You are not authorized to delete this member!");
             exit;
         }
 		
@@ -156,7 +156,7 @@
 		$sqlDelete = "DELETE FROM schedule WHERE memberid='" . mysql_real_escape_string($member[id]) . "'";
 		mysql_query($sqlDelete);
 		
-        header("Location: " . option('base_uri') . "members&success=Your member was deleted successfully!");
+        header("Location: " . option('base_uri') . "members?success=Your member was deleted successfully!");
         exit;
     }
 

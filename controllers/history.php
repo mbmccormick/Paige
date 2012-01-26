@@ -67,20 +67,20 @@
         $count = mysql_num_rows($result);
 
         if ($page > 0)
-            $pagination .= "<li class='prev'><a href='" . option('base_uri') . "history&page=" . $page . "'>&larr; Previous</a></li>";
+            $pagination .= "<li class='prev'><a href='" . option('base_uri') . "history?page=" . $page . "'>&larr; Previous</a></li>";
         else
             $pagination .= "<li class='prev disabled'><a href='#'>&larr; Previous</a></li>";
 
         for ($i = 1; $i < ($count / 25) + 1; $i++)
         {
             if (($page + 1) == $i)
-                $pagination .= "<li class='active'><a href='" . option('base_uri') . "history&page=" . $i . "'>" . $i . "</a></li>";
+                $pagination .= "<li class='active'><a href='" . option('base_uri') . "history?page=" . $i . "'>" . $i . "</a></li>";
             else
-                $pagination .= "<li><a href='" . option('base_uri') . "history&page=" . $i . "'>" . $i . "</a></li>";
+                $pagination .= "<li><a href='" . option('base_uri') . "history?page=" . $i . "'>" . $i . "</a></li>";
         }
 
         if ((($page + 1) * 25) < $count)
-            $pagination .= "<li class='next'><a href='" . option('base_uri') . "history&page=" . ($page + 2) . "'>Next &rarr;</a></li>";
+            $pagination .= "<li class='next'><a href='" . option('base_uri') . "history?page=" . ($page + 2) . "'>Next &rarr;</a></li>";
         else
             $pagination .= "<li class='next disabled'><a href='#'>Next &rarr;</a></li>";
         

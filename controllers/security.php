@@ -25,7 +25,7 @@
         }
         else
         {
-            header("Location: " . option('base_uri') . "login&error=Please check your login credentials and try again.");
+            header("Location: " . option('base_uri') . "login?error=Please check your login credentials and try again.");
             exit;
         }
     }
@@ -53,12 +53,12 @@
             $sql = "UPDATE account SET password='" . mysql_real_escape_string(md5($password)) . "' WHERE id='" . mysql_real_escape_string($account[id]) . "'";
             mysql_query($sql);
             
-            header("Location: " . option('base_uri') . "login&success=Your password has been reset, please check your email!");
+            header("Location: " . option('base_uri') . "login?success=Your password has been reset, please check your email!");
             exit;
         }
         else
         {
-            header("Location: " . option('base_uri') . "login&error=Something went wrong, please contact our support team!");
+            header("Location: " . option('base_uri') . "login?error=Something went wrong, please contact our support team!");
             exit;
         }
     }

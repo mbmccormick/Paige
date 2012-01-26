@@ -48,7 +48,7 @@
         $call = $twilio->account->calls->create(
             $_SESSION['CurrentAccount_PhoneNumber'],
             $member[phonenumber],
-            "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step2&attempt=" . $attempt . "&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id],
+            "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step2?attempt=" . $attempt . "&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id],
             array('IfMachine' => 'Continue')
         );
     }
@@ -86,7 +86,7 @@
 
                     $now = AccountTime();
                     
-                    $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id];
+                    $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1?attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id];
 
                     $duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes', strtotime($now)));
                     $createdtime = $now;
@@ -108,7 +108,7 @@
                     
                     $now = AccountTime();
                     
-                    $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $_GET[memberid];
+                    $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1?attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $_GET[memberid];
 
                     $duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes', strtotime($now)));
                     $createdtime = $now;
@@ -124,12 +124,12 @@
             	// caller answered, read automated message
                 echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
                 echo "<Response>\n";
-                echo "<Gather timeout='20' action='https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . $_GET[attempt] . "&amp;message=" . urlencode($_GET[message]) . "&amp;memberid=" . $_GET[memberid] . "' method='POST' numDigits='1'>\n";
+                echo "<Gather timeout='20' action='https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step3?attempt=" . $_GET[attempt] . "&amp;message=" . urlencode($_GET[message]) . "&amp;memberid=" . $_GET[memberid] . "' method='POST' numDigits='1'>\n";
                 echo "<Say voice='woman'>Hello, this is an automated page from " . $_SESSION['CurrentAccount_Name'] . ".</Say>\n";
                 echo "<Say voice='woman'>" . $_GET[message] . "</Say>\n";
                 echo "<Say voice='woman'>Press one now to confirm that you have received this page.</Say>\n";
                 echo "</Gather>\n";
-                echo "<Redirect>https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step3&amp;attempt=" . $_GET[attempt] . "&amp;message=" . urlencode($_GET[message]) . "&amp;memberid=" . $_GET[memberid] . "</Redirect>\n";
+                echo "<Redirect>https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step3?attempt=" . $_GET[attempt] . "&amp;message=" . urlencode($_GET[message]) . "&amp;memberid=" . $_GET[memberid] . "</Redirect>\n";
                 echo "</Response>\n";
             }
         }
@@ -174,7 +174,7 @@
             
             $now = AccountTime();
             
-            $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id];
+            $url = "https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1?attempt=" . $_GET[attempt] . "&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id];
 
             $duedatetime = date("Y-m-d H:i:s", strtotime('+10 minutes', strtotime($now)));
             $createdtime = $now;
@@ -218,7 +218,7 @@
 
         LogHistory($member[id], $_GET[message], 3);
 
-        RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_GET[message]) . "&memberid=" . $member[id]);
+        RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1?message=" . urlencode($_GET[message]) . "&memberid=" . $member[id]);
     }
 
 ?>

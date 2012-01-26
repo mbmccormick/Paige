@@ -64,8 +64,8 @@
         set("title", "Schedule");
         set("calendar", $calendar);
         set("calendar_title", date("F", $first_of_month) . " " . date("Y", $first_of_month));
-        set("prev", "<a href='/schedule&month=" . (($month - 1) == 0 ? 12 : ($month - 1)) . "&year=" . (($month - 1) == 0 ? ($year - 1) : $year) . "'>&larr; Previous</a>");
-        set("next", "<a href='/schedule&month=" . (($month + 1) == 13 ? 1 : ($month + 1)) . "&year=" . (($month + 1) == 13 ? ($year + 1) : $year) . "'>Next &rarr;</a>");
+        set("prev", "<a href='/schedule?month=" . (($month - 1) == 0 ? 12 : ($month - 1)) . "&year=" . (($month - 1) == 0 ? ($year - 1) : $year) . "'>&larr; Previous</a>");
+        set("next", "<a href='/schedule?month=" . (($month + 1) == 13 ? 1 : ($month + 1)) . "&year=" . (($month + 1) == 13 ? ($year + 1) : $year) . "'>Next &rarr;</a>");
         
         return html("schedule/view.php");
     }
@@ -98,14 +98,14 @@
 
         if ($count > 0)
         {
-            header("Location: /schedule/add&error=Another shift is already scheduled for that date and time!");
+            header("Location: /schedule/add?error=Another shift is already scheduled for that date and time!");
             exit;
         }
         
         $sql = "INSERT INTO schedule (accountid, memberid, startdate, type, createddate) VALUES ('" . mysql_real_escape_string($_SESSION['CurrentAccount_ID']) . "', '" . mysql_real_escape_string($_POST[memberid]) . "', '" . mysql_real_escape_string(date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime]))) . "', '0', '" . $now . "')";
         mysql_query($sql);
         
-        header("Location: /schedule&month=" . date("m", strtotime($_POST[startdate])) . "&year=" . date("Y", strtotime($_POST[startdate])) . "&success=Your shift was created successfully!");
+        header("Location: /schedule?month=" . date("m", strtotime($_POST[startdate])) . "&year=" . date("Y", strtotime($_POST[startdate])) . "&success=Your shift was created successfully!");
         exit;
     }
     
@@ -142,14 +142,14 @@
 
         if ($count > 0)
         {
-            header("Location: /schedule/add&error=Another shift is already scheduled for that date and time!");
+            header("Location: /schedule/add?error=Another shift is already scheduled for that date and time!");
             exit;
         }
         
         $sql = "UPDATE schedule SET memberid='" . mysql_real_escape_string($_POST[memberid]) . "', startdate='" . date("Y-m-d", strtotime($_POST[startdate])) . " " . date("H:i:s", strtotime($_POST[starttime])) . "' WHERE id='" . params('id') . "'";
         mysql_query($sql);
         
-        header("Location: " . option('base_uri') . "schedule&success=Your shift was updated successfully!");
+        header("Location: " . option('base_uri') . "schedule?success=Your shift was updated successfully!");
         exit;
     }
     
@@ -160,7 +160,7 @@
         $sql = "DELETE FROM schedule WHERE id='" . params('id') . "'";    
         mysql_query($sql);
 
-        header("Location: " . option('base_uri') . "schedule&success=Your shift was deleted successfully!");
+        header("Location: " . option('base_uri') . "schedule?success=Your shift was deleted successfully!");
         exit;
     }
 

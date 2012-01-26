@@ -7,14 +7,14 @@
         
         if ($return[rowcount] > 0)
         {
-            header("Location: " . option('base_uri') . "register&error=An account with that email address already exists!");
+            header("Location: " . option('base_uri') . "register?error=An account with that email address already exists!");
             exit;
         }
 
         if ($_POST[password] == "" ||
             $_POST[password] != $_POST[passwordconfirm])
         {
-            header("Location: " . option('base_uri') . "register&error=Your passwords do not match!");
+            header("Location: " . option('base_uri') . "register?error=Your passwords do not match!");
             exit;
         }
         
@@ -35,7 +35,7 @@
         }
         catch (Exception $e)
         {
-            header("Location: " . option('base_uri') . "register&error=Your billing information could not be verified!");
+            header("Location: " . option('base_uri') . "register?error=Your billing information could not be verified!");
             exit;
         }
         
@@ -54,7 +54,7 @@
         {
             $customer->delete();
 
-            header("Location: " . option('base_uri') . "register&error=There was a problem provisioning your account!");
+            header("Location: " . option('base_uri') . "register?error=There was a problem provisioning your account!");
             exit;
         }
         
@@ -77,7 +77,7 @@
 
         mail($account[email], "Welcome to " . ApplicationName . "", "Thank you for signing up with " . ApplicationName . "! Your account is now activate and your two week free trial begins today. If you have any questions about our service, please don't hesitate to contact us. Login to your account now to get started!\n\n--\n" . ApplicationName . "", "From: " . ApplicationName . " <" . EmailAddress . ">");
         
-        header("Location: " . option('base_uri') . "login&success=Your account was added successfully!");
+        header("Location: " . option('base_uri') . "login?success=Your account was added successfully!");
         exit;
     }
     
@@ -90,7 +90,7 @@
 
         if ($_SESSION['CurrentAccount_ID'] != $account[id])
         {
-            header("Location: " . option('base_uri') . "&error=You are not authorized to edit that account!");
+            header("Location: " . option('base_uri') . "?error=You are not authorized to edit that account!");
             exit;
         }
         
@@ -124,7 +124,7 @@
 
         if ($_SESSION['CurrentAccount_ID'] != $account[id])
         {
-            header("Location: " . option('base_uri') . "&error=You are not authorized to edit that account!");
+            header("Location: " . option('base_uri') . "?error=You are not authorized to edit that account!");
             exit;
         }
         
@@ -154,7 +154,7 @@
             Security_Refresh(params('id'));
         }
         
-        header("Location: " . option('base_uri') . "accounts/$account[id]&success=Your account was updated successfully!");
+        header("Location: " . option('base_uri') . "accounts/" . $account[id] . "?success=Your account was updated successfully!");
         exit;
     }
     
@@ -167,7 +167,7 @@
 
         if ($_SESSION['CurrentAccount_ID'] != $account[id])
         {
-            header("Location: " . option('base_uri') . "&error=You are not authorized to edit that account!");
+            header("Location: " . option('base_uri') . "?error=You are not authorized to edit that account!");
             exit;
         }
         
@@ -201,7 +201,7 @@
         $sql = "DELETE FROM schedule WHERE accountid='" . mysql_real_escape_string(params('id')) . "'";    
         mysql_query($sql);
 
-        header("Location: " . option('base_uri') . "logout&success=Your account was deleted successfully!");
+        header("Location: " . option('base_uri') . "logout?success=Your account was deleted successfully!");
         exit;
     }
 

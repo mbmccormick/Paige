@@ -63,7 +63,7 @@
 
             LogHistory($member[id], $_GET[message], 2);
 
-            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&memberid=" . $member[id]);
+            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1?memberid=" . $member[id]);
         }
         elseif ($_POST[Digits] == "2")
         {

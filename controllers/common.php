@@ -56,15 +56,15 @@
                     $history .= "<div class='history-item-image'><img src='/public/img/2.png' title='This page was not confirmed.' /></div>";
                 $history .= "<div class='history-item-body'>\n";
                 if ($row[medium] == 0)
-                    $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via unknown</b><br />\n";
+                    $history .= "<b><a href='" . option('base_uri') . "members/" . $member[id] . "'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via unknown</b><br />\n";
                 elseif ($row[medium] == 1)
-                    $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via web</b><br />\n";
+                    $history .= "<b><a href='" . option('base_uri') . "members/" . $member[id] . "'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via web</b><br />\n";
                 elseif ($row[medium] == 2)
-                    $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via telephone</b><br />\n";
+                    $history .= "<b><a href='" . option('base_uri') . "members/" . $member[id] . "'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via telephone</b><br />\n";
                 elseif ($row[medium] == 3)
-                    $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via hook</b><br />\n";
+                    $history .= "<b><a href='" . option('base_uri') . "members/" . $member[id] . "'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via hook</b><br />\n";
                 elseif ($row[medium] == 4)
-                    $history .= "<b><a href='" . option('base_uri') . "members/$member[id]'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via scheduler</b><br />\n";
+                    $history .= "<b><a href='" . option('base_uri') . "members/" . $member[id] . "'>" . $member[name] . "</a> was paged " . FriendlyDate(1, strtotime($row[createddate])) . " via scheduler</b><br />\n";
                 $history .= $row[message] . "<br />\n";
                 $history .= "</div></div><br />\n";
             }
@@ -86,11 +86,11 @@
         
             LogHistory($_POST[recipient], $_POST[message], 1);
             
-            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&memberid=" . $_POST[recipient]);
+            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1?message=" . urlencode($_POST[message]) . "&memberid=" . $_POST[recipient]);
         }
         else
         {
-            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1&message=" . urlencode($_POST[message]) . "&team=true");
+            RequestUrl("https://" . $_SERVER['HTTP_HOST'] . "/page/" . $_SESSION['CurrentAccount_ID'] . "/step1?message=" . urlencode($_POST[message]) . "&team=true");
         }
         
         header("Location: /&success=Your page was sent successfully!");

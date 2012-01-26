@@ -65,11 +65,14 @@ function hasClass(el, class_to_match)
 
 function getRawUrl()
 {
+    var url_parts = window.location.href.split('?');
+    var url = url_parts[0];
+
     var regexS = "^(.*)&(?:.*)$";
     var regex = new RegExp(regexS);
-    var results = regex.exec(window.location.href);
+    var results = regex.exec(url);
     if(results == null)
-        return window.location.href;
+        return url;
     else
         return results[1];
 }
