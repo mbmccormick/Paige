@@ -16,17 +16,21 @@ $(document).ready(function() {
     });
 
     $("form.form-stacked").submit(function() {
-        var formData = $("form.form-stacked").serializeArray();
+        var formData = [];
+        $("form.form-stacked input").each(function() { formData.push(this); });
+
         for (var i=0; i < formData.length; i++) { 
-            if (formData[i].className.contains("exclude")) continue;
+            if (hasClass(formData[i], "exclude")) { 
+                continue;
+            }
 
             if (!formData[i].value) { 
                 alert("Please complete all fields, check your input, and try again.")                
                 return false;
             }
 
-            if (formData[i].className.contains("email")) { 
-                if (!validateEmail(formData[i].value)) {}
+            if (hasClass(formData[i], "email")) { 
+                if (!validateEmail(formData[i].value)) {
                     alert("Please enter a valid email address and try again.")                
                     return false;
                 }
@@ -35,10 +39,10 @@ $(document).ready(function() {
     });
 });
 
-function validateEmail($email)
+function validateEmail(email)
 {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    if(!emailReg.test($email)) {
+    if(!emailReg.test(email)) {
         return false;
     }
     else {
@@ -46,6 +50,18 @@ function validateEmail($email)
     }
 }
 
+function hasClass(el, class_to_match)
+{
+    var c;
+    if (el && el.className && typeof class_to_match === "string") {
+        c = el.getAttribute("class");
+        c = " "+ c + " ";
+        return c.indexOf(" " + class_to_match + " ") > -1;
+    } 
+    else {
+        return false;
+    }
+}
 
 function getRawUrl()
 {
