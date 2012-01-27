@@ -5,25 +5,25 @@
                 <div class="clearfix">
                     <label for="name">Name</label>
                     <div class="input">
-                        <input class="xlarge" id="name" name="name" size="30" type="text" value="<?=$member['name']?>">
+                        <input class="xlarge" id="name" name="name" size="30" type="text" value="<?=$member['name']?>" />
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="email">Email Address</label>
                     <div class="input">
-                        <input class="xlarge email" id="email" name="email" size="30" type="text" value="<?=$member['email']?>">
+                        <input class="xlarge email" id="email" name="email" size="30" type="text" value="<?=$member['email']?>" />
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="phonenumber">Phone Number</label>
                     <div class="input">
-                        <input class="xlarge phone" id="phonenumber" name="phonenumber" size="30" type="text" value="<?=$member['phonenumber']?>">
+                        <input class="xlarge phone" id="phonenumber" name="phonenumber" size="30" type="text" value="<?=$member['phonenumber']?>" />
                     </div>
                 </div>
                 <br />
                 <div class="clearfix">
                     <div class="input">
-                        <input type="checkbox" name="isoptedin" value="1" <?php if ($member['isoptedin'] == 1) { ?>checked="true"<?php } ?>>
+                        <input type="checkbox" name="isoptedin" value="1" <?php if ($member['isoptedin'] == 1) { ?>checked="true"<?php } ?> />
                         <span>This phone number can receive text messages</span>
                     </div>
                 </div>

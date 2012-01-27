@@ -13,7 +13,7 @@
                 <div class="clearfix">
                     <label for="startdate">Start Date/Time</label>
                     <div class="input">
-                        <input class="medium" id="startdate" name="startdate" size="30" type="text" value=<?=date("n/d/Y", strtotime($schedule[startdate]))?>> <input class="medium" id="starttime" name="starttime" size="30" type="text" value=<?=date("g:ia", strtotime($schedule[startdate]))?>>
+                        <input class="medium" id="startdate" name="startdate" size="30" type="text" value=<?=date("n/d/Y", strtotime($schedule[startdate]))?> /> <input class="medium" id="starttime" name="starttime" size="30" type="text" value=<?=date("g:ia", strtotime($schedule[startdate]))?> />
                     </div>
                 </div>
             </fieldset>

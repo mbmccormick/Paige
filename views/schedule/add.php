@@ -13,7 +13,7 @@
                 <div class="clearfix">
                     <label for="startdate">Start Date/Time</label>
                     <div class="input">
-                        <input class="medium" id="startdate" name="startdate" size="30" type="text"> <input class="medium" id="starttime" name="starttime" size="30" type="text">
+                        <input class="medium" id="startdate" name="startdate" size="30" type="text" /> <input class="medium" id="starttime" name="starttime" size="30" type="text" />
                     </div>
                 </div>
             </fieldset>

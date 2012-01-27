@@ -5,25 +5,25 @@
                 <div class="clearfix">
                     <label for="name">Name</label>
                     <div class="input">
-                        <input class="xlarge" id="name" name="name" size="30" type="text">
+                        <input class="xlarge" id="name" name="name" size="30" type="text" />
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="email">Email Address</label>
                     <div class="input">
-                        <input class="xlarge email" id="email" name="email" size="30" type="text">
+                        <input class="xlarge email" id="email" name="email" size="30" type="text" />
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="phonenumber">Phone Number</label>
                     <div class="input">
-                        <input class="xlarge phone" id="phonenumber" name="phonenumber" size="30" type="text">
+                        <input class="xlarge phone" id="phonenumber" name="phonenumber" size="30" type="text" />
                     </div>
                 </div>
                 <br />
                 <div class="clearfix">
                     <div class="input">
-                        <input type="checkbox" name="isoptedin" value="1">
+                        <input type="checkbox" name="isoptedin" value="1" />
                         <span>This phone number can receive text messages</span>
                     </div>
                 </div>

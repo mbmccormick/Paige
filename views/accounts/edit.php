@@ -5,13 +5,13 @@
                 <div class="clearfix">
                     <label for="name">Name</label>
                     <div class="input">
-                        <input class="xlarge" id="name" name="name" size="30" type="text" value="<?=$account['name']?>">
+                        <input class="xlarge" id="name" name="name" size="30" type="text" value="<?=$account['name']?>" />
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="email">Email</label>
                     <div class="input">
-                        <input class="xlarge email" id="email" name="email" size="30" type="text" value="<?=$account['email']?>">
+                        <input class="xlarge email" id="email" name="email" size="30" type="text" value="<?=$account['email']?>" />
                     </div>
                 </div>
                 <div class="clearfix">
@@ -29,14 +29,14 @@
                 <div class="clearfix">
                     <label for="phonenumber">Phone Number</label>
                     <div class="input">
-                        <input class="xlarge" id="phonenumber" name="phonenumber" size="30" type="text" value="<?=substr($account['phonenumber'], 0, 3) . '-' . substr($account['phonenumber'], 3, 3) . '-' . substr($account['phonenumber'], 6, 4)?>" readonly="true">
+                        <input class="xlarge" id="phonenumber" name="phonenumber" size="30" type="text" value="<?=substr($account['phonenumber'], 0, 3) . '-' . substr($account['phonenumber'], 3, 3) . '-' . substr($account['phonenumber'], 6, 4)?>" readonly="true" />
                     </div>
                     <span class="help-block">If you need to change the phone number assigned to your account, please contact support.</span>
                 </div>
                 <div class="clearfix">
                     <label for="hash">Page Hook URL</label>
                     <div class="input">
-                        <input class="xlarge" id="hash" name="hash" size="30" type="text" value="https://<?=$_SERVER['HTTP_HOST']?>/page/<?=$account['hash']?>" readonly="true">
+                        <input class="xlarge" id="hash" name="hash" size="30" type="text" value="https://<?=$_SERVER['HTTP_HOST']?>/page/<?=$account['hash']?>" readonly="true" />
                     </div>
                     <span class="help-block">If you need to change the page hook URL assigned to your account, please contact support.</span>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="clearfix">
                     <label for="cardnumber">Credit Card Number</label>
                     <div class="input">
-                        <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text" value="<?=$creditcard?>" readonly="true">
+                        <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text" value="<?=$creditcard?>" readonly="true" />
                     </div>
                     <span class="help-block">If you need to change the credit card used for billing your account, please contact support. Your next charge will occur on <?=$nextcharge?>.</span>
                 </div>
@@ -64,13 +64,13 @@
                 <div class="clearfix">
                     <label for="newpassword">New Password</label>
                     <div class="input">
-                        <input class="xlarge exclude" id="newpassword" name="newpassword" size="30" type="password">
+                        <input class="xlarge exclude" id="newpassword" name="newpassword" size="30" type="password" />
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="newpasswordconfirm">Confirm New Password</label>
                     <div class="input">
-                        <input class="xlarge exclude" id="newpasswordconfirm" name="newpasswordconfirm" size="30" type="password">
+                        <input class="xlarge exclude" id="newpasswordconfirm" name="newpasswordconfirm" size="30" type="password" />
                     </div>
                 </div>
             </fieldset>

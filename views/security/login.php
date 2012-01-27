@@ -4,18 +4,18 @@
             <div class="clearfix">
                 <label for="email">Email Address</label>
                 <div class="input">
-                    <input class="xlarge email" id="email" name="email" size="30" type="text">
+                    <input class="xlarge email" id="email" name="email" size="30" type="text" />
                 </div>
             </div>
             <div class="clearfix">
                 <label for="password">Password</label>
                 <div class="input">
-                    <input class="xlarge" id="password" name="password" size="30" type="password">
+                    <input class="xlarge" id="password" name="password" size="30" type="password" />
                 </div>
             </div>
             <div class="clearfix">
                 <div class="input">
-                    <input type="checkbox" id="rememberme" name="rememberme" value="true">
+                    <input type="checkbox" id="rememberme" name="rememberme" value="true" />
                     <span>Remember me</span>
                 </div>
             </div>

@@ -5,13 +5,13 @@
                 <div class="clearfix">
                     <label for="name">Name</label>
                     <div class="input">
-                        <input class="xlarge" id="name" name="name" size="30" type="text">
+                        <input class="xlarge" id="name" name="name" size="30" type="text" />
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="email">Email</label>
                     <div class="input">
-                        <input class="xlarge email" id="email" name="email" size="30" type="text">
+                        <input class="xlarge email" id="email" name="email" size="30" type="text" />
                     </div>
                 </div>
                 <div class="clearfix">
@@ -40,7 +40,7 @@
                 <div class="clearfix">
                     <label for="cardnumber">Credit Card Number</label>
                     <div class="input">
-                        <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text" value="4242424242424242">
+                        <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text" value="4242424242424242" />
                     </div>
                 </div>
                 <div class="clearfix">
@@ -77,20 +77,20 @@
                 <div class="clearfix">
                     <label for="cardcvc">Security Code</label>
                     <div class="input">
-                        <input class="small" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text" value="123">
+                        <input class="small" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text" value="123" />
                     </div>
                 </div>
                 <br />
                 <div class="clearfix">
                     <label for="password">Password</label>
                     <div class="input">
-                        <input class="xlarge" id="password" name="password" size="30" type="password">
+                        <input class="xlarge" id="password" name="password" size="30" type="password" />
                     </div>
                 </div>
                 <div class="clearfix">
                     <label for="passwordconfirm">Confirm Password</label>
                     <div class="input">
-                        <input class="xlarge" id="passwordconfirm" name="passwordconfirm" size="30" type="password">
+                        <input class="xlarge" id="passwordconfirm" name="passwordconfirm" size="30" type="password" />
                     </div>
                 </div>
             </fieldset>
