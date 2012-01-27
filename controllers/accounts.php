@@ -90,7 +90,7 @@
 
         if ($_SESSION['CurrentAccount_ID'] != $account[id])
         {
-            header("Location: " . option('base_uri') . "?error=You are not authorized to edit that account!");
+            header("Location: " . option('base_uri') . "&error=You are not authorized to edit that account!");
             exit;
         }
         
