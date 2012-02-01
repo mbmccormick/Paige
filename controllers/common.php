@@ -99,9 +99,9 @@
 
     function common_register()
     {
-        if (isset("warning") == false)
+        if (isset($_GET["warning"]) == false)
         {
-            header("Location: " . option('base_uri') . "register&warning=Paige is currenty only open for testing. For commercial use, please contact our support team.");
+            header("Location: " . option('base_uri') . "register&warning=You can sign up for a Paige test account below. For commercial use, please contact our support team.");
             exit;
         }
         
