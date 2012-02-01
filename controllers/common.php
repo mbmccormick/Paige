@@ -99,6 +99,12 @@
 
     function common_register()
     {
+        if (isset("warning") == false)
+        {
+            header("Location: " . option('base_uri') . "register&warning=Paige is currenty only open for testing. For commercial use, please contact our support team.");
+            exit;
+        }
+        
         set("title", "Register");
         return html("accounts/add.php");
     }
