@@ -10,6 +10,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="<?=option('base_uri')?>public/img/logo.ico">
     <script type="text/javascript" src="<?=option('base_uri')?>public/js/jquery.js"></script>
     <script type="text/javascript" src="<?=option('base_uri')?>public/js/bootstrap.js"></script>
+    <script type="text/javascript" src="<?=option('base_uri')?>public/js/calendrical/jquery.calendrical.js"></script>
+    <script type="text/javascript" src="<?=option('base_uri')?>public/js/maskedinput/jquery.maskedinput.js"></script>
     <script type="text/javascript" src="<?=option('base_uri')?>public/js/common.js"></script>
 </head> 
 <body>

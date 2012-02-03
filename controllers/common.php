@@ -15,7 +15,7 @@
             }
 
             set("title", "Home");
-            return html("common/home.php");
+            return html("common/home.php", "static.php");
         }
         else
         {
@@ -109,13 +109,13 @@
         }
         
         set("title", "Register");
-        return html("accounts/add.php");
+        return html("accounts/add.php", "static.php");
     }
 
     function common_about()
     {
         set("title", "About");
-        return html("common/about.php");
+        return html("common/about.php", "static.php");
     }
 
     function common_execute()

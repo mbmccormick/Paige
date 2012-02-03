@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?=ApplicationName?> - <?=$title?></title> 
     <link rel="stylesheet" href="<?=option('base_uri')?>public/css/bootstrap.css" />
-    <link rel="stylesheet" href="<?=option('base_uri')?>public/css/layout.css" />
+    <link rel="stylesheet" href="<?=option('base_uri')?>public/css/static.css" />
     <link rel="stylesheet" href="<?=option('base_uri')?>public/css/bootstrap.responsive.css" />
     <link rel="shortcut icon" type="image/x-icon" href="<?=option('base_uri')?>public/img/logo.ico">
     <script type="text/javascript" src="<?=option('base_uri')?>public/js/jquery.js"></script>
@@ -27,39 +27,28 @@
                 <a class="brand" href="<?=option('base_uri')?>"><?=ApplicationName?></a>
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <?php if ($_SERVER['REQUEST_URI'] == option('base_uri')) { ?>
-                        <li class="active"><a href="<?=option('base_uri')?>">Dashboard</a></li>
+                        <?php if ($_SERVER['REQUEST_URI'] == option('base_uri') || $_SERVER['REQUEST_URI'] == "") { ?>
+                        <li class="active"><a href="<?=option('base_uri')?>">Home</a></li>
                         <?php } else { ?>
-                        <li><a href="<?=option('base_uri')?>">Dashboard</a></li>
+                        <li><a href="<?=option('base_uri')?>">Home</a></li>
                         <?php } ?>
-                        <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "schedule") === 0) { ?>
-                        <li class="active"><a href="<?=option('base_uri')?>schedule">Schedule</a></li>
+                        <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "about") === 0) { ?>
+                        <li class="active"><a href="<?=option('base_uri')?>about">About</a></li>
                         <?php } else { ?>
-                        <li><a href="<?=option('base_uri')?>schedule">Schedule</a></li>
+                        <li><a href="<?=option('base_uri')?>about">About</a></li>
                         <?php } ?>
-                        <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "members") === 0) { ?>
-                        <li class="active"><a href="<?=option('base_uri')?>members">Team</a></li>
+                        <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "register") === 0) { ?>
+                        <li class="active"><a href="<?=option('base_uri')?>register">Register</a></li>
                         <?php } else { ?>
-                        <li><a href="<?=option('base_uri')?>members">Team</a></li>
-                        <?php } ?>
-                        <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "history") === 0) { ?>
-                        <li class="active"><a href="<?=option('base_uri')?>history">History</a></li>
-                        <?php } else { ?>
-                        <li><a href="<?=option('base_uri')?>history">History</a></li>
+                        <li><a href="<?=option('base_uri')?>register">Register</a></li>
                         <?php } ?>
                     </ul>
                     <ul class="nav pull-right">
-                        <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "accounts") === 0) { ?>
-                        <li class="dropdown active">
+                        <?php if (strpos($_SERVER['REQUEST_URI'], option('base_uri') . "login") === 0) { ?>
+                        <li class="active"><a href="<?=option('base_uri')?>login">Login</a></li>
                         <?php } else { ?>
-                        <li class="dropdown">
+                        <li><a href="<?=option('base_uri')?>login">Login</a></li>
                         <?php } ?>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=$_SESSION['CurrentAccount_Name']?> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?=option('base_uri')?>accounts/<?=$_SESSION['CurrentAccount_ID']?>">Account Settings</a></li>
-                                <li><a href="<?=option('base_uri')?>logout">Logout</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -67,9 +56,11 @@
     </div>
     <div class="container">
         <div class="content">
+            <?php if ($_SERVER['REQUEST_URI'] != option('base_uri') && $_SERVER['REQUEST_URI'] != "") { ?>
             <div class="page-header">
                 <h1><?=$title?></h1>
             </div>
+            <?php } ?>
             <?php if ($_GET['error'] != null) { ?>
             <div class="alert alert-error">
                 <strong>Error:</strong> <?=$_GET['error']?>
