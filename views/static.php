@@ -84,7 +84,6 @@
             <?=$content?>
         </div>
         <footer>
-            <p class="pull-right"><a href="#">Back to top</a></p>
             <p><a href="<?=option('base_uri')?>"><?=ApplicationName?></a> is a <a href="http://mccormicktechnologies.com" target="_blank">McCormick Technologies</a> product, powered by <a href="http://github.com/mbmccormick/limoncello" target="_blank">Limoncello</a>.</p>
             <p>&copy; 2012 Paige. All Rights Reserved. Version <?=Version?>.</p>
       </footer>
