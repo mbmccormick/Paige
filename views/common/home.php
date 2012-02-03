@@ -1,6 +1,7 @@
 <div class="hero-unit">
     <h1>Hello, I'm Paige.</h1>
     <p>Paige is a simple web application that allows businesses to ditch analog pagers and move their paging service to the web.</p>
+    <br />
     <p><a href="/register" class="btn btn-large btn-success">Get Started Now</a></p>
 </div>
 <div class="row">
