@@ -99,7 +99,10 @@
 
     function common_register()
     {
-        if (isset($_GET["warning"]) == false)
+        if (isset($_GET["error"]) == false &&
+            isset($_GET["warning"]) == false &&
+            isset($_GET["success"]) == false &&
+            isset($_GET["info"]) == false)
         {
             header("Location: " . option('base_uri') . "register&warning=You can sign up for a Paige test account below. For commercial use, please contact our support team.");
             exit;
