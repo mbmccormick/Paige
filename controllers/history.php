@@ -17,7 +17,7 @@
 		{
 			$body .= "<tr>\n";
        
-            $body .= "<th>\n";
+            $body .= "<th style='vertical-align: top;'>\n";
             $body .= $index;
             $body .= "</th>\n";
             $body .= "<td style='text-align: center;'>\n";

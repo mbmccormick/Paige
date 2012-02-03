@@ -1,40 +1,41 @@
 <div class="row">
-    <div class="span10">
-        <form action="<?=option('base_uri')?>members/<?=$member['id']?>/edit" method="post" class="form-stacked">
+    <div class="span6">
+        <form action="<?=option('base_uri')?>members/<?=$member['id']?>/edit" method="post" class="form-vertical">
             <fieldset>
-                <div class="clearfix">
-                    <label for="name">Name</label>
-                    <div class="input">
-                        <input class="xlarge" id="name" name="name" size="30" type="text" value="<?=$member['name']?>" />
+                <div class="control-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input class="input-xlarge" id="name" name="name" type="text" value="<?=$member['name']?>" />
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="email">Email Address</label>
-                    <div class="input">
-                        <input class="xlarge email" id="email" name="email" size="30" type="text" value="<?=$member['email']?>" />
+                <div class="control-group">
+                    <label class="control-label" for="email">Email Address</label>
+                    <div class="controls">
+                        <input class="input-xlarge email" id="email" name="email" type="text" value="<?=$member['email']?>" />
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="phonenumber">Phone Number</label>
-                    <div class="input">
-                        <input class="xlarge phone" id="phonenumber" name="phonenumber" size="30" type="text" value="<?=$member['phonenumber']?>" />
+                <div class="control-group">
+                    <label class="control-label" for="phonenumber">Phone Number</label>
+                    <div class="controls">
+                        <input class="input-xlarge phone" id="phonenumber" name="phonenumber" type="text" value="<?=$member['phonenumber']?>" />
                     </div>
                 </div>
                 <br />
-                <div class="clearfix">
-                    <div class="input">
-                        <input type="checkbox" name="isoptedin" value="1" <?php if ($member['isoptedin'] == 1) { ?>checked="true"<?php } ?> />
-                        <span>This phone number can receive text messages</span>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input type="checkbox" name="isoptedin" value="1" <?php if ($member['isoptedin'] == 1) { ?>checked="true"<?php } ?> /> This phone number can receive text messages
+                        </label>
                     </div>
                 </div>
             </fieldset>
             <br />
-            <div class="actions">
-                <button type="submit" class="btn primary">Save Member</button>&nbsp;<a onclick="return confirm('Are you sure you want to delete this member?');" href="<?=option('base_uri')?>members/<?=$member['id']?>/delete" class="btn">Delete</a>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Member</button>&nbsp;<a onclick="return confirm('Are you sure you want to delete this member?');" href="<?=option('base_uri')?>members/<?=$member['id']?>/delete" class="btn">Delete</a>
             </div>
         </form>
     </div>
-    <div class="span4">
+    <div class="span2">
         <h5>Page Description</h5>
         <p>This page allows you to edit a team member's information. You also have the ability to delete a team member from this page.</p>
         <br />

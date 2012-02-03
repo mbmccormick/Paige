@@ -1,22 +1,22 @@
 <div class="row">
-    <div class="span7">
+    <div class="span4">
         <h3>Send Page</h3>
-        <span class="help-block">Send a message to your on-call team from the web.</span>
+        <span class="help-block">Send a message to your on-call team from the web.</span><br />
         <br />
-        <form action="<?=option('base_uri')?>" method="post" class="form-stacked" style="padding-left: 0px;">
+        <form action="<?=option('base_uri')?>" method="post" class="form-vertical" style="padding-left: 0px;">
             <fieldset>
-                <div class="clearfix">
-                    <label for="name">Recipient</label>
-                    <div class="input">
-                        <select class="xlarge" id="recipient" name="recipient">
+                <div class="control-group">
+                    <label class="control-label" for="name">Recipient</label>
+                    <div class="controls">
+                        <select class="input-xlarge" id="recipient" name="recipient">
                             <?=$members?>
                         </select>
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="name">Message</label>
-                    <div class="input">
-                        <textarea class="xlarge" style="resize: none;" id="message" name="message" rows="2"></textarea>
+                <div class="control-group">
+                    <label class="control-label" for="name">Message</label>
+                    <div class="controls">
+                        <textarea class="input-xlarge" style="resize: none;" id="message" name="message" rows="2"></textarea><br />
                         <span class="help-block" id="limit">
                             You have 120 characters left.
                         </span>
@@ -25,13 +25,13 @@
             </fieldset>
             <br />
             <div>                
-                <button type="submit" class="btn success">Send Page</button>
+                <button type="submit" class="btn btn-success">Send Page</button>
             </div>
         </form>
     </div>
-    <div class="span7">
+    <div class="span4">
         <h3>Recent History</h3>
-        <span class="help-block">View the recent pages that have been sent.</span>
+        <span class="help-block">View the recent pages that have been sent.</span><br />
         <br />
         <?=$history?>
     </div>

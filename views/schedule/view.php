@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="span14">
+    <div class="span8">
         <div class="calendar">
-            <table class="bordered-table">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th><?=$prev?></th>
@@ -24,7 +24,7 @@
             </table>
         </div>
         <div class="well">
-            <a href="<?=option('base_uri')?>schedule/add" class="btn primary">New Shift</a>
+            <a href="<?=option('base_uri')?>schedule/add" class="btn btn-primary">New Shift</a>
         </div>
     </div>
 </div>

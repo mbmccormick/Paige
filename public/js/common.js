@@ -7,34 +7,42 @@ $(document).ready(function() {
         history.replaceState(null, document.title, getRawUrl());
     }
 
-    $(".phone").mask("999-999-9999");
-    
-    $(".alert-message").delay(5000).fadeOut();
-	
-    $(".alert-message a.close").click(function() {
-        $(".alert-message").fadeOut();
-    });
+    $(".alert").delay(5000).fadeOut();
 
-    $("form.form-stacked").submit(function() {
+    $("form.form-vertical").submit(function() {
         var formData = [];
-        $("form.form-stacked input").each(function() { formData.push(this); });
+        $("form.form-vertical input").each(function() { formData.push(this); });
 
+        var hasError = false;
+        var hasEmailError = false;
         for (var i=0; i < formData.length; i++) { 
             if (hasClass(formData[i], "exclude")) { 
                 continue;
             }
 
+            $(formData[i]).parent().parent().removeClass("error");
+            
             if (!formData[i].value) { 
-                alert("Please complete all fields, check your input, and try again.")                
-                return false;
+                hasError = true;
+                $(formData[i]).parent().parent().addClass("error");
             }
 
             if (hasClass(formData[i], "email")) { 
                 if (!validateEmail(formData[i].value)) {
-                    alert("Please enter a valid email address and try again.")                
-                    return false;
+                    hasEmailError = true;
+                    $(formData[i]).parent().parent().addClass("error");
                 }
             }
+        }
+
+        if (hasError == true) {
+            alert("Please complete all fields, check your input, and try again.")                
+            return false;
+        }
+
+        if (hasEmailError == true) {
+            alert("Please enter a valid email address and try again.")                
+            return false;
         }
     });
 });

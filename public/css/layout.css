@@ -6,12 +6,17 @@ body {
     padding-top: 40px;
 }
 
-.container > footer p {
-    text-align: center;
+.container {
+    max-width: 820px;
 }
 
-.container {
-    width: 820px;
+.container > footer {
+    margin-top: 20px;
+    color: #999;
+}
+
+.container > footer p {
+    text-align: center;
 }
 
 .container > .content {
@@ -26,30 +31,55 @@ body {
     box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
+.navbar-fixed-top {
+    margin-bottom: 0px !important;
+}
+
 .page-header {
     background-color: #f5f5f5;
-    padding: 20px 20px 10px;
+    padding: 20px 20px 20px;
     margin: -20px -20px 20px;
 }
 
-.content .span10, .content .span4 {
+.content .span8, .content .span6, .content .span2 {
     min-height: 500px;
 }
 
-.content .span10 {
+.content .span8 {
+    width: 820px;
+}
+
+.content .span6 {
     width: 560px;
     padding-right: 20px;
 }
 
-.content .span4 {
+.content .span2 {
     margin-left: 0;
     padding-left: 19px;
     border-left: 1px solid #eee;
+    width: 220px;
 }
 
-.topbar .btn {
-    border: 0;
+.control-label {
+    font-weight: bold;
 }
+
+a.btn {
+    position: relative;
+    bottom: -2px;
+}
+
+@media screen and (max-width: 720px) {
+  .content .span6 {
+    padding-right: 0px;
+  }
+  
+  .content .span2 {
+    display: none !important;
+  }
+}
+
 
 .calendar table th {
     text-align: center;
@@ -60,14 +90,14 @@ body {
     text-align: center;
     font-size: 12px;
     text-transform: uppercase;
-	-webkit-border-radius: 0 !important;
-	-moz-border-radius: 0 !important;
-	border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
 }
 
 .calendar table .calendar-day {
     height: 80px;
-	padding: 5px;
+    padding: 5px;
 }
 
 .calendar table .calendar-day.today {
@@ -75,7 +105,7 @@ body {
 }
 
 .calendar table .calendar-day .calendar-day-title-off {
-	color: #cccccc;
+    color: #cccccc;
 }
 
 .calendar table .calendar-day.today .calendar-day-title {

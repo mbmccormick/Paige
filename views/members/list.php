@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="span10">
-        <table class="bordered-table">
+    <div class="span6">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th style="width: 40px;">#</th>
@@ -13,10 +13,10 @@
             </tbody>
         </table>
         <div class="well">
-            <a href="<?=option('base_uri')?>members/add" class="btn primary">New Member</a>
+            <a href="<?=option('base_uri')?>members/add" class="btn btn-primary">New Member</a>
         </div>
     </div>
-    <div class="span4">
+    <div class="span2">
         <h5>Page Description</h5>
         <p>This page shows the list of team members currently setup for the application. This list allows you to view a team members's information or create a new team member.</p>
         <br />

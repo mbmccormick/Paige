@@ -1,23 +1,23 @@
 <div class="row">
-    <div class="span10">
-        <form action="<?=option('base_uri')?>accounts/add" method="post" class="form-stacked">
+    <div class="span6">
+        <form action="<?=option('base_uri')?>accounts/add" method="post" class="form-vertical">
             <fieldset>
-                <div class="clearfix">
-                    <label for="name">Name</label>
-                    <div class="input">
-                        <input class="xlarge" id="name" name="name" size="30" type="text" />
+                <div class="control-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input class="input-xlarge" id="name" name="name" type="text" />
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="email">Email</label>
-                    <div class="input">
-                        <input class="xlarge email" id="email" name="email" size="30" type="text" />
+                <div class="control-group">
+                    <label class="control-label" for="email">Email</label>
+                    <div class="controls">
+                        <input class="input-xlarge email" id="email" name="email" type="text" />
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="timezone">Timezone</label>
-                    <div class="input">
-                        <select class="xlarge" id="timezone" name="timezone">
+                <div class="control-group">
+                    <label class="control-label" for="timezone">Timezone</label>
+                    <div class="controls">
+                        <select class="input-xlarge" id="timezone" name="timezone">
                             <option value="5">Eastern</option>
                             <option value="6">Central</option>
                             <option value="7">Mountain</option>
@@ -26,10 +26,10 @@
                     </div>
                 </div>
                 <br />
-                <div class="clearfix">
-                    <label for="plan">Plan</label>
-                    <div class="input">
-                        <select class="xlarge" id="plan" name="plan">
+                <div class="control-group">
+                    <label class="control-label" for="plan">Plan</label>
+                    <div class="controls">
+                        <select class="input-xlarge" id="plan" name="plan">
                             <option value="1">Small - $10/month</option>
                             <option value="2">Medium - $15/month</option>
                             <option value="3">Large - $20/month</option>
@@ -37,16 +37,16 @@
                     </div>
                 </div>
                 <br />
-                <div class="clearfix">
-                    <label for="cardnumber">Credit Card Number</label>
-                    <div class="input">
-                        <input class="xlarge" id="cardnumber" name="cardnumber" autocomplete="off" size="20" type="text" value="4242424242424242" />
+                <div class="control-group">
+                    <label class="control-label" for="cardnumber">Credit Card Number</label>
+                    <div class="controls">
+                        <input class="input-xlarge" id="cardnumber" name="cardnumber" autocomplete="off" type="text" value="4242424242424242" />
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="cardexpmonth">Expiration</label>
-                    <div class="input">
-                        <select class="small" id="cardexpmonth" name="cardexpmonth" autocomplete="off">
+                <div class="control-group">
+                    <label class="control-label" for="cardexpmonth">Expiration</label>
+                    <div class="controls">
+                        <select class="input-small" id="cardexpmonth" name="cardexpmonth" autocomplete="off">
                             <option value="01">01</option>
                             <option value="02">02</option>
                             <option value="03">03</option>
@@ -60,7 +60,7 @@
                             <option value="11">11</option>
                             <option value="12">12</option>
                         </select>
-                        <select class="small" id="cardexpyear" name="cardexpyear" autocomplete="off">
+                        <select class="input-small" id="cardexpyear" name="cardexpyear" autocomplete="off">
                             <option value="2012">2012</option>
                             <option value="2013" selected="true">2013</option>
                             <option value="2014">2014</option>
@@ -74,33 +74,33 @@
                         </select>
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="cardcvc">Security Code</label>
-                    <div class="input">
-                        <input class="small" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text" value="123" />
+                <div class="control-group">
+                    <label class="control-label" for="cardcvc">Security Code</label>
+                    <div class="controls">
+                        <input class="input-small" id="cardcvc" name="cardcvc" autocomplete="off" size="4" type="text" value="123" />
                     </div>
                 </div>
                 <br />
-                <div class="clearfix">
-                    <label for="password">Password</label>
-                    <div class="input">
-                        <input class="xlarge" id="password" name="password" size="30" type="password" />
+                <div class="control-group">
+                    <label class="control-label" for="password">Password</label>
+                    <div class="controls">
+                        <input class="input-xlarge" id="password" name="password" type="password" />
                     </div>
                 </div>
-                <div class="clearfix">
-                    <label for="passwordconfirm">Confirm Password</label>
-                    <div class="input">
-                        <input class="xlarge" id="passwordconfirm" name="passwordconfirm" size="30" type="password" />
+                <div class="control-group">
+                    <label class="control-label" for="passwordconfirm">Confirm Password</label>
+                    <div class="controls">
+                        <input class="input-xlarge" id="passwordconfirm" name="passwordconfirm" type="password" />
                     </div>
                 </div>
             </fieldset>
             <br />
-            <div class="actions">
-                <button type="submit" class="btn primary">Create Account</button>&nbsp;<button type="reset" class="btn">Cancel</button>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Create Account</button>&nbsp;<button type="reset" class="btn">Cancel</button>
             </div>
         </form>
     </div>
-    <div class="span4">
+    <div class="span2">
         <h5>Page Description</h5>
         <p>This page allows you to create a new account for this application. Make sure that the email address you provide is valid, as it will be used to send important account-related news.</p>
         <br />
