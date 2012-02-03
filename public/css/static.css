@@ -7,12 +7,14 @@ body {
 }
 
 .container > footer {
-    margin-top: 20px;
-    color: #999;
+    margin-top: 45px;
+    padding: 35px 0 36px;
+    border-top: 1px solid #E5E5E5;
 }
 
 .container > footer p {
-    text-align: center;
+    margin-bottom: 0;
+    color: #555;
 }
 
 .navbar-fixed-top {
