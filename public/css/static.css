@@ -35,3 +35,27 @@ a.btn {
 .control-label {
     font-weight: bold;
 }
+
+@media screen and (max-width: 720px) {
+  .hero-unit {
+    padding: 20px;
+  }
+  
+  .hero-unit h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .hero-unit p {
+      font-size: 13px;
+      line-height: 1.5em;
+  }
+
+  .content .span6 {
+    padding-right: 0px;
+  }
+  
+  .content .span2 {
+    display: none !important;
+  }
+}
