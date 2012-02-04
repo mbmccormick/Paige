@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     $("form.form-vertical").submit(function() {
         var formData = [];
-        $("form.form-vertical input").each(function() { formData.push(this); });
+        $("form.form-vertical input, form.form-vertical textarea").each(function() { formData.push(this); });
 
         var hasError = false;
         var hasEmailError = false;
