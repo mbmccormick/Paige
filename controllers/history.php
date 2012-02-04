@@ -49,7 +49,7 @@
                 $body .= "Scheduler";
             $body .= "</td>\n";
 			$body .= "<td>\n";
-			$body .= date('F d \a\t g:ia', strtotime($row[createddate]));
+			$body .= date('F j \a\t g:ia', strtotime($row[createddate]));
             $body .= "</td>\n";			
             $body .= "</tr>\n";
 
